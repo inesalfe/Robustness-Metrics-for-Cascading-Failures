@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <time.h>
+#include <fstream>
 
 using namespace std;
 
@@ -26,6 +27,7 @@ int main() {
 	igraph_vector_t curr_bc; // Betweeness centrality in a given moment
 	igraph_es_t del_edges_sel; // Edges to be deleted in each iteration in selector mode
 	igraph_vector_t del_edges; // Edges to be deleted in each iteration 
+	igraph_vector_t edges_v; // Edges to be deleted in each iteration - each pair of vertices corresponds to one edge
 	double alpha = 0;
 
 	// Edges vector where each pair of numbers represents one edge
@@ -59,6 +61,10 @@ int main() {
 	igraph_vector_init(&deletion_list, 0);
 	igraph_vector_init(&del_edges, 0);
 	igraph_vector_init(&comp, 0);
+	igraph_vector_init(&edges_v, 0);
+
+	ofstream v_e_file;
+	v_e_file.open ("v_edges.txt");
 
 	// Fill the capacity / load vector
 	igraph_betweenness(&graph, &capacity, igraph_vss_all(), IGRAPH_UNDIRECTED, NULL);
@@ -78,17 +84,27 @@ int main() {
 	igraph_vector_push_back(&deletion_list, initial_node);
 	cout << "Delete " << initial_node << endl << endl;
 
+	int it = 1;
+
 	while(!igraph_vector_empty(&deletion_list)) {
 
 		cout << "----------New Iteration----------" << endl;
 
 		// Write in files the "deleted" vertices
+		v_e_file << "it " << it << endl;
 
 		// Delete edges incident in the vertices in the deletion list
 		while(!igraph_vector_empty(&deletion_list)) {
+			v_e_file << VECTOR(deletion_list)[igraph_vector_size(&deletion_list)-1] << endl;
 			igraph_incident(&graph, &del_edges, igraph_vector_pop_back(&deletion_list), IGRAPH_ALL);
 			// print_vector(&del_edges);
 			igraph_es_vector(&del_edges_sel, &del_edges);
+			igraph_edges(&graph, del_edges_sel, &edges_v);
+			for (int i = 0; i < igraph_vector_size(&edges_v); i++) {
+				v_e_file << VECTOR(edges_v)[i] << " ";
+			}
+			v_e_file << endl;
+			// print_vector(&edges_v);
 			igraph_delete_edges(&graph, del_edges_sel);
 		}
 
@@ -104,8 +120,12 @@ int main() {
 			}
 		}
 
+		it++;
+
 		cout << endl;
 	}
+
+	v_e_file.close();
 
 	igraph_integer_t n_comp; // Number of connected components
 	igraph_clusters(&graph, NULL, &comp, &n_comp, IGRAPH_WEAK);
@@ -120,6 +140,7 @@ int main() {
 	igraph_vector_destroy(&comp);
 	igraph_vector_destroy(&deletion_list);
 	igraph_vector_destroy(&del_edges);
+	igraph_vector_destroy(&edges_v);
 
     return 0;
 
