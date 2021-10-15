@@ -20,7 +20,6 @@ void print_vector(igraph_vector_t *v) {
 }
 
 int main() {
-	
 
 	cout << "Please choose the criteria for node eliminatiton:" << endl;
 	cout << "0 - RANDOM" << endl;
