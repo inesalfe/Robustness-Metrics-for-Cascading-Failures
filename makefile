@@ -1,3 +1,6 @@
+p_law: p_law.C
+	g++ -std=c++11 p_law.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o p_law
+
 proj_test_edges: proj_test_edges.C
 	g++ -std=c++11 proj_test_edges.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o proj_test_edges
 

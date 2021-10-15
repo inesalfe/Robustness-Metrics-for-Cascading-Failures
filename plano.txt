@@ -1,0 +1,15 @@
+Simulação:
+
+Corrigir centralidade das figuras;
+Fazer a silumação para uma rede maior;
+Possivelmente tirar as labels
+
+Para obter os dados:
+
+Fazer com critério random, por grau e por centralidade;
+Utilizar o modelo DMS que o professor sugeriu e relacionar com a centralidade;
+Colocar o critério como argumento quando se corre o ficheiro;
+Otuput para ficheiro;
+Gráficos no python;
+Repetir para o critério de edge betweeness centrality;
+Verificar power law para o tamanho da maior componente em função das iterações
