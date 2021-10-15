@@ -62,7 +62,7 @@ int main() {
 	output_file << "IT " << IT << endl;
 	output_file << "CRITERIA " << criteria << endl;
 	output_file << "ALPHA " << alpha << endl;
-	output_file << "ALPHAS " << alpha;
+	output_file << "ALPHAS ";
 
 	vector<double> alphas(11);
 	vector<vector<double>> ratios(11, vector<double>(10,0));
