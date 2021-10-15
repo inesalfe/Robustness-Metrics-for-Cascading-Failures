@@ -55,13 +55,11 @@ int main() {
 	igraph_vector_t clustering_sorted; // Sorted clustering coeficient of each vertex
 	igraph_vector_t degree; // Degree of each vertex
 	igraph_vector_t clustering; // Clustering coeficient of each vertex
-	double alpha = 0;
 
 	output_file << "N " << N << endl;
 	output_file << "N_NET " << N_GRAPHS << endl;
 	output_file << "IT " << IT << endl;
 	output_file << "CRITERIA " << criteria << endl;
-	output_file << "ALPHA " << alpha << endl;
 	output_file << "ALPHAS ";
 
 	vector<double> alphas(11);
