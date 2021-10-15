@@ -2,15 +2,15 @@
 #include <time.h>
 #include <vector>
 #include <iostream>
-#include <time.h>
+#include <fstream>
 
 using namespace std;
 
-#define N 1000 // Number of nodes
-#define N_GRAPHS 5 // Number of repetitions
+#define N 5000 // Number of nodes
+#define N_GRAPHS 10 // Number of repetitions
 #define M 2 // New edges per iteration
 // Average degre is 2 * M
-#define IT 3 // Iteration of the same network per alpha
+#define IT 5 // Iteration of the same network per alpha
 
 void print_vector(igraph_vector_t *v) {
 	long int i, l = igraph_vector_size(v);
@@ -37,6 +37,9 @@ int main() {
 		cin >> criteria;
 	}
 
+	ofstream output_file;
+	output_file.open("data.txt");
+
 	igraph_t graph, graph_cp; // The graph itself
 	igraph_vector_t v; // Auxiliary vector for the edges
 	igraph_vector_t deletion_list; 	// List with the vertices to delete - updated in each iteration
@@ -54,10 +57,21 @@ int main() {
 	igraph_vector_t clustering; // Clustering coeficient of each vertex
 	double alpha = 0;
 
+	output_file << "N " << N << endl;
+	output_file << "N_NET " << N_GRAPHS << endl;
+	output_file << "IT " << IT << endl;
+	output_file << "CRITERIA " << criteria << endl;
+	output_file << "ALPHA " << alpha << endl;
+	output_file << "ALPHAS " << alpha;
+
 	vector<double> alphas(11);
 	vector<vector<double>> ratios(11, vector<double>(10,0));
-	for(int i = 0; i < 11; ++i) 
+	for(int i = 0; i < 11; ++i) {
 		alphas[i] = .1 * i;
+		output_file << " " << alphas[i];
+	}
+
+	output_file << endl;
 
 	igraph_rng_seed(igraph_rng_default(), time(NULL));
 	igraph_vector_init(&comp, 0);
@@ -97,7 +111,7 @@ int main() {
 
 			for(int it = 0; it < IT; ++it) {
 
-				cout << "##### Iteration " << it + 1 << "/" << IT << " #####" << endl;
+				cout << endl << "##### Iteration " << it + 1 << "/" << IT << " #####" << endl;
 				igraph_copy(&graph_cp, &graph);
 
 				/* CHOOSE INITIAL VERTEX TO DELETE... */
@@ -130,20 +144,28 @@ int main() {
 
 				igraph_vector_push_back(&deletion_list, initial_node);
 
-				cout << "Initial Node: " << initial_node << "; Initial Node capacity: " << VECTOR(capacity_cp)[initial_node] << endl;
+				cout << "Initial Node: " << initial_node << endl << "Initial Node capacity: " << VECTOR(capacity_cp)[initial_node] << endl;
+
+				output_file << "N_V_TO_DELETE";
 
 				/* MAIN LOOP */
 				int iterations = 0;
 				while(!igraph_vector_empty(&deletion_list)) {
+
+					output_file << " " << igraph_vector_size(&deletion_list);
+
 					++iterations;
+
 					// Delete edges incident in the vertices in the deletion list
 					while(!igraph_vector_empty(&deletion_list)) {
 						igraph_incident(&graph_cp, &del_edges, igraph_vector_pop_back(&deletion_list), IGRAPH_ALL);
 						igraph_es_vector(&del_edges_sel, &del_edges);
 						igraph_delete_edges(&graph_cp, del_edges_sel);
 					}
+
 					// Recalculate the betweeness centralities
 					igraph_betweenness(&graph_cp, &curr_bc, igraph_vss_all(), IGRAPH_UNDIRECTED, NULL);
+					
 					// Create new deletion_list
 					for(int i = 0; i < igraph_vector_size(&curr_bc); ++i) {
 						if (VECTOR(curr_bc)[i] > VECTOR(capacity_cp)[i]) {
@@ -154,21 +176,23 @@ int main() {
 
 				// PRINT THE TOTAL NUMBER OF CASCADING ITERATIONS
 				cout << endl << "Iterations: " << iterations << endl << endl;
+				
+				output_file << endl << "ITER " << iterations << endl;
 
 				/* GRAPH FINAL INFORMATION */
-				int n_comp, L_comp;
+				int n_comp;
 				igraph_clusters(&graph_cp, NULL, &comp, &n_comp, IGRAPH_WEAK);
 				long final_L_comp = igraph_vector_max(&comp);
 				cout << "Final Number of Components: " << n_comp << "\nLargest component: " << final_L_comp << endl;
-				// print_vector(&comp);
 				cout << "Final Average Degree: " << (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)) << endl;
-				cout << "Ratio: " << 1.0 * final_L_comp / L_comp << endl << endl;
-				ratios[a][n] += (1.0 * final_L_comp / L_comp);
+				
+				output_file << "N_COMP " << n_comp << endl;
+				output_file << "L_COMP " << final_L_comp << endl;
+				output_file << "D_FINAL " << (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)) << endl;
 
 				igraph_destroy(&graph_cp);
 			
 			}
-			ratios[a][n] /= IT;
 			igraph_vector_destroy(&capacity_cp);
 
 		}
@@ -176,16 +200,7 @@ int main() {
 
 	}
 
-	vector<double> avg_ratios(11,0);
-	for(int i = 0; i < 11; ++i) {
-		cout << alphas[i] << ": ";
-		for(int j = 0; j < N_GRAPHS; ++j) { 
-			cout << ratios[i][j] << " ";
-			avg_ratios[i] += ratios[i][j];
-		}
-		avg_ratios[i] /= (N_GRAPHS);
-		cout << endl;
-	}
+	output_file.close();
 
 	// Free memory
 	igraph_vector_destroy(&capacity);
