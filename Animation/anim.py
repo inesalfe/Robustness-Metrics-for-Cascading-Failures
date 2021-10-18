@@ -5,11 +5,11 @@ import numpy as np
 def grouped(iterable, n):
     return zip(*[iter(iterable)]*n)
 
-G = nx.read_gml('net.gml', None)
+G = nx.read_gml('../Data/net.gml', None)
 
 it_list_v = []
 it_list_e = []
-with open('v_edges.txt', 'r') as f:
+with open('../Data/v_edges.txt', 'r') as f:
     for line in f:
         words = line.split()
         if (words[0] == 'it'):
@@ -44,7 +44,7 @@ fig_it = 1
 fig = plt.figure()
 nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=True, font_weight='bold')
 plt.show()
-name = "%i.png" % fig_it
+name = "Figures/%i.png" % fig_it
 fig.savefig(name, format='png')
 fig_it = fig_it + 1
 
@@ -63,7 +63,7 @@ for i in range(it+1):
 	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = marked_vertices, node_color = 'red', edgelist = marked_edges, edge_color = 'red', alpha = 1.0, with_labels=True, font_weight='bold')
 	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=True, font_weight='bold')
 	plt.show()
-	name = "%i.png" % fig_it
+	name = "Figures/%i.png" % fig_it
 	fig.savefig(name, format='png')
 	fig_it = fig_it + 1
 
@@ -81,6 +81,6 @@ for i in range(it+1):
 	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=True, font_weight='bold')
 	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=True, font_weight='bold')
 	plt.show()
-	name = "%i.png" % fig_it
+	name = "Figures/%i.png" % fig_it
 	fig.savefig(name, format='png')
 	fig_it = fig_it + 1

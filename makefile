@@ -1,14 +1,5 @@
-p_law: p_law.C
-	g++ -std=c++11 p_law.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o p_law
+cascade: Simulations/cascade.C
+	g++ -std=c++11 Simulations/cascade.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/cascade
 
-proj_test_edges: proj_test_edges.C
-	g++ -std=c++11 proj_test_edges.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o proj_test_edges
-
-proj_test: proj_test.C
-	g++ -std=c++11 proj_test.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o proj_test
-
-show: show.C
-	gcc show.C -I/usr/local/include/graphviz -L/usr/local/lib -lgvc -lcgraph -lcdt -o show
-
-clean:
-	rm proj_test show
+sim: Animation/sim.C
+	g++ -std=c++11 Animation/sim.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/sim

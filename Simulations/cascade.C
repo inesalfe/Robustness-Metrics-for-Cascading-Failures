@@ -37,7 +37,7 @@ int main() {
 	}
 
 	ofstream output_file;
-	output_file.open("data.txt");
+	output_file.open("../Data/data.txt");
 
 	igraph_t graph, graph_cp; // The graph itself
 	igraph_vector_t v; // Auxiliary vector for the edges
@@ -47,7 +47,7 @@ int main() {
 	igraph_vector_t comp; // Size of the components
 	igraph_vector_t capacity; // The capacity of each vertex equals the initial betweeness centrality
 	igraph_vector_t capacity_cp; // The capacity of each vertex equals the initial betweeness centrality
-	igraph_vector_t capacity_cp_sorted; // Sorted capacity
+	igraph_vector_t capacity_sorted; // Sorted capacity
 	igraph_vector_t curr_bc; // Betweeness centrality in a given moment
 	igraph_es_t del_edges_sel; // Edges to be deleted in each iteration in selector mode
 	igraph_vector_t degree_sorted; // Sorted degree of each vertex
@@ -76,11 +76,13 @@ int main() {
 	igraph_vector_init(&curr_bc, N);
 	igraph_vector_init(&deletion_list, 0);
 	igraph_vector_init(&del_edges, 0);
-	igraph_vector_init(&capacity_cp_sorted, 0);
+	igraph_vector_init(&capacity_sorted, 0);
 	igraph_vector_init(&degree_sorted, 0);
 	igraph_vector_init(&clustering_sorted, 0);
 	igraph_vector_init(&degree, N);
 	igraph_vector_init(&clustering, N);
+
+	vector<long> initial_nodes;
 
 	for(int n = 0; n < N_GRAPHS; ++n) {
 
@@ -96,52 +98,62 @@ int main() {
 		// Betweeness centrality
 		igraph_betweenness(&graph, &capacity, igraph_vss_all(), IGRAPH_UNDIRECTED, NULL);
 
+		/* CHOOSE INITIAL VERTEX TO DELETE... */
+		long initial_node;
+		switch (criteria) {
+			case 0:
+				// ... RANDOMLY
+				srandom(time(NULL));
+				for (int i = 0; i < IT; i++) {
+					initial_nodes.push_back(random() % N);
+				}
+				break;
+			case 1:
+				// ... HIGHEST LOAD
+				igraph_vector_copy(&capacity_sorted, &capacity);
+				igraph_vector_reverse_sort(&capacity_sorted);
+				for (int i = 0; i < IT; i++) {
+					igraph_vector_search(&capacity, 0, VECTOR(capacity_sorted)[i], &initial_node);
+					initial_nodes.push_back(initial_node);
+				}
+				break;
+			case 2:
+				// ... HIGHEST AVERAGE DEGREE
+				igraph_degree(&graph, &degree, igraph_vss_all(), IGRAPH_ALL, false);
+				igraph_vector_copy(&degree_sorted, &degree);
+				igraph_vector_reverse_sort(&degree_sorted);
+				for (int i = 0; i < IT; i++) {
+					igraph_vector_search(&degree, 0, VECTOR(degree_sorted)[i], &initial_node);
+					initial_nodes.push_back(initial_node);
+				}
+				break;
+			case 3:
+				// ... HIGHEST CLUSTERING COEFICIENT
+				igraph_transitivity_local_undirected(&graph, &clustering, igraph_vss_all(), IGRAPH_TRANSITIVITY_ZERO);
+				igraph_vector_copy(&clustering_sorted, &clustering);
+				igraph_vector_reverse_sort(&clustering_sorted);
+				for (int i = 0; i < IT; i++) {
+					igraph_vector_search(&clustering, 0, VECTOR(clustering_sorted)[i], &initial_node);
+					initial_nodes.push_back(initial_node);
+				}
+				break;
+		}
+
 		/* FOR EACH NETWORK RUM FOR EACH ALPHA */
 		for(int a = 0; a < 11; ++a) {
 			cout << "########## ALPHA = " << alphas[a] <<  " ##########" << endl;
 			igraph_vector_copy(&capacity_cp, &capacity);
 			/* SCALE CAPACITY BY alpha */
 			igraph_vector_scale(&capacity_cp, (igraph_real_t) (1 + alphas[a]));
-			igraph_vector_copy(&capacity_cp_sorted, &capacity_cp);
-
-			long initial_node;
 
 			for(int it = 0; it < IT; ++it) {
 
 				cout << endl << "##### Iteration " << it + 1 << "/" << IT << " #####" << endl;
 				igraph_copy(&graph_cp, &graph);
 
-				/* CHOOSE INITIAL VERTEX TO DELETE... */
-				switch (criteria) {
-					case 0:
-						// ... RANDOMLY
-						srandom(time(NULL));
-						initial_node = random() % N;
-						break;
-					case 1:
-						// ... HIGHEST LOAD
-						igraph_vector_reverse_sort(&capacity_cp_sorted);
-						igraph_vector_search(&capacity_cp, 0, VECTOR(capacity_cp_sorted)[it], &initial_node);
-						break;
-					case 2:
-						// ... HIGHEST AVERAGE DEGREE
-						igraph_degree(&graph, &degree, igraph_vss_all(), IGRAPH_ALL, false);
-						igraph_vector_copy(&degree_sorted, &degree);
-						igraph_vector_reverse_sort(&degree_sorted);
-						igraph_vector_search(&degree, 0, VECTOR(degree_sorted)[it], &initial_node);
-						break;
-					case 3:
-						// ... HIGHEST CLUSTERING COEFICIENT
-						igraph_transitivity_local_undirected(&graph, &clustering, igraph_vss_all(), IGRAPH_TRANSITIVITY_ZERO);
-						igraph_vector_copy(&clustering_sorted, &clustering);
-						igraph_vector_reverse_sort(&clustering_sorted);
-						igraph_vector_search(&clustering, 0, VECTOR(clustering_sorted)[it], &initial_node);
-						break;
-				}
+				igraph_vector_push_back(&deletion_list, initial_nodes[it]);
 
-				igraph_vector_push_back(&deletion_list, initial_node);
-
-				cout << "Initial Node: " << initial_node << endl << "Initial Node capacity: " << VECTOR(capacity_cp)[initial_node] << endl;
+				cout << "Initial Node: " << initial_nodes[it] << endl << "Initial Node capacity: " << VECTOR(capacity_cp)[initial_nodes[it]] << endl;
 
 				output_file << "N_V_TO_DELETE";
 
@@ -194,6 +206,7 @@ int main() {
 
 		}
 		igraph_destroy(&graph);
+		initial_nodes.clear();
 
 	}
 
@@ -205,7 +218,7 @@ int main() {
 	igraph_vector_destroy(&del_edges);
 	igraph_vector_destroy(&curr_bc);
 	igraph_vector_destroy(&comp);
-	igraph_vector_destroy(&capacity_cp_sorted);
+	igraph_vector_destroy(&capacity_sorted);
 	igraph_vector_destroy(&degree_sorted);
 	igraph_vector_destroy(&clustering_sorted);
 	igraph_vector_destroy(&degree);

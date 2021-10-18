@@ -40,7 +40,7 @@ int main() {
     
     FILE * file;
 
-    file = fopen("net.gml", "w");
+    file = fopen("../Data/net.gml", "w");
     if (file == 0) {
         exit(1);
     }
@@ -64,7 +64,7 @@ int main() {
 	igraph_vector_init(&edges_v, 0);
 
 	ofstream v_e_file;
-	v_e_file.open ("v_edges.txt");
+	v_e_file.open("../Data/v_edges.txt");
 
 	// Fill the capacity / load vector
 	igraph_betweenness(&graph, &capacity, igraph_vss_all(), IGRAPH_UNDIRECTED, NULL);
