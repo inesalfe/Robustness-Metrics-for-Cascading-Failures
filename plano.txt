@@ -9,3 +9,8 @@ Para obter os dados:
 Utilizar o modelo DMS que o professor sugeriu e relacionar com a centralidade;
 Repetir para o critério de edge betweeness centrality;
 Utilizar como critério de robustês o APL - ver entre todos os pares de nós aqueles para os quais o APL deixa de estar definido - isto dá a fração de pares de nós entre os quais a informação não consegues ser transmitida
+
+Mais urgente:
+
+Corrigir plots dos time stamps: tirar os zeros para poder usar escala logaritmica.
+Fazer os corredores a cinzento tal como o professor sugeriu.

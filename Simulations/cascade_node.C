@@ -153,7 +153,7 @@ int main() {
 
 				igraph_vector_push_back(&deletion_list, initial_nodes[it]);
 
-				cout << "Initial Node: " << initial_nodes[it] << endl << "Initial Node capacity: " << VECTOR(capacity_cp)[initial_nodes[it]] << endl;
+				cout << "Initial Node: " << initial_nodes[it] << endl << "Initial Node Capacity: " << VECTOR(capacity_cp)[initial_nodes[it]] << endl;
 
 				output_file << "N_V_TO_DELETE";
 
@@ -192,7 +192,7 @@ int main() {
 				int n_comp;
 				igraph_clusters(&graph_cp, NULL, &comp, &n_comp, IGRAPH_WEAK);
 				long final_L_comp = igraph_vector_max(&comp);
-				cout << "Final Number of Components: " << n_comp << "\nLargest component: " << final_L_comp << endl;
+				cout << "Final Number of Components: " << n_comp << "\nLargest Component: " << final_L_comp << endl;
 				cout << "Final Average Degree: " << (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)) << endl;
 				
 				output_file << "N_COMP " << n_comp << endl;

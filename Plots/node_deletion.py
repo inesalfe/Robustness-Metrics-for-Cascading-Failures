@@ -63,7 +63,7 @@ error = np.array([er_inferior, er_superior])
 np.resize(error,(2,len(small_del[2])))
 plt.errorbar(x, avg_del[2], yerr=error, fmt='bo', markersize=5, capsize=5, ecolor="black")
 
-plt.xscale('log')
+plt.yscale('log')
 plt.grid()
 plt.legend()
 plt.xlabel(r'Time Stamp', fontsize=11)
