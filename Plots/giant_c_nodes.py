@@ -120,23 +120,29 @@ f1 = plt.figure()
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-plt.scatter(alphas, giant_c_avg_rand, color="blue", label="Random")
-plt.scatter(alphas, giant_c_avg_bc, color="red", label="Betweeness Centrality")
-plt.scatter(alphas, giant_c_avg_dg, color="green", label="Degree")
-plt.scatter(alphas, giant_c_avg_cl, color="magenta", label="Clustering Coefficient")
+plt.scatter(alphas, giant_c_avg_rand, color="blue")
+plt.scatter(alphas, giant_c_avg_bc, color="red")
+plt.scatter(alphas, giant_c_avg_dg, color="green")
+plt.scatter(alphas, giant_c_avg_cl, color="magenta")
+
+plt.plot(alphas, giant_c_avg_rand, color="blue")
+plt.plot(alphas, giant_c_avg_bc, color="red")
+plt.plot(alphas, giant_c_avg_dg, color="green")
+plt.plot(alphas, giant_c_avg_cl, color="magenta")
+
+plt.errorbar(alphas, giant_c_avg_rand, giant_c_var_rand, fmt='bo', markersize=5, capsize=5, ecolor="black", label="Random")
+plt.errorbar(alphas, giant_c_avg_bc, giant_c_var_bc, fmt='ro', markersize=5, capsize=5, ecolor="black", label="Betweeness Centrality")
+plt.errorbar(alphas, giant_c_avg_dg, giant_c_var_dg, fmt='go', markersize=5, capsize=5, ecolor="black", label="Degree")
+plt.errorbar(alphas, giant_c_avg_cl, giant_c_var_cl, fmt='mo', markersize=5, capsize=5, ecolor="black", label="Clustering Coefficient")
+
+plt.xlim((-1.1, 11.1))
+plt.ylim((-0.1, 1.1))
 
 plt.grid()
 plt.legend()
 plt.xlabel(r'\textbf{$\alpha$}', fontsize=11)
 plt.ylabel(r'\textbf{N\'/N}', fontsize=11)
-plt.errorbar(alphas, giant_c_avg_rand, giant_c_var_rand, fmt='bo', markersize=5, capsize=5, ecolor="black")
-plt.errorbar(alphas, giant_c_avg_bc, giant_c_var_bc, fmt='ro', markersize=5, capsize=5, ecolor="black")
-plt.errorbar(alphas, giant_c_avg_dg, giant_c_var_dg, fmt='go', markersize=5, capsize=5, ecolor="black")
-plt.errorbar(alphas, giant_c_avg_cl, giant_c_var_cl, fmt='mo', markersize=5, capsize=5, ecolor="black")
-
-plt.xlim((-1.1, 11.1))
-plt.ylim((-0.1, 1.1))
 
 plt.show()
 
-f1.savefig("g_size.png", bbox_inches='tight')
+f1.savefig("g_size_nodes.png", bbox_inches='tight')
