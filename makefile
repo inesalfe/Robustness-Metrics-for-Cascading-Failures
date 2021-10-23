@@ -1,3 +1,5 @@
+all: cascade_node cascade_edge sim
+
 cascade_node: Simulations/cascade_node.C
 	g++ -std=c++11 Simulations/cascade_node.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/cascade_node
 

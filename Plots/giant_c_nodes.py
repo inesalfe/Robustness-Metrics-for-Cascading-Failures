@@ -21,7 +21,7 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_rand[a][a_it[a]] = float(lines[8+5*l_it].split()[1])
+			giant_c_sizes_rand[a][a_it[a]] = float(lines[8+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 

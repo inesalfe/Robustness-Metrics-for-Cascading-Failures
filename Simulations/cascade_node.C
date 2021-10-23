@@ -54,6 +54,7 @@ int main() {
 	igraph_vector_t clustering_sorted; // Sorted clustering coeficient of each vertex
 	igraph_vector_t degree; // Degree of each vertex
 	igraph_vector_t clustering; // Clustering coeficient of each vertex
+	igraph_matrix_t m; // Matrix to hold the shortest path between each pair of nodes
 
 	output_file << "N " << N << endl;
 	output_file << "N_NET " << N_GRAPHS << endl;
@@ -81,6 +82,7 @@ int main() {
 	igraph_vector_init(&clustering_sorted, 0);
 	igraph_vector_init(&degree, N);
 	igraph_vector_init(&clustering, N);
+	igraph_matrix_init(&m, 0, 0);
 
 	vector<long> initial_nodes;
 
@@ -199,6 +201,23 @@ int main() {
 				output_file << "L_COMP " << final_L_comp << endl;
 				output_file << "D_FINAL " << (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)) << endl;
 
+				int unconn_pairs = 0;
+
+				igraph_shortest_paths(&graph_cp, &m, igraph_vss_all(), igraph_vss_all(), IGRAPH_ALL);
+
+				for (int row = 0; row < N; row++) {
+					for (int col = 0; col < N; col++) {
+						if (MATRIX(m, row, col) == IGRAPH_INFINITY)
+							unconn_pairs++;
+					}
+				}
+
+				unconn_pairs /= 2;
+
+				cout << "Number of unconnected pairs of vertices: " << unconn_pairs << endl;
+
+				output_file << "UNCONN_PAIRS " << unconn_pairs << endl;
+
 				igraph_destroy(&graph_cp);
 			
 			}
@@ -223,6 +242,7 @@ int main() {
 	igraph_vector_destroy(&clustering_sorted);
 	igraph_vector_destroy(&degree);
 	igraph_vector_destroy(&clustering);
+	igraph_matrix_destroy(&m);
 
 	return 0;
 
