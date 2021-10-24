@@ -1,7 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.pyplot as plt
 
 with open('../Data/data_0.txt') as f:
     lines = f.read().splitlines()
@@ -141,7 +140,7 @@ plt.ylim((-0.1, 1.1))
 plt.grid()
 plt.legend()
 plt.xlabel(r'\textbf{$\alpha$}', fontsize=11)
-plt.ylabel(r'\textbf{N\'/N}', fontsize=11)
+plt.ylabel(r'\textbf{Fraction of unconnected pairs of nodes}', fontsize=11)
 
 plt.show()
 

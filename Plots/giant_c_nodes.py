@@ -1,5 +1,4 @@
 import networkx as nx
-import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -49,7 +48,7 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_bc[a][a_it[a]] = float(lines[8+5*l_it].split()[1])
+			giant_c_sizes_bc[a][a_it[a]] = float(lines[8+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 
@@ -77,7 +76,7 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_dg[a][a_it[a]] = float(lines[8+5*l_it].split()[1])
+			giant_c_sizes_dg[a][a_it[a]] = float(lines[8+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 
@@ -105,7 +104,7 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_cl[a][a_it[a]] = float(lines[8+5*l_it].split()[1])
+			giant_c_sizes_cl[a][a_it[a]] = float(lines[8+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 

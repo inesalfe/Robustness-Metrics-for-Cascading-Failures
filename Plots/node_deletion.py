@@ -37,7 +37,7 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			deleted_v[a].append(lines[5+5*l_it].split()[1:])
+			deleted_v[a].append(lines[5+6*l_it].split()[1:])
 			l_it += 1
 
 for a in range(len(alphas)):
