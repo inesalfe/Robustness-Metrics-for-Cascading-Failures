@@ -21,6 +21,19 @@ void print_vector(igraph_vector_t *v) {
 
 int main() {
 
+	cout << "Please choose the model:" << endl;
+	cout << "0 - Barabasi Albert" << endl;
+	cout << "1 - DMS Minimal Model" << endl;
+
+	int model;
+	cin >> model;
+	while(cin.fail() || model < 0 || model > 1) {
+		cout << "Invalid Input" << endl;
+		cin.clear();
+		cin.ignore(256,'\n');
+		cin >> model;
+	}
+
 	cout << "Please choose the criteria for node eliminatiton:" << endl;
 	cout << "0 - RANDOM" << endl;
 	cout << "1 - HIGHEST LOAD (BETWEENNESS CENTRALITY)" << endl;
@@ -36,8 +49,14 @@ int main() {
 		cin >> criteria;
 	}
 
+	string file_name;
+	if (model == 0)
+		file_name = "../Data/BA/data.txt";
+	else
+		file_name = "../Data/DMS/data.txt";
+
 	ofstream output_file;
-	output_file.open("../Data/data.txt");
+	output_file.open(filename);
 
 	igraph_t graph, graph_cp; // The graph itself
 	igraph_vector_t v; // Auxiliary vector for the edges
