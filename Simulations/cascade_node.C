@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <string.h>
 
 using namespace std;
 
@@ -49,20 +50,15 @@ int main() {
 		cin >> criteria;
 	}
 
-	FILE * output_file;
+	char file_name[50] = {0};
+	if (model == 0)
+		strcpy(file_name, "Data/BA/data.txt");
+	else
+		strcpy(file_name, "Data/DMS/data.txt");
 
-	char * file_name;
-	if (model == 0) {
-		char file_name_aux[] = "../Data/BA/data.txt";
-		file_name = file_name_aux;
-	}
-	else {
-		char file_name_aux[] = "../Data/DMS/data.txt";
-		file_name = file_name_aux;
-	}
-
-	output_file = fopen(file_name, "w");
+	FILE *output_file = fopen(file_name, "w");
 	if (output_file == 0) {
+		cout << "Unable to open output file " << file_name << ". Exiting\n";
 		return 10;
 	}
 
@@ -109,7 +105,7 @@ int main() {
 	for(int i = 0; i < 11; ++i) {
 		alphas[i] = .1 * i;
 		// output_file << " " << alphas[i];
-		fprintf(output_file, " %f", alphas[i]);
+		fprintf(output_file, " %.1f", alphas[i]);
 	}
 
 	fprintf(output_file, "\n");
@@ -138,16 +134,13 @@ int main() {
 		if (model == 0)
 			igraph_barabasi_game(&graph, N, 1, M, NULL, true, 1, false, IGRAPH_BARABASI_BAG, 0); 
 		else {
+			char filename[50] = {0};
+			sprintf(filename, "Simulations/graphs/dms_%d.gml", n);
 
-			FILE * input_file;
-
-			char filename[10] = {0};
-
-			sprintf(filename, "../Simulations/graphs/dms_%d.gml", n);
-
-			input_file = fopen(filename, "r");
+			FILE *input_file = fopen(filename, "r");
 			if (input_file == 0) {
-				return 10;
+				cout << "Unable to open input file " << filename << ". Exiting\n";
+				return 11;
 			}
 
 			igraph_read_graph_gml(&graph, input_file);

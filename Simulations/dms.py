@@ -7,7 +7,7 @@ import random
 def dms(n, seed=None):
 
 	if (n < 3):
-		raise NetworkXError("Invalid value for n")
+		raise nx.NetworkXError("Invalid value for n")
 
 	G = nx.Graph()
 	G.add_node(0)
