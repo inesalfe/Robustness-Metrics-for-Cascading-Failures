@@ -49,14 +49,31 @@ int main() {
 		cin >> criteria;
 	}
 
-	string file_name;
-	if (model == 0)
-		file_name = "../Data/BA/data.txt";
-	else
-		file_name = "../Data/DMS/data.txt";
+	FILE * output_file;
 
-	ofstream output_file;
-	output_file.open(filename);
+	char * file_name;
+	if (model == 0) {
+		char file_name_aux[] = "../Data/BA/data.txt";
+		file_name = file_name_aux;
+	}
+	else {
+		char file_name_aux[] = "../Data/DMS/data.txt";
+		file_name = file_name_aux;
+	}
+
+	output_file = fopen(file_name, "w");
+	if (output_file == 0) {
+		return 10;
+	}
+
+	// string file_name;
+	// if (model == 0)
+	// 	file_name = "../Data/BA/data.txt";
+	// else
+	// 	file_name = "../Data/DMS/data.txt";
+
+	// ofstream output_file;
+	// output_file.open(file_name);
 
 	igraph_t graph, graph_cp; // The graph itself
 	igraph_vector_t v; // Auxiliary vector for the edges
@@ -75,20 +92,28 @@ int main() {
 	igraph_vector_t clustering; // Clustering coeficient of each vertex
 	igraph_matrix_t m; // Matrix to hold the shortest path between each pair of nodes
 
-	output_file << "N " << N << endl;
-	output_file << "N_NET " << N_GRAPHS << endl;
-	output_file << "IT " << IT << endl;
-	output_file << "CRITERIA " << criteria << endl;
-	output_file << "ALPHAS ";
+	fprintf(output_file, "N %d\n", N);
+	fprintf(output_file, "N_NET %d\n", N_GRAPHS);
+	fprintf(output_file, "IT %d\n", IT);
+	fprintf(output_file, "CRITERIA %d\n", criteria);
+	fprintf(output_file, "ALPHAS");
+
+	// output_file << "N " << N << endl;
+	// output_file << "N_NET " << N_GRAPHS << endl;
+	// output_file << "IT " << IT << endl;
+	// output_file << "CRITERIA " << criteria << endl;
+	// output_file << "ALPHAS";
 
 	vector<double> alphas(11);
 	vector<vector<double>> ratios(11, vector<double>(10,0));
 	for(int i = 0; i < 11; ++i) {
 		alphas[i] = .1 * i;
-		output_file << " " << alphas[i];
+		// output_file << " " << alphas[i];
+		fprintf(output_file, " %f", alphas[i]);
 	}
 
-	output_file << endl;
+	fprintf(output_file, "\n");
+	// output_file << endl;
 
 	igraph_rng_seed(igraph_rng_default(), time(NULL));
 	igraph_vector_init(&comp, 0);
@@ -109,7 +134,26 @@ int main() {
 
 		cout << "#################### NETWORK Nº " << n + 1 << " ####################" << endl;
 		/* GRAPH TYPE CHOICE */
-		igraph_barabasi_game(&graph, N, 1, M, NULL, true, 1, false, IGRAPH_BARABASI_BAG, 0); 
+
+		if (model == 0)
+			igraph_barabasi_game(&graph, N, 1, M, NULL, true, 1, false, IGRAPH_BARABASI_BAG, 0); 
+		else {
+
+			FILE * input_file;
+
+			char filename[10] = {0};
+
+			sprintf(filename, "../Simulations/graphs/dms_%d.gml", n);
+
+			input_file = fopen(filename, "r");
+			if (input_file == 0) {
+				return 10;
+			}
+
+			igraph_read_graph_gml(&graph, input_file);
+			fclose(input_file);
+
+		}
 
 		/* GRAPH INITIAL INFORMATION */
 		cout << "Number of Nodes: " << N << endl;
@@ -176,13 +220,15 @@ int main() {
 
 				cout << "Initial Node: " << initial_nodes[it] << endl << "Initial Node Capacity: " << VECTOR(capacity_cp)[initial_nodes[it]] << endl;
 
-				output_file << "N_V_TO_DELETE";
+				// output_file << "N_V_TO_DELETE";
+				fprintf(output_file, "N_V_TO_DELETE");
 
 				/* MAIN LOOP */
 				int iterations = 0;
 				while(!igraph_vector_empty(&deletion_list)) {
 
-					output_file << " " << igraph_vector_size(&deletion_list);
+					// output_file << " " << igraph_vector_size(&deletion_list);
+					fprintf(output_file, " %ld", igraph_vector_size(&deletion_list));
 
 					++iterations;
 
@@ -207,7 +253,8 @@ int main() {
 				// PRINT THE TOTAL NUMBER OF CASCADING ITERATIONS
 				cout << endl << "Iterations: " << iterations << endl << endl;
 				
-				output_file << endl << "ITER " << iterations << endl;
+				// output_file << endl << "ITER " << iterations << endl;
+				fprintf(output_file, "ITER %d", iterations);
 
 				/* GRAPH FINAL INFORMATION */
 				int n_comp;
@@ -216,9 +263,13 @@ int main() {
 				cout << "Final Number of Components: " << n_comp << "\nLargest Component: " << final_L_comp << endl;
 				cout << "Final Average Degree: " << (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)) << endl;
 				
-				output_file << "N_COMP " << n_comp << endl;
-				output_file << "L_COMP " << final_L_comp << endl;
-				output_file << "D_FINAL " << (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)) << endl;
+				fprintf(output_file, "N_COMP %d\n", n_comp);
+				fprintf(output_file, "L_COMP %ld\n", final_L_comp);
+				fprintf(output_file, "D_FINAL %f\n", (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)));
+
+				// output_file << "N_COMP " << n_comp << endl;
+				// output_file << "L_COMP " << final_L_comp << endl;
+				// output_file << "D_FINAL " << (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)) << endl;
 
 				int unconn_pairs = 0;
 
@@ -235,7 +286,8 @@ int main() {
 
 				cout << "Number of unconnected pairs of vertices: " << unconn_pairs << endl;
 
-				output_file << "UNCONN_PAIRS " << unconn_pairs << endl;
+				// output_file << "UNCONN_PAIRS " << unconn_pairs << endl;
+				fprintf(output_file, "UNCONN_PAIRS %d\n", unconn_pairs);
 
 				igraph_destroy(&graph_cp);
 			
@@ -248,7 +300,8 @@ int main() {
 
 	}
 
-	output_file.close();
+	fclose(output_file);
+	// output_file.close();
 
 	// Free memory
 	igraph_vector_destroy(&capacity);
