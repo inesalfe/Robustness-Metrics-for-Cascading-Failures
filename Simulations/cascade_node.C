@@ -62,15 +62,6 @@ int main() {
 		return 10;
 	}
 
-	// string file_name;
-	// if (model == 0)
-	// 	file_name = "../Data/BA/data.txt";
-	// else
-	// 	file_name = "../Data/DMS/data.txt";
-
-	// ofstream output_file;
-	// output_file.open(file_name);
-
 	igraph_t graph, graph_cp; // The graph itself
 	igraph_vector_t v; // Auxiliary vector for the edges
 	igraph_vector_t deletion_list; 	// List with the vertices to delete - updated in each iteration
@@ -87,6 +78,7 @@ int main() {
 	igraph_vector_t degree; // Degree of each vertex
 	igraph_vector_t clustering; // Clustering coeficient of each vertex
 	igraph_matrix_t m; // Matrix to hold the shortest path between each pair of nodes
+	igraph_vector_t deletion_list; 	// List with the deleted nodes in each iteration
 
 	fprintf(output_file, "N %d\n", N);
 	fprintf(output_file, "N_NET %d\n", N_GRAPHS);
@@ -94,22 +86,14 @@ int main() {
 	fprintf(output_file, "CRITERIA %d\n", criteria);
 	fprintf(output_file, "ALPHAS");
 
-	// output_file << "N " << N << endl;
-	// output_file << "N_NET " << N_GRAPHS << endl;
-	// output_file << "IT " << IT << endl;
-	// output_file << "CRITERIA " << criteria << endl;
-	// output_file << "ALPHAS";
-
 	vector<double> alphas(11);
 	vector<vector<double>> ratios(11, vector<double>(10,0));
 	for(int i = 0; i < 11; ++i) {
 		alphas[i] = .1 * i;
-		// output_file << " " << alphas[i];
 		fprintf(output_file, " %.1f", alphas[i]);
 	}
 
 	fprintf(output_file, "\n");
-	// output_file << endl;
 
 	igraph_rng_seed(igraph_rng_default(), time(NULL));
 	igraph_vector_init(&comp, 0);
@@ -122,6 +106,7 @@ int main() {
 	igraph_vector_init(&clustering_sorted, 0);
 	igraph_vector_init(&degree, N);
 	igraph_vector_init(&clustering, N);
+	igraph_vector_init(&deleted_nodes, 0);
 	igraph_matrix_init(&m, 0, 0);
 
 	vector<long> initial_nodes;
@@ -213,20 +198,19 @@ int main() {
 
 				cout << "Initial Node: " << initial_nodes[it] << endl << "Initial Node Capacity: " << VECTOR(capacity_cp)[initial_nodes[it]] << endl;
 
-				// output_file << "N_V_TO_DELETE";
 				fprintf(output_file, "N_V_TO_DELETE");
 
 				/* MAIN LOOP */
 				int iterations = 0;
 				while(!igraph_vector_empty(&deletion_list)) {
 
-					// output_file << " " << igraph_vector_size(&deletion_list);
 					fprintf(output_file, " %ld", igraph_vector_size(&deletion_list));
 
 					++iterations;
 
 					// Delete edges incident in the vertices in the deletion list
 					while(!igraph_vector_empty(&deletion_list)) {
+						igraph_vector_push_back(&deleted_nodes, igraph_vector_tail(&deletion_list));
 						igraph_incident(&graph_cp, &del_edges, igraph_vector_pop_back(&deletion_list), IGRAPH_ALL);
 						igraph_es_vector(&del_edges_sel, &del_edges);
 						igraph_delete_edges(&graph_cp, del_edges_sel);
@@ -260,11 +244,12 @@ int main() {
 				fprintf(output_file, "L_COMP %ld\n", final_L_comp);
 				fprintf(output_file, "D_FINAL %f\n", (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)));
 
-				// output_file << "N_COMP " << n_comp << endl;
-				// output_file << "L_COMP " << final_L_comp << endl;
-				// output_file << "D_FINAL " << (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)) << endl;
-
 				int unconn_pairs = 0;
+
+				igraph_vs_t v_sel;
+
+				igraph_vs_vector(&v_sel, &deleted_nodes);
+				igraph_delete_vertices(&graph_cp, v_del);
 
 				igraph_shortest_paths(&graph_cp, &m, igraph_vss_all(), igraph_vss_all(), IGRAPH_ALL);
 
@@ -279,10 +264,10 @@ int main() {
 
 				cout << "Number of unconnected pairs of vertices: " << unconn_pairs << endl;
 
-				// output_file << "UNCONN_PAIRS " << unconn_pairs << endl;
 				fprintf(output_file, "UNCONN_PAIRS %d\n", unconn_pairs);
 
 				igraph_destroy(&graph_cp);
+				igraph_vector_clear(&deletion_list);
 			
 			}
 			igraph_vector_destroy(&capacity_cp);
@@ -294,7 +279,6 @@ int main() {
 	}
 
 	fclose(output_file);
-	// output_file.close();
 
 	// Free memory
 	igraph_vector_destroy(&capacity);
@@ -308,6 +292,7 @@ int main() {
 	igraph_vector_destroy(&degree);
 	igraph_vector_destroy(&clustering);
 	igraph_matrix_destroy(&m);
+	igraph_matrix_destroy(&deletion_list);
 
 	return 0;
 
