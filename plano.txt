@@ -9,3 +9,8 @@ Animação:
 Simulações:
 
 	LFR_benchmark - community
+	BA - criar ficheiro com a criação dos grafos
+	Mudar nome dos ficheiros "data"
+	Seed
+	Correr os scripts
+	Comentar o código

@@ -95,7 +95,7 @@ int main() {
 
 	fprintf(output_file, "\n");
 
-	igraph_rng_seed(igraph_rng_default(), time(NULL));
+	igraph_rng_seed(igraph_rng_default(), 0);
 	igraph_vector_init(&comp, 0);
 	igraph_vector_init(&capacity, N);
 	igraph_vector_init(&curr_bc, N);
@@ -230,8 +230,12 @@ int main() {
 				// PRINT THE TOTAL NUMBER OF CASCADING ITERATIONS
 				cout << endl << "Iterations: " << iterations << endl << endl;
 				
-				// output_file << endl << "ITER " << iterations << endl;
 				fprintf(output_file, "\nITER %d", iterations);
+
+				igraph_vs_t v_del;
+
+				igraph_vs_vector(&v_del, &deleted_nodes);
+				igraph_delete_vertices(&graph_cp, v_del);
 
 				/* GRAPH FINAL INFORMATION */
 				int n_comp;
@@ -245,11 +249,6 @@ int main() {
 				fprintf(output_file, "D_FINAL %f\n", (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)));
 
 				int unconn_pairs = 0;
-
-				igraph_vs_t v_del;
-
-				igraph_vs_vector(&v_del, &deleted_nodes);
-				igraph_delete_vertices(&graph_cp, v_del);
 
 				igraph_shortest_paths(&graph_cp, &m, igraph_vss_all(), igraph_vss_all(), IGRAPH_ALL);
 
