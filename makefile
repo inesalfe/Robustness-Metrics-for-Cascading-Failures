@@ -12,7 +12,7 @@ sim: Animation/sim.C
 ricky: cascade_node_r cascade_edge_r sim_r
 
 CC = g++
-CFLAGS = -std=c++11 -g
+CFLAGS = -std=c++11 -O3
 LIBS = -ligraph -lm -lstdc++ -lxml2 -lz -lgmp -lblas -lcxsparse -lglpk -llapack -larpack -lgomp -lpthread
 LIBS_PATHS = -I/usr/local/include/igraph -L/usr/local/lib
 GRAPHIC_LIBS = -lpython3.8
@@ -26,3 +26,6 @@ cascade_edge_r: Simulations/cascade_edge.C
 
 sim_r: Animation/sim.C
 	$(CC) $(CFLAGS) Animation/sim.C $(LIBS_PATHS) $(LIBS) -o Executables/sim
+
+degree_dist: Simulations/degree_dist.cpp
+	$(CC) $(CFLAGS) Simulations/degree_dist.cpp $(LIBS_PATHS) $(LIBS) $(GRAPHIC_PATHS) $(GRAPHIC_LIBS) -o Simulations/dd
