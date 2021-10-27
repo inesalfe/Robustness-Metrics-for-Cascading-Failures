@@ -78,7 +78,7 @@ int main() {
 	igraph_vector_t degree; // Degree of each vertex
 	igraph_vector_t clustering; // Clustering coeficient of each vertex
 	igraph_matrix_t m; // Matrix to hold the shortest path between each pair of nodes
-	igraph_vector_t deletion_list; 	// List with the deleted nodes in each iteration
+	igraph_vector_t deleted_nodes; 	// List with the deleted nodes in each iteration
 
 	fprintf(output_file, "N %d\n", N);
 	fprintf(output_file, "N_NET %d\n", N_GRAPHS);
@@ -246,9 +246,9 @@ int main() {
 
 				int unconn_pairs = 0;
 
-				igraph_vs_t v_sel;
+				igraph_vs_t v_del;
 
-				igraph_vs_vector(&v_sel, &deleted_nodes);
+				igraph_vs_vector(&v_del, &deleted_nodes);
 				igraph_delete_vertices(&graph_cp, v_del);
 
 				igraph_shortest_paths(&graph_cp, &m, igraph_vss_all(), igraph_vss_all(), IGRAPH_ALL);
@@ -292,7 +292,7 @@ int main() {
 	igraph_vector_destroy(&degree);
 	igraph_vector_destroy(&clustering);
 	igraph_matrix_destroy(&m);
-	igraph_matrix_destroy(&deletion_list);
+	igraph_vector_destroy(&deleted_nodes);
 
 	return 0;
 
