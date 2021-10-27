@@ -170,4 +170,6 @@ plt.ylabel(r'\textbf{N\'/N}', fontsize=11)
 
 plt.show()
 
-f1.savefig("g_size_nodes.png", bbox_inches='tight')
+fig_name = "g_size_nodes_%i.png" % int(input_int)
+
+f1.savefig(fig_name, bbox_inches='tight')

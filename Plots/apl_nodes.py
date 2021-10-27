@@ -170,4 +170,6 @@ plt.ylabel(r'\textbf{Fraction of unconnected pairs of nodes}', fontsize=11)
 
 plt.show()
 
-f1.savefig("unc_pairs_nodes.png", bbox_inches='tight')
+fig_name = "unc_pairs_nodes_%i.png" % int(input_int)
+
+f1.savefig(fig_name, bbox_inches='tight')

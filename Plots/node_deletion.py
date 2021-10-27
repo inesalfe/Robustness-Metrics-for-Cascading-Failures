@@ -3,6 +3,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.pyplot as plt
 
+model = 0
+while True:
+	try:
+		model = int(input("Choose model (0 - BA; 1 - DMS): "))       
+	except ValueError:
+		print("Please enter 0 or 1:")
+		continue
+	else:
+		if model == 0 or model == 1:
+			break
+		else:
+			continue
+
 criteria = 0
 while True:
 	try:
@@ -16,9 +29,14 @@ while True:
 		else:
 			continue
 
-file_name = "../Data/data_%i.txt" % criteria
+if model == 0:
+	folder = "../Data/BA/"
+else:
+	folder = "../Data/DMS/"
 
-with open(file_name) as f:
+file_name = "data_%i.txt" % criteria
+
+with open(folder + file_name) as f:
 	lines = f.read().splitlines()
 
 N = int(lines[0].split()[1])
