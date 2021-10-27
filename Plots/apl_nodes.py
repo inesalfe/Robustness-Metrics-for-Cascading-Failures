@@ -2,7 +2,27 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 
-with open('../Data/data_0.txt') as f:
+def check_user_input(input):
+	try:
+		val = int(input)
+		if val == 0 or val == 1:
+			return True
+		return False
+	except ValueError:
+		return False
+
+input_int = input("Please choose the model:\n0 - Barabasi Albert\n1 - DMS Minimal Model\n")
+while check_user_input(input_int) == False:
+	input_int = input("Invalid input, try again\n")
+
+if int(input_int) == int(0):
+	folder = "../Data/BA/"
+else:
+	folder = "../Data/DMS/"
+
+file = "data_0.txt"
+
+with open(folder + file) as f:
     lines = f.read().splitlines()
 
 N = int(lines[0].split()[1])
@@ -30,7 +50,9 @@ for a in range(len(alphas)):
 	unc_pairs_avg_rand[a] = np.mean(unc_pairs_sizes_rand[a])
 	unc_pairs_var_rand[a] = np.var(unc_pairs_sizes_rand[a])
 
-with open('../Data/data_1.txt') as f:
+file = "data_1.txt"
+
+with open(folder + file) as f:
 	lines = f.read().splitlines()
 
 N = int(lines[0].split()[1])
@@ -58,7 +80,9 @@ for a in range(len(alphas)):
 	unc_pairs_avg_bc[a] = np.mean(unc_pairs_sizes_bc[a])
 	unc_pairs_var_bc[a] = np.var(unc_pairs_sizes_bc[a])
 
-with open('../Data/data_2.txt') as f:
+file = "data_2.txt"
+
+with open(folder + file) as f:
 	lines = f.read().splitlines()
 
 N = int(lines[0].split()[1])
@@ -86,7 +110,9 @@ for a in range(len(alphas)):
 	unc_pairs_avg_dg[a] = np.mean(unc_pairs_sizes_dg[a])
 	unc_pairs_var_dg[a] = np.var(unc_pairs_sizes_dg[a])
 
-with open('../Data/data_3.txt') as f:
+file = "data_3.txt"
+
+with open(folder + file) as f:
     lines = f.read().splitlines()
 
 N = int(lines[0].split()[1])

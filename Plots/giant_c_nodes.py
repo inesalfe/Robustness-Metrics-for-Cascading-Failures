@@ -2,8 +2,28 @@ import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
 
-with open('../Data/data_0.txt') as f:
-    lines = f.read().splitlines()
+def check_user_input(input):
+	try:
+		val = int(input)
+		if val == 0 or val == 1:
+			return True
+		return False
+	except ValueError:
+		return False
+
+input_int = input("Please choose the model:\n0 - Barabasi Albert\n1 - DMS Minimal Model\n")
+while check_user_input(input_int) == False:
+	input_int = input("Invalid input, try again\n")
+
+if int(input_int) == int(0):
+	folder = "../Data/BA/"
+else:
+	folder = "../Data/DMS/"
+
+file = "data_0.txt"
+
+with open(folder + file) as f:
+	lines = f.read().splitlines()
 
 N = int(lines[0].split()[1])
 N_GRAPHS = int(lines[1].split()[1])
@@ -30,7 +50,9 @@ for a in range(len(alphas)):
 	giant_c_avg_rand[a] = np.mean(giant_c_sizes_rand[a])
 	giant_c_var_rand[a] = np.var(giant_c_sizes_rand[a])
 
-with open('../Data/data_1.txt') as f:
+file = "data_1.txt"
+
+with open(folder + file) as f:
 	lines = f.read().splitlines()
 
 N = int(lines[0].split()[1])
@@ -58,7 +80,9 @@ for a in range(len(alphas)):
 	giant_c_avg_bc[a] = np.mean(giant_c_sizes_bc[a])
 	giant_c_var_bc[a] = np.var(giant_c_sizes_bc[a])
 
-with open('../Data/data_2.txt') as f:
+file = "data_2.txt"
+
+with open(folder + file) as f:
 	lines = f.read().splitlines()
 
 N = int(lines[0].split()[1])
@@ -86,8 +110,10 @@ for a in range(len(alphas)):
 	giant_c_avg_dg[a] = np.mean(giant_c_sizes_dg[a])
 	giant_c_var_dg[a] = np.var(giant_c_sizes_dg[a])
 
-with open('../Data/data_3.txt') as f:
-    lines = f.read().splitlines()
+file = "data_3.txt"
+
+with open(folder + file) as f:
+	lines = f.read().splitlines()
 
 N = int(lines[0].split()[1])
 N_GRAPHS = int(lines[1].split()[1])

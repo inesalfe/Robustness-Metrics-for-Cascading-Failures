@@ -247,7 +247,7 @@ int main() {
 				cout << endl << "Iterations: " << iterations << endl << endl;
 				
 				// output_file << endl << "ITER " << iterations << endl;
-				fprintf(output_file, "ITER %d", iterations);
+				fprintf(output_file, "\nITER %d", iterations);
 
 				/* GRAPH FINAL INFORMATION */
 				int n_comp;
@@ -256,7 +256,7 @@ int main() {
 				cout << "Final Number of Components: " << n_comp << "\nLargest Component: " << final_L_comp << endl;
 				cout << "Final Average Degree: " << (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)) << endl;
 				
-				fprintf(output_file, "N_COMP %d\n", n_comp);
+				fprintf(output_file, "\nN_COMP %d\n", n_comp);
 				fprintf(output_file, "L_COMP %ld\n", final_L_comp);
 				fprintf(output_file, "D_FINAL %f\n", (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)));
 
