@@ -253,8 +253,11 @@ int main() {
 
 				igraph_shortest_paths(&graph_cp, &m, igraph_vss_all(), igraph_vss_all(), IGRAPH_ALL);
 
-				for (int row = 0; row < N; row++) {
-					for (int col = 0; col < N; col++) {
+				long rows = igraph_matrix_nrow(&m);
+				long cols = igraph_matrix_ncol(&m);
+
+				for (int row = 0; row < rows; row++) {
+					for (int col = 0; col < cols; col++) {
 						if (MATRIX(m, row, col) == IGRAPH_INFINITY)
 							unconn_pairs++;
 					}
@@ -267,7 +270,7 @@ int main() {
 				fprintf(output_file, "UNCONN_PAIRS %d\n", unconn_pairs);
 
 				igraph_destroy(&graph_cp);
-				igraph_vector_clear(&deletion_list);
+				igraph_vector_clear(&deleted_nodes);
 			
 			}
 			igraph_vector_destroy(&capacity_cp);
