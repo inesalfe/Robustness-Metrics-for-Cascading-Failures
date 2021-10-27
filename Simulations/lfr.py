@@ -24,7 +24,7 @@ def lfr(n, tau1, tau2, mu, avg_k, seed=None):
     if (n < 3):
         raise nx.NetworkXError("Invalid value for n")
 
-    G = LFR_benchmark_graph(n, tau1, tau2, mu, average_degree=avg_k, min_community=int(0.05*n), seed=seed)
+    G = LFR_benchmark_graph(n, tau1, tau2, mu, average_degree=avg_k, min_community=int(0.1*n), seed=seed)
     G.remove_edges_from(nx.selfloop_edges(G))
     
     print("Nodes:", G.number_of_nodes(), "\nEdges:", G.number_of_edges())
@@ -40,21 +40,16 @@ def lfr(n, tau1, tau2, mu, avg_k, seed=None):
         else:
             c += 1
 
-    # communities = {frozenset(G.nodes[v]["community"]) for v in G}
-    # n_communities = len(communities)
-    # print(communities, n_communities)
-    # colors = [i for v in G for i in range(len(communities)) if v in communities[i]]
-    # print(colors)
-    # print(communities, n_communities)
-    # print([G.nodes[v]["community"] for v in G])
+    nx.set_node_attributes(G, {n:colors[n] for n in G.nodes()}, 'community')
 
-    nx.draw_spring(G, with_labels=False, node_color=colors)
-    plt.show()
+    # nx.draw(G, with_labels=False, node_color=colors)
+    # plt.show()
 
     return G
 
 if __name__ == '__main__':
-    lfr(1000, 3, 2, 0.15, 4, seed=10)
+    graph = lfr(5000, 3, 2, 0.15, 4, seed=1)
+    nx.write_gml(graph, "Simulations/graphs/lfr.gml")
 	# n_graphs = 10
 	# n = 5000
 	# for i in range(n_graphs):
