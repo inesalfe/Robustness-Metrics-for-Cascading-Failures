@@ -35,6 +35,6 @@ def dms(n, seed=None):
 	return G
 
 if __name__ == '__main__':
-	n = 500
+	n = 50
 	graph = dms(n, 0)
 	nx.write_gml(graph, "Animation/Graphs/dms.gml")

@@ -5,24 +5,45 @@ import numpy as np
 model = 0
 while True:
 	try:
-		model = int(input("Choose model (0 - BA; 1 - DMS): "))       
+		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - Small Example): "))       
 	except ValueError:
-		print("Please enter 0 or 1:")
+		print("Please enter 0, 1 or 2:")
 		continue
 	else:
-		if model == 0 or model == 1:
+		if model >= 0 or model <= 2:
 			break
 		else:
 			continue
-			
+
+criteria = 0
+while True:
+	try:
+		criteria = int(input("Choose criteria (0, 1, 2 or 3): "))       
+	except ValueError:
+		print("Please enter an integer between 0 and 3:")
+		continue
+	else:
+		if criteria >= 0 and criteria <= 3:
+			break
+		else:
+			continue
+
 def grouped(iterable, n):
     return zip(*[iter(iterable)]*n)
 
-G = nx.read_gml('../Data/net.gml', None)
+if model == 0:
+	G = nx.read_gml("Animation/Graphs/ba.gml", None)
+	file_name = "Animation/Data/ba_%i.txt" % criteria
+elif model == 1:
+	G = nx.read_gml("Animation/Graphs/dms.gml", None)
+	file_name = "Animation/Data/dms_%i.txt" % criteria
+else:
+	G = nx.read_gml("Animation/Graphs/small.gml", None)
+	file_name = "Animation/Data/small_%i.txt" % criteria
 
 it_list_v = []
 it_list_e = []
-with open('../Data/v_edges.txt', 'r') as f:
+with open(file_name, 'r') as f:
     for line in f:
         words = line.split()
         if (words[0] == 'it'):
@@ -35,15 +56,15 @@ with open('../Data/v_edges.txt', 'r') as f:
         	for word in words:
         		it_list_e[it].append(int(word))
 
-print(it+1)
-print(it_list_v)
-print(it_list_e)
+# print(it+1)
+# print(it_list_v)
+# print(it_list_e)
 
 N = G.number_of_nodes()
 E = G.number_of_edges()
 
-print(N)
-print(E)
+# print(N)
+# print(E)
 
 untouched_edges = list(G.edges)
 deleted_edges = []
@@ -52,13 +73,21 @@ untouched_vertices = list(G.nodes)
 deleted_vertices = []
 marked_vertices = []
 
+if model == 0:
+	name = "Animation/Figures/ba_%i" % criteria
+elif model == 1:
+	name = "Animation/Figures/dms_%i" % criteria
+else:
+	name = "Animation/Figures/small_%i" % criteria
+
+
 fig_it = 1
 
 fig = plt.figure()
 nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=True, font_weight='bold')
 plt.show()
-name = "Figures/%i.png" % fig_it
-fig.savefig(name, format='png')
+fig_name = name + "_%i.png" % fig_it
+fig.savefig(fig_name + '', format='png')
 fig_it = fig_it + 1
 
 for i in range(it+1):
@@ -76,8 +105,8 @@ for i in range(it+1):
 	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = marked_vertices, node_color = 'red', edgelist = marked_edges, edge_color = 'red', alpha = 1.0, with_labels=True, font_weight='bold')
 	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=True, font_weight='bold')
 	plt.show()
-	name = "Figures/%i.png" % fig_it
-	fig.savefig(name, format='png')
+	fig_name = name + "_%i.png" % fig_it
+	fig.savefig(fig_name, format='png')
 	fig_it = fig_it + 1
 
 	for v in marked_vertices:
@@ -94,6 +123,6 @@ for i in range(it+1):
 	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=True, font_weight='bold')
 	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=True, font_weight='bold')
 	plt.show()
-	name = "Figures/%i.png" % fig_it
-	fig.savefig(name, format='png')
+	fig_name = name + "_%i.png" % fig_it
+	fig.savefig(fig_name, format='png')
 	fig_it = fig_it + 1
