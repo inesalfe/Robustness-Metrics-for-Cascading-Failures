@@ -40,11 +40,10 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			unc_pairs_sizes_rand[a][a_it[a]] = float(lines[10+6*l_it].split()[1])
+			temp_n = N - np.sum([int(i) for i in lines[5+6*l_it].split()[1:]])
+			unc_pairs_sizes_rand[a][a_it[a]] = float(lines[10+6*l_it].split()[1]) / temp_n / (temp_n-1) * 2
 			l_it += 1
 			a_it[a] += 1
-
-unc_pairs_sizes_rand = unc_pairs_sizes_rand / (N*(N-1)/2)
 
 for a in range(len(alphas)):
 	unc_pairs_avg_rand[a] = np.mean(unc_pairs_sizes_rand[a])
@@ -70,11 +69,10 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			unc_pairs_sizes_bc[a][a_it[a]] = float(lines[10+6*l_it].split()[1])
+			temp_n = N - np.sum([int(i) for i in lines[5+6*l_it].split()[1:]])
+			unc_pairs_sizes_bc[a][a_it[a]] = float(lines[10+6*l_it].split()[1]) / temp_n / (temp_n-1) * 2
 			l_it += 1
 			a_it[a] += 1
-
-unc_pairs_sizes_bc = unc_pairs_sizes_bc / (N*(N-1)/2)
 
 for a in range(len(alphas)):
 	unc_pairs_avg_bc[a] = np.mean(unc_pairs_sizes_bc[a])
@@ -100,11 +98,10 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			unc_pairs_sizes_dg[a][a_it[a]] = float(lines[10+6*l_it].split()[1])
+			temp_n = N - np.sum([int(i) for i in lines[5+6*l_it].split()[1:]])
+			unc_pairs_sizes_dg[a][a_it[a]] = float(lines[10+6*l_it].split()[1]) / temp_n / (temp_n-1) * 2
 			l_it += 1
 			a_it[a] += 1
-
-unc_pairs_sizes_dg = unc_pairs_sizes_dg / (N*(N-1)/2)
 
 for a in range(len(alphas)):
 	unc_pairs_avg_dg[a] = np.mean(unc_pairs_sizes_dg[a])
@@ -130,11 +127,10 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			unc_pairs_sizes_cl[a][a_it[a]] = float(lines[10+6*l_it].split()[1])
+			temp_n = N - np.sum([int(i) for i in lines[5+6*l_it].split()[1:]])
+			unc_pairs_sizes_cl[a][a_it[a]] = float(lines[10+6*l_it].split()[1]) / temp_n / (temp_n-1) * 2
 			l_it += 1
 			a_it[a] += 1
-
-unc_pairs_sizes_cl = unc_pairs_sizes_cl / (N*(N-1)/2)
 
 for a in range(len(alphas)):
 	unc_pairs_avg_cl[a] = np.mean(unc_pairs_sizes_cl[a])

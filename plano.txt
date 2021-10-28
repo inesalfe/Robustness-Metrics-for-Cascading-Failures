@@ -5,3 +5,5 @@ Animação:
 	Corrigir centralidade das figuras;
 	Fazer a simulação para uma rede maior;
 	Possivelmente tirar as labels.
+
+Barras de erro no n_comp_nodes.py

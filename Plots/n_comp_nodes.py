@@ -44,8 +44,6 @@ for net in range(N_GRAPHS):
 			l_it += 1
 			a_it[a] += 1
 
-n_comp_rand = n_comp_rand / N
-
 for a in range(len(alphas)):
 	n_comp_avg_rand[a] = np.mean(n_comp_rand[a])
 	n_comp_var_rand[a] = np.var(n_comp_rand[a])
@@ -73,8 +71,6 @@ for net in range(N_GRAPHS):
 			n_comp_bc[a][a_it[a]] = float(lines[7+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
-
-n_comp_bc = n_comp_bc / N
 
 for a in range(len(alphas)):
 	n_comp_avg_bc[a] = np.mean(n_comp_bc[a])
@@ -104,8 +100,6 @@ for net in range(N_GRAPHS):
 			l_it += 1
 			a_it[a] += 1
 
-n_comp_dg = n_comp_dg / N
-
 for a in range(len(alphas)):
 	n_comp_avg_dg[a] = np.mean(n_comp_dg[a])
 	n_comp_var_dg[a] = np.var(n_comp_dg[a])
@@ -134,8 +128,6 @@ for net in range(N_GRAPHS):
 			l_it += 1
 			a_it[a] += 1
 
-n_comp_cl = n_comp_cl / N
-
 for a in range(len(alphas)):
 	n_comp_avg_cl[a] = np.mean(n_comp_cl[a])
 	n_comp_var_cl[a] = np.var(n_comp_cl[a])
@@ -155,18 +147,18 @@ plt.plot(alphas, n_comp_avg_bc, color="red")
 plt.plot(alphas, n_comp_avg_dg, color="green")
 plt.plot(alphas, n_comp_avg_cl, color="magenta")
 
-plt.errorbar(alphas, n_comp_avg_rand, n_comp_var_rand, fmt='bo', markersize=5, capsize=5, ecolor="black", label="Random")
-plt.errorbar(alphas, n_comp_avg_bc, n_comp_var_bc, fmt='ro', markersize=5, capsize=5, ecolor="black", label="Betweeness Centrality")
-plt.errorbar(alphas, n_comp_avg_dg, n_comp_var_dg, fmt='go', markersize=5, capsize=5, ecolor="black", label="Degree")
-plt.errorbar(alphas, n_comp_avg_cl, n_comp_var_cl, fmt='mo', markersize=5, capsize=5, ecolor="black", label="Clustering Coefficient")
+# plt.errorbar(alphas, n_comp_avg_rand, n_comp_var_rand, fmt='bo', markersize=5, capsize=5, ecolor="black", label="Random")
+# plt.errorbar(alphas, n_comp_avg_bc, n_comp_var_bc, fmt='ro', markersize=5, capsize=5, ecolor="black", label="Betweeness Centrality")
+# plt.errorbar(alphas, n_comp_avg_dg, n_comp_var_dg, fmt='go', markersize=5, capsize=5, ecolor="black", label="Degree")
+# plt.errorbar(alphas, n_comp_avg_cl, n_comp_var_cl, fmt='mo', markersize=5, capsize=5, ecolor="black", label="Clustering Coefficient")
 
-plt.xlim((-1.1, 11.1))
-plt.ylim((-0.1, 1.1))
+# plt.xlim((-1.1, 11.1))
+# plt.ylim((-0.1, 1.1))
 
 plt.grid()
 plt.legend()
 plt.xlabel(r'\textbf{$\alpha$}', fontsize=11)
-plt.ylabel(r'\textbf{N\'/N}', fontsize=11)
+plt.ylabel(r'\textbf{Final number of components in the network}', fontsize=11)
 
 plt.show()
 
