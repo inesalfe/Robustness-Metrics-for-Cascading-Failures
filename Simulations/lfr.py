@@ -51,4 +51,4 @@ if __name__ == '__main__':
     # 1, 
     seed = 1
     graph = lfr(5000, 3, 2, 0.15, 4, seed=seed)
-    nx.write_gml(graph, "Simulations/graphs/lfr_%i.gml" % seed)
+    nx.write_gml(graph, "Simulations/Graphs/lfr_%i.gml" % seed)

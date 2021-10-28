@@ -35,10 +35,6 @@ def dms(n, seed=None):
 	return G
 
 if __name__ == '__main__':
-	# 10 Graphs
-	n_graphs = 10
-	# 5000 nodes
-	n = 5000
-	for i in range(n_graphs):
-		graph = dms(n, i)
-		nx.write_gml(graph, "Simulations/Graphs/dms_%i.gml" % i)
+	n = 500
+	graph = dms(n, 0)
+	nx.write_gml(graph, "Animation/Graphs/dms.gml")

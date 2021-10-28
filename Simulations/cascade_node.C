@@ -20,7 +20,7 @@ int main() {
 
 	// The user inserts the model of the network
 	cout << "Please choose the model:" << endl;
-	cout << "0 - Barabasi Albert" << endl;
+	cout << "0 - Barabasi Albert Model" << endl;
 	cout << "1 - DMS Minimal Model" << endl;
 	cout << "2 - LFR Benchmark Model" << endl;
 
@@ -71,7 +71,6 @@ int main() {
 	}
 
 	igraph_t graph, graph_cp; // The graph itself
-	igraph_vector_t v; // Auxiliary vector for the edges
 	igraph_vector_t deletion_list; 	// List with the vertices to delete - updated in each iteration
 	igraph_vector_t del_edges; // Edges to be deleted in each iteration
 	igraph_vector_t deleted_nodes; 	// List with the deleted nodes in each iteration
@@ -125,10 +124,10 @@ int main() {
 
 		cout << "#################### NETWORK Nº " << n + 1 << " ####################" << endl;
 
-		// Choose the path for the output files depending on the chosen model and criterion
+		// Choose the path for the input files
 		if (model == 0) {
 			char filename[50] = {0};
-			sprintf(filename, "Simulations/graphs/ba_%d.gml", n);
+			sprintf(filename, "Simulations/Graphs/ba_%d.gml", n);
 
 			FILE *input_file = fopen(filename, "r");
 			if (input_file == 0) {
@@ -141,7 +140,7 @@ int main() {
 		}
 		else if (model == 1) {
 			char filename[50] = {0};
-			sprintf(filename, "Simulations/graphs/dms_%d.gml", n);
+			sprintf(filename, "Simulations/Graphs/dms_%d.gml", n);
 
 			FILE *input_file = fopen(filename, "r");
 			if (input_file == 0) {
@@ -154,7 +153,7 @@ int main() {
 		}
 		else {
 			char filename[50] = {0};
-			sprintf(filename, "Simulations/graphs/lfr_%d.gml", n);
+			sprintf(filename, "Simulations/Graphs/lfr_%d.gml", n);
 
 			FILE *input_file = fopen(filename, "r");
 			if (input_file == 0) {

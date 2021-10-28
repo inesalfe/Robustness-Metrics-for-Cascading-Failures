@@ -13,7 +13,7 @@ int main() {
 	igraph_t graph; // The graph itself
 
 	// Path to the output file
-	char file_name[28] = "Simulations/graphs/ba_0.gml";
+	char file_name[28] = "Simulations/Graphs/ba_0.gml";
 
 	for(int n = 0; n < N_GRAPHS; ++n) {
 

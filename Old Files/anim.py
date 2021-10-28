@@ -2,19 +2,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 
-model = 0
-while True:
-	try:
-		model = int(input("Choose model (0 - BA; 1 - DMS): "))       
-	except ValueError:
-		print("Please enter 0 or 1:")
-		continue
-	else:
-		if model == 0 or model == 1:
-			break
-		else:
-			continue
-			
 def grouped(iterable, n):
     return zip(*[iter(iterable)]*n)
 

@@ -1,4 +1,6 @@
-all: cascade_node ba sim
+# Inês
+
+all: cascade_node ba sim ba_sim small
 
 cascade_node: Simulations/cascade_node.C
 	g++ -std=c++11 Simulations/cascade_node.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/cascade_node
@@ -6,13 +8,18 @@ cascade_node: Simulations/cascade_node.C
 ba: Simulations/ba.C
 	g++ -std=c++11 Simulations/ba.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ba
 
-# cascade_edge: Simulations/cascade_edge.C
-# 	g++ -std=c++11 Simulations/cascade_edge.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/cascade_edge
-
 sim: Animation/sim.C
 	g++ -std=c++11 Animation/sim.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/sim
 
-ricky: cascade_node_r cascade_edge_r sim_r
+ba_sim: Animation/Network_Generation/ba.C
+	g++ -std=c++11 Animation/Network_Generation/ba.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ba_sim
+
+small: Animation/Network_Generation/small.C
+	g++ -std=c++11 Animation/Network_Generation/small.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/small
+
+# Ricardo
+
+ricky: cascade_node_r sim_r
 
 CC = g++
 CFLAGS = -std=c++11 -O3
@@ -23,9 +30,6 @@ GRAPHIC_PATHS = -I/usr/include/python3.8 -I/home/ricky/.local/lib/python3.8/site
 
 cascade_node_r: Simulations/cascade_node.C
 	$(CC) $(CFLAGS) Simulations/cascade_node.C $(LIBS_PATHS) $(LIBS) -o Executables/cascade_node
-
-# cascade_edge_r: Simulations/cascade_edge.C
-# 	$(CC) $(CFLAGS) Simulations/cascade_edge.C $(LIBS_PATHS) $(LIBS) -o Executables/cascade_edge
 
 sim_r: Animation/sim.C
 	$(CC) $(CFLAGS) Animation/sim.C $(LIBS_PATHS) $(LIBS) -o Executables/sim
