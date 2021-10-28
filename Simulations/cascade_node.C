@@ -22,10 +22,11 @@ int main() {
 	cout << "Please choose the model:" << endl;
 	cout << "0 - Barabasi Albert" << endl;
 	cout << "1 - DMS Minimal Model" << endl;
+	cout << "2 - LFR Benchmark Model" << endl;
 
 	int model;
 	cin >> model;
-	while(cin.fail() || model < 0 || model > 1) {
+	while(cin.fail() || model < 0 || model > 2) {
 		cout << "Invalid Input" << endl;
 		cin.clear();
 		cin.ignore(256,'\n');
@@ -54,8 +55,12 @@ int main() {
 		strcpy(file_name, "Data/BA/data_0.txt");
 		file_name[13] = criterion + '0';
 	}
-	else {
+	else if (model == 1) {
 		strcpy(file_name, "Data/DMS/data_0.txt");
+		file_name[14] = criterion + '0';
+	}
+	else {
+		strcpy(file_name, "Data/LFR/data_0.txt");
 		file_name[14] = criterion + '0';
 	}
 
@@ -134,9 +139,22 @@ int main() {
 			igraph_read_graph_gml(&graph, input_file);
 			fclose(input_file);
 		}
-		else {
+		else if (model == 1) {
 			char filename[50] = {0};
 			sprintf(filename, "Simulations/graphs/dms_%d.gml", n);
+
+			FILE *input_file = fopen(filename, "r");
+			if (input_file == 0) {
+				cout << "Unable to open input file " << filename << ". Exiting\n";
+				return 11;
+			}
+
+			igraph_read_graph_gml(&graph, input_file);
+			fclose(input_file);
+		}
+		else {
+			char filename[50] = {0};
+			sprintf(filename, "Simulations/graphs/lfr_%d.gml", n);
 
 			FILE *input_file = fopen(filename, "r");
 			if (input_file == 0) {

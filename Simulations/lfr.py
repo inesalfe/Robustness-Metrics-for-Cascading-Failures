@@ -42,16 +42,11 @@ def lfr(n, tau1, tau2, mu, avg_k, seed=None):
 
     nx.set_node_attributes(G, {n:colors[n] for n in G.nodes()}, 'community')
 
-    # nx.draw(G, with_labels=False, node_color=colors)
-    # plt.show()
-
     return G
 
 if __name__ == '__main__':
-    graph = lfr(5000, 3, 2, 0.15, 4, seed=1)
-    nx.write_gml(graph, "Simulations/graphs/lfr.gml")
-	# n_graphs = 10
-	# n = 5000
-	# for i in range(n_graphs):
-	# 	graph = dms(n, i)
-	# 	nx.write_gml(graph, "graphs/dms_%i.gml" % i)
+    # 10 Graphs
+    n_graphs = 10
+    for i in range(n_graphs):
+        graph = lfr(5000, 3, 2, 0.15, 4, seed=i)
+        nx.write_gml(graph, "Simulations/graphs/lfr_%i.gml" % i)

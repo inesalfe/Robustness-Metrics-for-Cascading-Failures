@@ -5,8 +5,3 @@ Animação:
 	Corrigir centralidade das figuras;
 	Fazer a simulação para uma rede maior;
 	Possivelmente tirar as labels.
-
-Simulações:
-
-	LFR_benchmark - community
-	Correr os scripts
