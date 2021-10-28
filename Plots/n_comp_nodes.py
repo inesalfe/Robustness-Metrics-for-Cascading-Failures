@@ -32,23 +32,23 @@ criteria = int(lines[3].split()[1])
 alphas = lines[4].split()[1:12]
 
 a_it = np.zeros(len(alphas), dtype=int)
-giant_c_avg_rand = np.zeros(len(alphas))
-giant_c_var_rand = np.zeros(len(alphas))
-giant_c_sizes_rand = np.zeros((len(alphas), IT*N_GRAPHS))
+n_comp_avg_rand = np.zeros(len(alphas))
+n_comp_var_rand = np.zeros(len(alphas))
+n_comp_rand = np.zeros((len(alphas), IT*N_GRAPHS))
 
 l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_rand[a][a_it[a]] = float(lines[8+6*l_it].split()[1])
+			n_comp_rand[a][a_it[a]] = float(lines[7+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 
-giant_c_sizes_rand = giant_c_sizes_rand / N
+n_comp_rand = n_comp_rand / N
 
 for a in range(len(alphas)):
-	giant_c_avg_rand[a] = np.mean(giant_c_sizes_rand[a])
-	giant_c_var_rand[a] = np.var(giant_c_sizes_rand[a])
+	n_comp_avg_rand[a] = np.mean(n_comp_rand[a])
+	n_comp_var_rand[a] = np.var(n_comp_rand[a])
 
 file = "data_1.txt"
 
@@ -62,23 +62,23 @@ criteria = int(lines[3].split()[1])
 alphas = lines[4].split()[1:12]
 
 a_it = np.zeros(len(alphas), dtype=int)
-giant_c_avg_bc = np.zeros(len(alphas))
-giant_c_var_bc = np.zeros(len(alphas))
-giant_c_sizes_bc = np.zeros((len(alphas), IT*N_GRAPHS))
+n_comp_avg_bc = np.zeros(len(alphas))
+n_comp_var_bc = np.zeros(len(alphas))
+n_comp_bc = np.zeros((len(alphas), IT*N_GRAPHS))
 
 l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_bc[a][a_it[a]] = float(lines[8+6*l_it].split()[1])
+			n_comp_bc[a][a_it[a]] = float(lines[7+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 
-giant_c_sizes_bc = giant_c_sizes_bc / N
+n_comp_bc = n_comp_bc / N
 
 for a in range(len(alphas)):
-	giant_c_avg_bc[a] = np.mean(giant_c_sizes_bc[a])
-	giant_c_var_bc[a] = np.var(giant_c_sizes_bc[a])
+	n_comp_avg_bc[a] = np.mean(n_comp_bc[a])
+	n_comp_var_bc[a] = np.var(n_comp_bc[a])
 
 file = "data_2.txt"
 
@@ -92,23 +92,23 @@ criteria = int(lines[3].split()[1])
 alphas = lines[4].split()[1:12]
 
 a_it = np.zeros(len(alphas), dtype=int)
-giant_c_avg_dg = np.zeros(len(alphas))
-giant_c_var_dg = np.zeros(len(alphas))
-giant_c_sizes_dg = np.zeros((len(alphas), IT*N_GRAPHS))
+n_comp_avg_dg = np.zeros(len(alphas))
+n_comp_var_dg = np.zeros(len(alphas))
+n_comp_dg = np.zeros((len(alphas), IT*N_GRAPHS))
 
 l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_dg[a][a_it[a]] = float(lines[8+6*l_it].split()[1])
+			n_comp_dg[a][a_it[a]] = float(lines[7+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 
-giant_c_sizes_dg = giant_c_sizes_dg / N
+n_comp_dg = n_comp_dg / N
 
 for a in range(len(alphas)):
-	giant_c_avg_dg[a] = np.mean(giant_c_sizes_dg[a])
-	giant_c_var_dg[a] = np.var(giant_c_sizes_dg[a])
+	n_comp_avg_dg[a] = np.mean(n_comp_dg[a])
+	n_comp_var_dg[a] = np.var(n_comp_dg[a])
 
 file = "data_3.txt"
 
@@ -122,43 +122,43 @@ criteria = int(lines[3].split()[1])
 alphas = lines[4].split()[1:12]
 
 a_it = np.zeros(len(alphas), dtype=int)
-giant_c_avg_cl = np.zeros(len(alphas))
-giant_c_var_cl = np.zeros(len(alphas))
-giant_c_sizes_cl = np.zeros((len(alphas), IT*N_GRAPHS))
+n_comp_avg_cl = np.zeros(len(alphas))
+n_comp_var_cl = np.zeros(len(alphas))
+n_comp_cl = np.zeros((len(alphas), IT*N_GRAPHS))
 
 l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_cl[a][a_it[a]] = float(lines[8+6*l_it].split()[1])
+			n_comp_cl[a][a_it[a]] = float(lines[7+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 
-giant_c_sizes_cl = giant_c_sizes_cl / N
+n_comp_cl = n_comp_cl / N
 
 for a in range(len(alphas)):
-	giant_c_avg_cl[a] = np.mean(giant_c_sizes_cl[a])
-	giant_c_var_cl[a] = np.var(giant_c_sizes_cl[a])
+	n_comp_avg_cl[a] = np.mean(n_comp_cl[a])
+	n_comp_var_cl[a] = np.var(n_comp_cl[a])
 
 f1 = plt.figure()
 
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-plt.scatter(alphas, giant_c_avg_rand, color="blue")
-plt.scatter(alphas, giant_c_avg_bc, color="red")
-plt.scatter(alphas, giant_c_avg_dg, color="green")
-plt.scatter(alphas, giant_c_avg_cl, color="magenta")
+plt.scatter(alphas, n_comp_avg_rand, color="blue")
+plt.scatter(alphas, n_comp_avg_bc, color="red")
+plt.scatter(alphas, n_comp_avg_dg, color="green")
+plt.scatter(alphas, n_comp_avg_cl, color="magenta")
 
-plt.plot(alphas, giant_c_avg_rand, color="blue")
-plt.plot(alphas, giant_c_avg_bc, color="red")
-plt.plot(alphas, giant_c_avg_dg, color="green")
-plt.plot(alphas, giant_c_avg_cl, color="magenta")
+plt.plot(alphas, n_comp_avg_rand, color="blue")
+plt.plot(alphas, n_comp_avg_bc, color="red")
+plt.plot(alphas, n_comp_avg_dg, color="green")
+plt.plot(alphas, n_comp_avg_cl, color="magenta")
 
-plt.errorbar(alphas, giant_c_avg_rand, giant_c_var_rand, fmt='bo', markersize=5, capsize=5, ecolor="black", label="Random")
-plt.errorbar(alphas, giant_c_avg_bc, giant_c_var_bc, fmt='ro', markersize=5, capsize=5, ecolor="black", label="Betweeness Centrality")
-plt.errorbar(alphas, giant_c_avg_dg, giant_c_var_dg, fmt='go', markersize=5, capsize=5, ecolor="black", label="Degree")
-plt.errorbar(alphas, giant_c_avg_cl, giant_c_var_cl, fmt='mo', markersize=5, capsize=5, ecolor="black", label="Clustering Coefficient")
+plt.errorbar(alphas, n_comp_avg_rand, n_comp_var_rand, fmt='bo', markersize=5, capsize=5, ecolor="black", label="Random")
+plt.errorbar(alphas, n_comp_avg_bc, n_comp_var_bc, fmt='ro', markersize=5, capsize=5, ecolor="black", label="Betweeness Centrality")
+plt.errorbar(alphas, n_comp_avg_dg, n_comp_var_dg, fmt='go', markersize=5, capsize=5, ecolor="black", label="Degree")
+plt.errorbar(alphas, n_comp_avg_cl, n_comp_var_cl, fmt='mo', markersize=5, capsize=5, ecolor="black", label="Clustering Coefficient")
 
 plt.xlim((-1.1, 11.1))
 plt.ylim((-0.1, 1.1))
@@ -170,6 +170,6 @@ plt.ylabel(r'\textbf{N\'/N}', fontsize=11)
 
 plt.show()
 
-fig_name = "Plots/figures/g_size_nodes_%i.png" % int(input_int)
+fig_name = "Plots/figures/n_comp_%i.png" % int(input_int)
 
 f1.savefig(fig_name, bbox_inches='tight')

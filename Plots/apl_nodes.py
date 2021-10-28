@@ -16,9 +16,9 @@ while check_user_input(input_int) == False:
 	input_int = input("Invalid input, try again\n")
 
 if int(input_int) == int(0):
-	folder = "../Data/BA/"
+	folder = "Data/BA/"
 else:
-	folder = "../Data/DMS/"
+	folder = "Data/DMS/"
 
 file = "data_0.txt"
 
@@ -170,6 +170,6 @@ plt.ylabel(r'\textbf{Fraction of unconnected pairs of nodes}', fontsize=11)
 
 plt.show()
 
-fig_name = "unc_pairs_nodes_%i.png" % int(input_int)
+fig_name = "Plots/figures/unc_pairs_nodes_%i.png" % int(input_int)
 
 f1.savefig(fig_name, bbox_inches='tight')

@@ -30,9 +30,9 @@ while True:
 			continue
 
 if model == 0:
-	folder = "../Data/BA/"
+	folder = "Data/BA/"
 else:
-	folder = "../Data/DMS/"
+	folder = "Data/DMS/"
 
 file_name = "data_%i.txt" % criteria
 
@@ -93,6 +93,6 @@ plt.ylabel(r'\# Deleted Nodes', fontsize=11)
 
 plt.show()
 
-file_name = "v_del_%i.png" % criteria
+file_name = "Plots/figures/v_del_%i.png" % criteria
 
 f1.savefig(file_name, bbox_inches='tight')

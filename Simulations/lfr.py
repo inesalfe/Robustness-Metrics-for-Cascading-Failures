@@ -46,7 +46,9 @@ def lfr(n, tau1, tau2, mu, avg_k, seed=None):
 
 if __name__ == '__main__':
     # 10 Graphs
-    n_graphs = 10
-    for i in range(n_graphs):
-        graph = lfr(5000, 3, 2, 0.15, 4, seed=i)
-        nx.write_gml(graph, "Simulations/graphs/lfr_%i.gml" % i)
+    # n_graphs = 10
+    # for i in range(n_graphs):
+    # 1, 
+    seed = 1
+    graph = lfr(5000, 3, 2, 0.15, 4, seed=seed)
+    nx.write_gml(graph, "Simulations/graphs/lfr_%i.gml" % seed)
