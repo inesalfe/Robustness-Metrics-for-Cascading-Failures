@@ -159,6 +159,11 @@ plt.errorbar(alphas, unc_pairs_avg_cl, np.sqrt(unc_pairs_var_cl), fmt='mo', mark
 plt.xlim((-1.1, 11.1))
 plt.ylim((-0.1, 1.1))
 
+if int(input_int) == int(0):
+	plt.title('Barabási Albert Model')
+else:
+	plt.title('DMS Minimal Model')
+	
 plt.grid()
 plt.legend()
 plt.xlabel(r'\textbf{$\alpha$}', fontsize=11)

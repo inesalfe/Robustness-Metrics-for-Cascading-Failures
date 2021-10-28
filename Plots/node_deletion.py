@@ -85,6 +85,11 @@ plt.fill_between(x, avg_del[2]-std_del[2], avg_del[2]+std_del[2], color="red", a
 
 plt.fill_between(x, min_del[2], max_del[2], color="blue", alpha=0.1, label='Maximum and Minimum')
 
+if model == 0:
+	plt.title('Barabási Albert Model')
+else:
+	plt.title('DMS Minimal Model')
+
 plt.yscale('log')
 plt.grid()
 plt.legend()
