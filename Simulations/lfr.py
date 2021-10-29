@@ -40,22 +40,25 @@ def lfr(n, tau1, tau2, mu, avg_k, seed=None):
     nx.set_node_attributes(G, {n:colors[n] for n in G.nodes()}, 'community')
 
     return G
+# works: 
+#    graph = lfr(5000, 3, 3, 0.2, 4, seed=1)
+#    graph = lfr(5000, 3, 1.1, 0.15, 4, seed=1)
 
 if __name__ == '__main__':
-    # graph = lfr(5000, 3, 2, 0.15, 4, seed=6)
+    graph = lfr(5000, 3, 1.1, 0.15, 4, seed=10)
     # nx.write_gml(graph, "Simulations/graphs/lfr_2.gml")
-    n_graphs = 5
-    n = 5000
-    i = s = 0
-    while True:
-        try:
-            graph = lfr(n, 3, 1.5, 0.15, 4, seed=s)
-            nx.write_gml(graph, "Simulations/graphs/lfr_%d.gml" % i)
-            print(i, s)
-            i += 1
-            if i == n_graphs:
-                break
-        except nx.ExceededMaxIterations:
-            print("Seed", s, "doesn't work")
-        finally:
-            s += 1
+    # n_graphs = 5
+    # n = 5000
+    # i = s = 0
+    # while True:
+    #     try:
+    #         graph = lfr(n, 3, 1.5, 0.15, 4, seed=s)
+    #         nx.write_gml(graph, "Simulations/graphs/lfr_%d.gml" % i)
+    #         print(i, s)
+    #         i += 1
+    #         if i == n_graphs:
+    #             break
+    #     except nx.ExceededMaxIterations:
+    #         print("Seed", s, "doesn't work")
+    #     finally:
+    #         s += 1
