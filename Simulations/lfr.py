@@ -21,10 +21,7 @@ import random
 
 def lfr(n, tau1, tau2, mu, avg_k, seed=None):
 
-    if (n < 3):
-        raise nx.NetworkXError("Invalid value for n")
-
-    G = LFR_benchmark_graph(n, tau1, tau2, mu, average_degree=avg_k, min_community=int(0.1*n), seed=seed)
+    G = LFR_benchmark_graph(n, tau1, tau2, mu, average_degree=avg_k, min_community=int(0.1*n), seed=seed, max_iters=40)
     G.remove_edges_from(nx.selfloop_edges(G))
     
     print("Nodes:", G.number_of_nodes(), "\nEdges:", G.number_of_edges())
@@ -48,10 +45,20 @@ def lfr(n, tau1, tau2, mu, avg_k, seed=None):
     return G
 
 if __name__ == '__main__':
-    graph = lfr(5000, 3, 2, 0.15, 4, seed=1)
-    nx.write_gml(graph, "Simulations/graphs/lfr.gml")
-	# n_graphs = 10
-	# n = 5000
-	# for i in range(n_graphs):
-	# 	graph = dms(n, i)
-	# 	nx.write_gml(graph, "graphs/dms_%i.gml" % i)
+    # graph = lfr(5000, 3, 2, 0.15, 4, seed=6)
+    # nx.write_gml(graph, "Simulations/graphs/lfr_2.gml")
+    n_graphs = 10
+    n = 5000
+    i = s = 0
+    while True:
+        try:
+            graph = lfr(n, 3, 2, 0.15, 4, seed=s)
+            # nx.write_gml(graph, "Simulations/graphs/lfr_%d.gml" % i)
+            print(i, s)
+            i += 1
+            if i == n_graphs:
+                break
+        except nx.ExceededMaxIterations:
+            print("Seed", s, "doesn't work")
+        finally:
+            s += 1
