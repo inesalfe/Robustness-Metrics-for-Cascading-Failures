@@ -29,7 +29,7 @@ while True:
 			continue
 
 def grouped(iterable, n):
-    return zip(*[iter(iterable)]*n)
+	return zip(*[iter(iterable)]*n)
 
 if model == 0:
 	G = nx.read_gml("Animation/Graphs/ba.gml", None)
@@ -44,17 +44,20 @@ else:
 it_list_v = []
 it_list_e = []
 with open(file_name, 'r') as f:
-    for line in f:
-        words = line.split()
-        if (words[0] == 'it'):
-        	it = int(words[1])-1
-        	it_list_v.append([])
-        	it_list_e.append([])
-        elif (len(words) == 1):
-        	it_list_v[it].append(int(words[0]))
-        else:
-        	for word in words:
-        		it_list_e[it].append(int(word))
+	for line in f:
+		words = line.split()
+		if (len(words) == 0):
+			it_list_e[it].append(-1)
+			it_list_e[it].append(-1)
+		elif (words[0] == 'it'):
+			it = int(words[1])-1
+			it_list_v.append([])
+			it_list_e.append([])
+		elif (len(words) == 1):
+			it_list_v[it].append(int(words[0]))
+		else:
+			for word in words:
+				it_list_e[it].append(int(word))
 
 # print(it+1)
 # print(it_list_v)
@@ -80,7 +83,6 @@ elif model == 1:
 else:
 	name = "Animation/Figures/small_%i" % criteria
 
-
 fig_it = 1
 
 fig = plt.figure()
@@ -97,8 +99,9 @@ for i in range(it+1):
 		marked_vertices.append(v)
 
 	for e1, e2 in grouped(it_list_e[i], 2):
-		untouched_edges.remove((e1, e2))
-		marked_edges.append((e1, e2))
+		if ((e1, e2) != (-1, -1)):
+			untouched_edges.remove((e1, e2))
+			marked_edges.append((e1, e2))
 
 	fig = plt.figure()
 	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=True, font_weight='bold')
