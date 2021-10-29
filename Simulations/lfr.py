@@ -21,7 +21,7 @@ import random
 
 def lfr(n, tau1, tau2, mu, avg_k, seed=None):
 
-    G = LFR_benchmark_graph(n, tau1, tau2, mu, average_degree=avg_k, min_community=int(0.1*n), seed=seed, max_iters=40)
+    G = LFR_benchmark_graph(n, tau1, tau2, mu, average_degree=avg_k, min_community=int(0.1*n), seed=seed, max_iters=50)
     G.remove_edges_from(nx.selfloop_edges(G))
     
     print("Nodes:", G.number_of_nodes(), "\nEdges:", G.number_of_edges())
@@ -44,13 +44,13 @@ def lfr(n, tau1, tau2, mu, avg_k, seed=None):
 if __name__ == '__main__':
     # graph = lfr(5000, 3, 2, 0.15, 4, seed=6)
     # nx.write_gml(graph, "Simulations/graphs/lfr_2.gml")
-    n_graphs = 10
+    n_graphs = 5
     n = 5000
     i = s = 0
     while True:
         try:
-            graph = lfr(n, 3, 2, 0.15, 4, seed=s)
-            # nx.write_gml(graph, "Simulations/graphs/lfr_%d.gml" % i)
+            graph = lfr(n, 3, 1.5, 0.15, 4, seed=s)
+            nx.write_gml(graph, "Simulations/graphs/lfr_%d.gml" % i)
             print(i, s)
             i += 1
             if i == n_graphs:

@@ -19,10 +19,10 @@ small: Animation/Network_Generation/small.C
 
 # Ricardo
 
-ricky: cascade_node_r sim_r
+ricky: cascade_node_r sim_r degree_dist ba_r
 
 CC = g++
-CFLAGS = -std=c++11 -O3
+CFLAGS = -std=c++11 -g
 LIBS = -ligraph -lm -lstdc++ -lxml2 -lz -lgmp -lblas -lcxsparse -lglpk -llapack -larpack -lgomp -lpthread
 LIBS_PATHS = -I/usr/local/include/igraph -L/usr/local/lib
 GRAPHIC_LIBS = -lpython3.8
@@ -36,3 +36,6 @@ sim_r: Animation/sim.C
 
 degree_dist: Simulations/degree_dist.cpp
 	$(CC) $(CFLAGS) Simulations/degree_dist.cpp $(LIBS_PATHS) $(LIBS) $(GRAPHIC_PATHS) $(GRAPHIC_LIBS) -o Simulations/dd
+
+ba_r: Simulations/ba.C
+	$(CC) $(CFLAGS) Simulations/ba.C $(LIBS_PATHS) $(LIBS) -o Executables/ba

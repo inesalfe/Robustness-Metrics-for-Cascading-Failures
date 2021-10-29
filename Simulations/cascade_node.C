@@ -1,12 +1,13 @@
 #include <igraph.h>
 #include <vector>
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 
 #define N 5000 // Number of nodes
-#define N_GRAPHS 10 // Number of repetitions
-#define IT 5 // Iterations of the same network per alpha
+#define N_GRAPHS 1 // Number of repetitions
+#define IT 1 // Iterations of the same network per alpha
 
 // Auxiliary function to print an igraph_vector
 void print_vector(igraph_vector_t *v) {
