@@ -1,6 +1,7 @@
 #include <igraph.h>
 #include <vector>
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 
@@ -211,6 +212,7 @@ int main() {
 	igraph_vector_destroy(&capacity_cp);
 	igraph_vector_destroy(&deletion_list);
 	igraph_vector_destroy(&del_edges);
+	igraph_vector_destroy(&edges_v);
 	igraph_vector_destroy(&curr_bc);
 	igraph_vector_destroy(&degree);
 	igraph_vector_destroy(&clustering);
