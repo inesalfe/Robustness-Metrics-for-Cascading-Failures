@@ -16,9 +16,9 @@ int main() {
     vector<int> degree(n_pts);
     for(int i = 0; i < n_pts; degree[i] = i, ++i);
 
-    FILE *input_file = fopen("Simulations/graphs/lfr.gml", "r");
+    FILE *input_file = fopen("Simulations/Graphs/lfr.gml", "r");
     if (input_file == 0) {
-        cout << "Unable to open input file Simulations/graphs/lfr.gml. Exiting\n";
+        cout << "Unable to open input file Simulations/Graphs/lfr.gml. Exiting\n";
         return 11;
     }
     igraph_read_graph_gml(&graph, input_file);

@@ -3,6 +3,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.pyplot as plt
 
+model = 0
+while True:
+	try:
+		model = int(input("Choose model (0 - BA; 1 - DMS): "))       
+	except ValueError:
+		print("Please enter 0 or 1:")
+		continue
+	else:
+		if model == 0 or model == 1:
+			break
+		else:
+			continue
+
 criteria = 0
 while True:
 	try:
@@ -16,9 +29,14 @@ while True:
 		else:
 			continue
 
-file_name = "../Data/data_%i.txt" % criteria
+if model == 0:
+	folder = "Data/BA/"
+else:
+	folder = "Data/DMS/"
 
-with open(file_name) as f:
+file_name = "data_%i.txt" % criteria
+
+with open(folder + file_name) as f:
 	lines = f.read().splitlines()
 
 N = int(lines[0].split()[1])
@@ -67,6 +85,11 @@ plt.fill_between(x, avg_del[2]-std_del[2], avg_del[2]+std_del[2], color="red", a
 
 plt.fill_between(x, min_del[2], max_del[2], color="blue", alpha=0.1, label='Maximum and Minimum')
 
+if model == 0:
+	plt.title('Barabási Albert Model')
+else:
+	plt.title('DMS Minimal Model')
+
 plt.yscale('log')
 plt.grid()
 plt.legend()
@@ -75,6 +98,6 @@ plt.ylabel(r'\# Deleted Nodes', fontsize=11)
 
 plt.show()
 
-file_name = "v_del_%i.png" % criteria
+file_name = "Plots/figures/v_del_%i.png" % criteria
 
 f1.savefig(file_name, bbox_inches='tight')

@@ -39,9 +39,6 @@ def lfr(n, tau1, tau2, mu, avg_k, seed=None):
 
     nx.set_node_attributes(G, {n:colors[n] for n in G.nodes()}, 'community')
 
-    # nx.draw(G, with_labels=False, node_color=colors)
-    # plt.show()
-
     return G
 
 if __name__ == '__main__':

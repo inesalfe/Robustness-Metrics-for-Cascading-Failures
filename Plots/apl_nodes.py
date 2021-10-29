@@ -16,9 +16,9 @@ while check_user_input(input_int) == False:
 	input_int = input("Invalid input, try again\n")
 
 if int(input_int) == int(0):
-	folder = "../Data/BA/"
+	folder = "Data/BA/"
 else:
-	folder = "../Data/DMS/"
+	folder = "Data/DMS/"
 
 file = "data_0.txt"
 
@@ -40,11 +40,10 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			unc_pairs_sizes_rand[a][a_it[a]] = float(lines[10+6*l_it].split()[1])
+			temp_n = N - np.sum([int(i) for i in lines[5+6*l_it].split()[1:]])
+			unc_pairs_sizes_rand[a][a_it[a]] = float(lines[10+6*l_it].split()[1]) / temp_n / (temp_n-1) * 2
 			l_it += 1
 			a_it[a] += 1
-
-unc_pairs_sizes_rand = unc_pairs_sizes_rand / (N*(N-1)/2)
 
 for a in range(len(alphas)):
 	unc_pairs_avg_rand[a] = np.mean(unc_pairs_sizes_rand[a])
@@ -70,11 +69,10 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			unc_pairs_sizes_bc[a][a_it[a]] = float(lines[10+6*l_it].split()[1])
+			temp_n = N - np.sum([int(i) for i in lines[5+6*l_it].split()[1:]])
+			unc_pairs_sizes_bc[a][a_it[a]] = float(lines[10+6*l_it].split()[1]) / temp_n / (temp_n-1) * 2
 			l_it += 1
 			a_it[a] += 1
-
-unc_pairs_sizes_bc = unc_pairs_sizes_bc / (N*(N-1)/2)
 
 for a in range(len(alphas)):
 	unc_pairs_avg_bc[a] = np.mean(unc_pairs_sizes_bc[a])
@@ -100,11 +98,10 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			unc_pairs_sizes_dg[a][a_it[a]] = float(lines[10+6*l_it].split()[1])
+			temp_n = N - np.sum([int(i) for i in lines[5+6*l_it].split()[1:]])
+			unc_pairs_sizes_dg[a][a_it[a]] = float(lines[10+6*l_it].split()[1]) / temp_n / (temp_n-1) * 2
 			l_it += 1
 			a_it[a] += 1
-
-unc_pairs_sizes_dg = unc_pairs_sizes_dg / (N*(N-1)/2)
 
 for a in range(len(alphas)):
 	unc_pairs_avg_dg[a] = np.mean(unc_pairs_sizes_dg[a])
@@ -130,11 +127,10 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			unc_pairs_sizes_cl[a][a_it[a]] = float(lines[10+6*l_it].split()[1])
+			temp_n = N - np.sum([int(i) for i in lines[5+6*l_it].split()[1:]])
+			unc_pairs_sizes_cl[a][a_it[a]] = float(lines[10+6*l_it].split()[1]) / temp_n / (temp_n-1) * 2
 			l_it += 1
 			a_it[a] += 1
-
-unc_pairs_sizes_cl = unc_pairs_sizes_cl / (N*(N-1)/2)
 
 for a in range(len(alphas)):
 	unc_pairs_avg_cl[a] = np.mean(unc_pairs_sizes_cl[a])
@@ -155,14 +151,19 @@ plt.plot(alphas, unc_pairs_avg_bc, color="red")
 plt.plot(alphas, unc_pairs_avg_dg, color="green")
 plt.plot(alphas, unc_pairs_avg_cl, color="magenta")
 
-plt.errorbar(alphas, unc_pairs_avg_rand, unc_pairs_var_rand, fmt='bo', markersize=5, capsize=5, ecolor="black", label="Random")
-plt.errorbar(alphas, unc_pairs_avg_bc, unc_pairs_var_bc, fmt='ro', markersize=5, capsize=5, ecolor="black", label="Betweeness Centrality")
-plt.errorbar(alphas, unc_pairs_avg_dg, unc_pairs_var_dg, fmt='go', markersize=5, capsize=5, ecolor="black", label="Degree")
-plt.errorbar(alphas, unc_pairs_avg_cl, unc_pairs_var_cl, fmt='mo', markersize=5, capsize=5, ecolor="black", label="Clustering Coefficient")
+plt.errorbar(alphas, unc_pairs_avg_rand, np.sqrt(unc_pairs_var_rand), fmt='bo', markersize=5, capsize=5, ecolor="black", label="Random")
+plt.errorbar(alphas, unc_pairs_avg_bc, np.sqrt(unc_pairs_var_bc), fmt='ro', markersize=5, capsize=5, ecolor="black", label="Betweeness Centrality")
+plt.errorbar(alphas, unc_pairs_avg_dg, np.sqrt(unc_pairs_var_dg), fmt='go', markersize=5, capsize=5, ecolor="black", label="Degree")
+plt.errorbar(alphas, unc_pairs_avg_cl, np.sqrt(unc_pairs_var_cl), fmt='mo', markersize=5, capsize=5, ecolor="black", label="Clustering Coefficient")
 
 plt.xlim((-1.1, 11.1))
 plt.ylim((-0.1, 1.1))
 
+if int(input_int) == int(0):
+	plt.title('Barabási Albert Model')
+else:
+	plt.title('DMS Minimal Model')
+	
 plt.grid()
 plt.legend()
 plt.xlabel(r'\textbf{$\alpha$}', fontsize=11)
@@ -170,4 +171,6 @@ plt.ylabel(r'\textbf{Fraction of unconnected pairs of nodes}', fontsize=11)
 
 plt.show()
 
-f1.savefig("unc_pairs_nodes.png", bbox_inches='tight')
+fig_name = "Plots/figures/unc_pairs_nodes_%i.png" % int(input_int)
+
+f1.savefig(fig_name, bbox_inches='tight')

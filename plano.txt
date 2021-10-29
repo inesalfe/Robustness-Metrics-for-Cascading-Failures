@@ -1,11 +1,14 @@
-Simulação:
+To do:
 
-Corrigir centralidade das figuras;
-Fazer a simulação para uma rede maior;
-Possivelmente tirar as labels.
+Animação:
 
-Para obter os dados:
+	Corrigir centralidade das figuras;
+	Fazer a simulação para uma rede maior;
+	Possivelmente tirar as labels.
 
-Utilizar o modelo DMS que o professor sugeriu e relacionar com a centralidade;
-LFR_benchmark - community
-Acabar parte do modelo DMS. Mudar filenames p/ os ficheiros em simulations e em plots
+Barras de erro no n_comp_nodes.py
+
+Resolver problemas na animação com o ba_1 e ba_2
+Fazer script para criar as animações automaticamente
+
+Power law e M = 1
