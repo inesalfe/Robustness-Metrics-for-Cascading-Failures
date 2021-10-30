@@ -1,6 +1,7 @@
 #include <igraph.h>
 #include <vector>
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 
@@ -112,9 +113,6 @@ int main() {
 	igraph_vector_init(&curr_bc, N);
 	igraph_vector_init(&deletion_list, 0);
 	igraph_vector_init(&del_edges, 0);
-	igraph_vector_init(&capacity_sorted, 0);
-	igraph_vector_init(&degree_sorted, 0);
-	igraph_vector_init(&clustering_sorted, 0);
 	igraph_vector_init(&degree, N);
 	igraph_vector_init(&clustering, N);
 	igraph_vector_init(&deleted_nodes, 0);
@@ -190,6 +188,7 @@ int main() {
 					igraph_vector_search(&capacity, 0, VECTOR(capacity_sorted)[i], &initial_node);
 					initial_nodes.push_back(initial_node);
 				}
+				igraph_vector_destroy(&capacity_sorted);
 				break;
 			case 2:
 				// ... HIGHEST AVERAGE DEGREE
@@ -200,6 +199,7 @@ int main() {
 					igraph_vector_search(&degree, 0, VECTOR(degree_sorted)[i], &initial_node);
 					initial_nodes.push_back(initial_node);
 				}
+				igraph_vector_destroy(&degree_sorted);
 				break;
 			case 3:
 				// ... HIGHEST CLUSTERING COEFICIENT
@@ -210,6 +210,7 @@ int main() {
 					igraph_vector_search(&clustering, 0, VECTOR(clustering_sorted)[i], &initial_node);
 					initial_nodes.push_back(initial_node);
 				}
+				igraph_vector_destroy(&clustering_sorted);
 				break;
 		}
 
@@ -316,7 +317,6 @@ int main() {
 		}
 		igraph_destroy(&graph);
 		initial_nodes.clear();
-
 	}
 
 	fclose(output_file);
@@ -327,9 +327,6 @@ int main() {
 	igraph_vector_destroy(&del_edges);
 	igraph_vector_destroy(&curr_bc);
 	igraph_vector_destroy(&comp);
-	igraph_vector_destroy(&capacity_sorted);
-	igraph_vector_destroy(&degree_sorted);
-	igraph_vector_destroy(&clustering_sorted);
 	igraph_vector_destroy(&degree);
 	igraph_vector_destroy(&clustering);
 	igraph_matrix_destroy(&m);

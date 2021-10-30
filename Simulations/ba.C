@@ -15,6 +15,8 @@ int main() {
 	// Path to the output file
 	char file_name[28] = "Simulations/Graphs/ba_0.gml";
 
+	igraph_rng_seed(igraph_rng_default(), 0);
+
 	for(int n = 0; n < N_GRAPHS; ++n) {
 
 		FILE * file;
@@ -28,9 +30,8 @@ int main() {
 		}
 
 		// Create graph using the barabasi albert model
-		igraph_rng_seed(igraph_rng_default(), 0);
-		igraph_barabasi_game(&graph, N, 1, M, NULL, true, 1, false, IGRAPH_BARABASI_BAG, 0); 
-
+		igraph_barabasi_game(&graph, N, 1, M, NULL, true, 1, false, IGRAPH_BARABASI_PSUMTREE, NULL); 
+		// std::cout << "Nodes: " << igraph_vcount(&graph) << " Edges: " << igraph_ecount(&graph) << std::endl;
 		igraph_write_graph_gml(&graph, file, NULL, 0);
 		
 		fclose(file);
