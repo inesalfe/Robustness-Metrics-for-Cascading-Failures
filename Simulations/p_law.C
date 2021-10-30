@@ -65,24 +65,24 @@ int main() {
 
 	double avgd = 2.0 * igraph_ecount(&graph) / igraph_vcount(&graph);
 
+	cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
+	cout << "Number of components: " << n_comp << endl;
+	cout << "Size of the largest component: " << L_comp_size << endl;
+	cout << "Largest component id: " << L_comp << endl;
+	cout << "Average degree: " << avgd << endl;
+
 	if (avgd > 1.985 && avgd < 2.015 && igraph_vcount(&graph) > 4950 && igraph_vcount(&graph) < 5050) {
-		cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
-		cout << "Number of components: " << n_comp << endl;
-		cout << "Size of the largest component: " << L_comp_size << endl;
-		cout << "Largest component id: " << L_comp << endl;
-		cout << "Average degree: " << (2.0 * igraph_ecount(&graph) / igraph_vcount(&graph)) << endl;
+		cout << "WRITTEN" << endl;
+		igraph_write_graph_gml(&graph, file, NULL, 0);
+		file_counter++;
 	}
-	
-	igraph_write_graph_gml(&graph, file, NULL, 0);
-	
+		
 	fclose(file);
 
 	igraph_vector_clear(&clusters);
 	igraph_vector_clear(&deleted_nodes);
 	igraph_vector_clear(&comp);
 	igraph_destroy(&graph);
-
-	file_counter++;
 
 	// SECOND AND THIRD NETWORKS
 
@@ -131,24 +131,23 @@ int main() {
 
 			double avgd = 2.0 * igraph_ecount(&graph) / igraph_vcount(&graph);
 
+			cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
+			cout << "Number of components: " << n_comp << endl;
+			cout << "Size of the largest component: " << L_comp_size << endl;
+			cout << "Largest component id: " << L_comp << endl;
+			cout << "Average degree: " << avgd << endl;
+
 			if (avgd > 1.985 && avgd < 2.015 && igraph_vcount(&graph) > 4950 && igraph_vcount(&graph) < 5050) {
-				cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
-				cout << "Number of components: " << n_comp << endl;
-				cout << "Size of the largest component: " << L_comp_size << endl;
-				cout << "Largest component id: " << L_comp << endl;
-				cout << "Average degree: " << (2.0 * igraph_ecount(&graph) / igraph_vcount(&graph)) << endl;
+				cout << "WRITTEN" << endl;
+				igraph_write_graph_gml(&graph, file, NULL, 0);
+				file_counter++;
 			}
-			
-			igraph_write_graph_gml(&graph, file, NULL, 0);
 			
 			fclose(file);
 
 			igraph_vector_clear(&clusters);
 			igraph_vector_clear(&deleted_nodes);
-			igraph_vector_clear(&comp);
-
-			file_counter++;
-		
+			igraph_vector_clear(&comp);		
 		}
 
 		igraph_destroy(&graph);
@@ -202,24 +201,23 @@ int main() {
 
 			double avgd = 2.0 * igraph_ecount(&graph) / igraph_vcount(&graph);
 
+			cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
+			cout << "Number of components: " << n_comp << endl;
+			cout << "Size of the largest component: " << L_comp_size << endl;
+			cout << "Largest component id: " << L_comp << endl;
+			cout << "Average degree: " << avgd << endl;
+
 			if (avgd > 1.985 && avgd < 2.015 && igraph_vcount(&graph) > 4950 && igraph_vcount(&graph) < 5050) {
-				cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
-				cout << "Number of components: " << n_comp << endl;
-				cout << "Size of the largest component: " << L_comp_size << endl;
-				cout << "Largest component id: " << L_comp << endl;
-				cout << "Average degree: " << (2.0 * igraph_ecount(&graph) / igraph_vcount(&graph)) << endl;
+				cout << "WRITTEN" << endl;
+				igraph_write_graph_gml(&graph, file, NULL, 0);
+				file_counter++;
 			}
-			
-			igraph_write_graph_gml(&graph, file, NULL, 0);
 			
 			fclose(file);
 
 			igraph_vector_clear(&clusters);
 			igraph_vector_clear(&deleted_nodes);
-			igraph_vector_clear(&comp);
-
-			file_counter++;
-		
+			igraph_vector_clear(&comp);		
 		}
 
 		igraph_destroy(&graph);
@@ -273,15 +271,17 @@ int main() {
 
 			double avgd = 2.0 * igraph_ecount(&graph) / igraph_vcount(&graph);
 
+			cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
+			cout << "Number of components: " << n_comp << endl;
+			cout << "Size of the largest component: " << L_comp_size << endl;
+			cout << "Largest component id: " << L_comp << endl;
+			cout << "Average degree: " << avgd << endl;
+
 			if(avgd > 1.985 && avgd < 2.015 && igraph_vcount(&graph) > 4950 && igraph_vcount(&graph) < 5050) {
-				cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
-				cout << "Number of components: " << n_comp << endl;
-				cout << "Size of the largest component: " << L_comp_size << endl;
-				cout << "Largest component id: " << L_comp << endl;
-				cout << "Average degree: " << (2.0 * igraph_ecount(&graph) / igraph_vcount(&graph)) << endl;
+				cout << "WRITTEN" << endl;
+				igraph_write_graph_gml(&graph, file, NULL, 0);
+				file_counter++;
 			}
-			
-			igraph_write_graph_gml(&graph, file, NULL, 0);
 			
 			fclose(file);
 
@@ -289,8 +289,6 @@ int main() {
 			igraph_vector_clear(&deleted_nodes);
 			igraph_vector_clear(&comp);
 
-			file_counter++;
-		
 		}
 
 		igraph_destroy(&graph);
@@ -308,7 +306,9 @@ int main() {
 
 		igraph_static_power_law_game(&graph, N, N*K/2, 3, -1, false, false, true);
 
-		if (n == 6 || n == 35 || n == 40) {
+		// 3, 7, 21, 26, 35
+
+		if (n == 3 || n == 7 || n == 35) {
 
 			FILE * file;
 
@@ -344,24 +344,24 @@ int main() {
 
 			double avgd = 2.0 * igraph_ecount(&graph) / igraph_vcount(&graph);
 
+			cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
+			cout << "Number of components: " << n_comp << endl;
+			cout << "Size of the largest component: " << L_comp_size << endl;
+			cout << "Largest component id: " << L_comp << endl;
+			cout << "Average degree: " << avgd << endl;
+
 			if (avgd > 1.985 && avgd < 2.015 && igraph_vcount(&graph) > 4950 && igraph_vcount(&graph) < 5050) {
-				cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
-				cout << "Number of components: " << n_comp << endl;
-				cout << "Size of the largest component: " << L_comp_size << endl;
-				cout << "Largest component id: " << L_comp << endl;
-				cout << "Average degree: " << (2.0 * igraph_ecount(&graph) / igraph_vcount(&graph)) << endl;
+				cout << "WRITTEN" << endl;
+				igraph_write_graph_gml(&graph, file, NULL, 0);
+				file_counter++;
 			}
-			
-			igraph_write_graph_gml(&graph, file, NULL, 0);
-			
+						
 			fclose(file);
 
 			igraph_vector_clear(&clusters);
 			igraph_vector_clear(&deleted_nodes);
 			igraph_vector_clear(&comp);
 
-			file_counter++;
-		
 		}
 
 		igraph_destroy(&graph);
@@ -415,23 +415,23 @@ int main() {
 
 			double avgd = 2.0 * igraph_ecount(&graph) / igraph_vcount(&graph);
 
+			cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
+			cout << "Number of components: " << n_comp << endl;
+			cout << "Size of the largest component: " << L_comp_size << endl;
+			cout << "Largest component id: " << L_comp << endl;
+			cout << "Average degree: " << avgd << endl;
+
 			if (avgd > 1.985 && avgd < 2.015 && igraph_vcount(&graph) > 4950 && igraph_vcount(&graph) < 5050) {
-				cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
-				cout << "Number of components: " << n_comp << endl;
-				cout << "Size of the largest component: " << L_comp_size << endl;
-				cout << "Largest component id: " << L_comp << endl;
-				cout << "Average degree: " << (2.0 * igraph_ecount(&graph) / igraph_vcount(&graph)) << endl;
+				cout << "WRITTEN" << endl;
+				igraph_write_graph_gml(&graph, file, NULL, 0);
+				file_counter++;
 			}
-			
-			igraph_write_graph_gml(&graph, file, NULL, 0);
 			
 			fclose(file);
 
 			igraph_vector_clear(&clusters);
 			igraph_vector_clear(&deleted_nodes);
 			igraph_vector_clear(&comp);
-
-			file_counter++;
 		
 		}
 
@@ -486,23 +486,23 @@ int main() {
 
 			double avgd = 2.0 * igraph_ecount(&graph) / igraph_vcount(&graph);
 
+			cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
+			cout << "Number of components: " << n_comp << endl;
+			cout << "Size of the largest component: " << L_comp_size << endl;
+			cout << "Largest component id: " << L_comp << endl;
+			cout << "Average degree: " << avgd << endl;
+
 			if (avgd > 1.985 && avgd < 2.015 && igraph_vcount(&graph) > 4950 && igraph_vcount(&graph) < 5050) {
-				cout << "Number of nodes: " << igraph_vcount(&graph) << endl;
-				cout << "Number of components: " << n_comp << endl;
-				cout << "Size of the largest component: " << L_comp_size << endl;
-				cout << "Largest component id: " << L_comp << endl;
-				cout << "Average degree: " << (2.0 * igraph_ecount(&graph) / igraph_vcount(&graph)) << endl;
+				cout << "WRITTEN" << endl;
+				igraph_write_graph_gml(&graph, file, NULL, 0);
+				file_counter++;
 			}
-			
-			igraph_write_graph_gml(&graph, file, NULL, 0);
 			
 			fclose(file);
 
 			igraph_vector_clear(&clusters);
 			igraph_vector_clear(&deleted_nodes);
 			igraph_vector_clear(&comp);
-
-			file_counter++;
 		
 		}
 

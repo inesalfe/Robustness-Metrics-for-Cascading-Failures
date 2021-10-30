@@ -87,7 +87,6 @@ int main() {
 	igraph_vector_ptr_t short_paths; // Auxiliary vector for the shorthest paths
 	igraph_es_t del_edges_sel; // Edges to be deleted in each iteration in selector mode
 	vector<long> initial_nodes; // Vector with the nodes to be deleted in each iteration
-	vector<int> N_nodes; // Vector with the number of nodes for each network - used for the Power Law model
 
 	int N = 5000;
 
@@ -168,10 +167,6 @@ int main() {
 		}
 
 		N = igraph_vcount(&graph);
-
-		if (model == 2) {
-			N_nodes.push_back(N);
-		}
 
 		/* GRAPH INITIAL INFORMATION */
 		cout << "Number of Nodes: " << N << endl;
@@ -330,27 +325,6 @@ int main() {
 	}
 
 	fclose(output_file);
-
-	if (model == 2) {
-
-		char f_name[50] = {0};
-		strcpy(f_name, "Data/first_line.txt");
-
-		FILE *file = fopen(f_name, "w");
-		if (file == 0) {
-			cout << "Unable to open output file " << f_name << ". Exiting\n";
-			return 10;
-		}
-
-		fprintf(file, "N");
-		for (int i = 0; i < 10; i++) {
-			fprintf(file, " %d", N_nodes[i]);
-		}
-		fprintf(file, "\n");
-
-		fclose(file);
-
-	}
 
 	// Free memory
 	igraph_vector_destroy(&capacity);
