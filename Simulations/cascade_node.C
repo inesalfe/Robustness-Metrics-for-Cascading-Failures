@@ -5,7 +5,6 @@
 
 using namespace std;
 
-#define N 5000 // Number of nodes
 #define N_GRAPHS 10 // Number of repetitions
 #define IT 5 // Iterations of the same network per alpha
 
@@ -23,7 +22,7 @@ int main() {
 	cout << "Please choose the model:" << endl;
 	cout << "0 - Barabasi Albert Model" << endl;
 	cout << "1 - DMS Minimal Model" << endl;
-	cout << "2 - LFR Benchmark Model" << endl;
+	cout << "2 - Power Law Model" << endl;
 
 	int model;
 	cin >> model;
@@ -61,8 +60,8 @@ int main() {
 		file_name[14] = criterion + '0';
 	}
 	else {
-		strcpy(file_name, "Data/LFR/data_0.txt");
-		file_name[14] = criterion + '0';
+		strcpy(file_name, "Data/PL/data_0.txt");
+		file_name[13] = criterion + '0';
 	}
 
 	FILE *output_file = fopen(file_name, "w");
@@ -88,6 +87,9 @@ int main() {
 	igraph_vector_ptr_t short_paths; // Auxiliary vector for the shorthest paths
 	igraph_es_t del_edges_sel; // Edges to be deleted in each iteration in selector mode
 	vector<long> initial_nodes; // Vector with the nodes to be deleted in each iteration
+	vector<int> N_nodes; // Vector with the number of nodes for each network - used for the Power Law model
+
+	int N = 5000;
 
 	// Printing general information in the output file
 	fprintf(output_file, "N %d\n", N);
@@ -105,6 +107,8 @@ int main() {
 	}
 
 	fprintf(output_file, "\n");
+
+	N = 5100;
 
 	// Initializations
 	igraph_rng_seed(igraph_rng_default(), 0);
@@ -151,7 +155,7 @@ int main() {
 		}
 		else {
 			char filename[50] = {0};
-			sprintf(filename, "Simulations/Graphs/lfr_%d.gml", n);
+			sprintf(filename, "Simulations/Graphs/pl_%d.gml", n);
 
 			FILE *input_file = fopen(filename, "r");
 			if (input_file == 0) {
@@ -163,9 +167,15 @@ int main() {
 			fclose(input_file);
 		}
 
+		N = igraph_vcount(&graph);
+
+		if (model == 2) {
+			N_nodes.push_back(N);
+		}
+
 		/* GRAPH INITIAL INFORMATION */
 		cout << "Number of Nodes: " << N << endl;
-		cout << "Average Degree: " << (2.0 * igraph_ecount(&graph) / igraph_vcount(&graph)) << endl;
+		cout << "Average Degree: " << (2.0 * igraph_ecount(&graph) / N) << endl;
 
 		/* CAPACITY METRIC - Betweeness centrality */
 		igraph_betweenness(&graph, &capacity, igraph_vss_all(), IGRAPH_UNDIRECTED, NULL);
@@ -258,7 +268,7 @@ int main() {
 					igraph_betweenness(&graph_cp, &curr_bc, igraph_vss_all(), IGRAPH_UNDIRECTED, NULL);
 					
 					// Create new deletion_list
-					for(int i = 0; i < igraph_vector_size(&curr_bc); ++i) {
+					for(int i = 0; i < N; ++i) {
 						if (VECTOR(curr_bc)[i] > VECTOR(capacity_cp)[i]) {
 							igraph_vector_push_back(&deletion_list, i);
 						}
@@ -320,6 +330,27 @@ int main() {
 	}
 
 	fclose(output_file);
+
+	if (model == 2) {
+
+		char f_name[50] = {0};
+		strcpy(f_name, "Data/first_line.txt");
+
+		FILE *file = fopen(f_name, "w");
+		if (file == 0) {
+			cout << "Unable to open output file " << f_name << ". Exiting\n";
+			return 10;
+		}
+
+		fprintf(file, "N");
+		for (int i = 0; i < 10; i++) {
+			fprintf(file, " %d", N_nodes[i]);
+		}
+		fprintf(file, "\n");
+
+		fclose(file);
+
+	}
 
 	// Free memory
 	igraph_vector_destroy(&capacity);
