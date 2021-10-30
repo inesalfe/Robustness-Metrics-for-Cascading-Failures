@@ -5,7 +5,7 @@
 namespace plt = matplotlibcpp;
 using namespace std;
 
-int main() {
+int main(int argc, char** argv) {
 
     igraph_t graph;
     igraph_real_t apl, c, L0, C0;
@@ -16,7 +16,10 @@ int main() {
     vector<int> degree(n_pts);
     for(int i = 0; i < n_pts; degree[i] = i, ++i);
 
-    FILE *input_file = fopen("Simulations/graphs/ba_7.gml", "r");
+    char filename[50] = {0};
+    sprintf(filename, "Simulations/graphs/%s_%d.gml", argv[1], argv[2][0] - '0');
+
+    FILE *input_file = fopen(filename, "r");
     if (input_file == 0) {
         cout << "Unable to open input file Simulations/Graphs/lfr.gml. Exiting\n";
         return 11;
@@ -33,7 +36,7 @@ int main() {
         degree_freq[k] /= igraph_vcount(&graph);
     for(int k = 0; k < 20; ++k) {
         deg[k] = k + 2;
-        powerlaw[k] = 8*pow(k + 2, -3);
+        powerlaw[k] = 2*pow(k + 2, -3);
     }
 
     plt::figure();
