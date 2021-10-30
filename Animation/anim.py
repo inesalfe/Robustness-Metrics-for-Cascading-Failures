@@ -86,7 +86,7 @@ else:
 fig_it = 1
 
 fig = plt.figure()
-nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=True, font_weight='bold')
+nx.draw_networkx(G, pos=nx.kamada_kawai_layout(G), nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=True, font_weight='bold')
 plt.show()
 fig_name = name + "_%i.png" % fig_it
 fig.savefig(fig_name + '', format='png')
@@ -104,9 +104,9 @@ for i in range(it+1):
 			marked_edges.append((e1, e2))
 
 	fig = plt.figure()
-	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=True, font_weight='bold')
-	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = marked_vertices, node_color = 'red', edgelist = marked_edges, edge_color = 'red', alpha = 1.0, with_labels=True, font_weight='bold')
-	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=True, font_weight='bold')
+	nx.draw_networkx(G, pos=nx.kamada_kawai_layout(G), nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=True, font_weight='bold')
+	nx.draw_networkx(G, pos=nx.kamada_kawai_layout(G), nodelist = marked_vertices, node_color = 'red', edgelist = marked_edges, edge_color = 'red', alpha = 1.0, with_labels=True, font_weight='bold')
+	nx.draw_networkx(G, pos=nx.kamada_kawai_layout(G), nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=True, font_weight='bold')
 	plt.show()
 	fig_name = name + "_%i.png" % fig_it
 	fig.savefig(fig_name, format='png')
@@ -123,8 +123,8 @@ for i in range(it+1):
 	marked_edges.clear()
 
 	fig = plt.figure()
-	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=True, font_weight='bold')
-	nx.draw_networkx(G, pos=nx.spring_layout(G, seed=10), nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=True, font_weight='bold')
+	nx.draw_networkx(G, pos=nx.kamada_kawai_layout(G), nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=True, font_weight='bold')
+	nx.draw_networkx(G, pos=nx.kamada_kawai_layout(G), nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=True, font_weight='bold')
 	plt.show()
 	fig_name = name + "_%i.png" % fig_it
 	fig.savefig(fig_name, format='png')
