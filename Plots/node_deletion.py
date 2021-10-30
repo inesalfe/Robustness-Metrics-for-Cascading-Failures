@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 model = 0
 while True:
 	try:
-		model = int(input("Choose model (0 - BA; 1 - DMS): "))       
+		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL): "))       
 	except ValueError:
-		print("Please enter 0 or 1:")
+		print("Please enter 0, 1 or 2:")
 		continue
 	else:
-		if model == 0 or model == 1:
+		if model == 0 or model == 1 or model == 2:
 			break
 		else:
 			continue
@@ -31,15 +31,21 @@ while True:
 
 if model == 0:
 	folder = "Data/BA/"
-else:
+elif model == 1:
 	folder = "Data/DMS/"
+else:
+	folder = "Data/PL/"
 
 file_name = "data_%i.txt" % criteria
 
 with open(folder + file_name) as f:
 	lines = f.read().splitlines()
 
-N = int(lines[0].split()[1])
+if model == 2:
+	N = [int(i) for i in lines[0].split()[1:]]
+else:
+	N = [int(lines[0].split()[1]) for i in range(10)]
+
 N_GRAPHS = int(lines[1].split()[1])
 IT = int(lines[2].split()[1])
 alphas = lines[4].split()[1:12]
