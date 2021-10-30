@@ -8,8 +8,5 @@ Animação:
 
 Barras de erro no n_comp_nodes.py
 
-Resolver problemas na animação com o ba_1 e ba_2
-Fazer script para criar as animações automaticamente
-
 Power law e M = 1
 Islands em vez de LFR
