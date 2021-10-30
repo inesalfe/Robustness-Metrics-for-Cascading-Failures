@@ -1,12 +1,15 @@
 # Inês
 
-all: cascade_node ba sim ba_sim small
+all: cascade_node ba sim ba_sim small p_law
 
 cascade_node: Simulations/cascade_node.C
 	g++ -std=c++11 Simulations/cascade_node.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/cascade_node
 
 ba: Simulations/ba.C
 	g++ -std=c++11 Simulations/ba.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ba
+
+p_law: Simulations/p_law.C
+	g++ -std=c++11 Simulations/p_law.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/p_law
 
 sim: Animation/sim.C
 	g++ -std=c++11 Animation/sim.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/sim
