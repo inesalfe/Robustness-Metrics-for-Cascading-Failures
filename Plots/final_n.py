@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 model = 0
 while True:
 	try:
-		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL): "))       
+		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL; 3 - IL): "))       
 	except ValueError:
-		print("Please enter 0, 1 or 2:")
+		print("Please enter 0, 1, 2 or 3:")
 		continue
 	else:
-		if model == 0 or model == 1 or model == 2:
+		if model == 0 or model == 1 or model == 2 or model == 3:
 			break
 		else:
 			continue
@@ -19,8 +19,10 @@ if model == 0:
 	folder = "Data/BA/"
 elif model == 1:
 	folder = "Data/DMS/"
-else:
+elif model == 2:
 	folder = "Data/PL/"
+else:
+	folder = "Data/IL/"
 
 file = "data_0.txt"
 
@@ -177,8 +179,10 @@ if model == 0:
 	plt.title('Barabási Albert Model')
 elif model == 1:
 	plt.title('DMS Minimal Model')
-else:
+elif model == 2:
 	plt.title('Power Law Model')
+else:
+	plt.title('Interconnected Islands Model')
 
 plt.grid()
 plt.legend()

@@ -1,9 +1,12 @@
 # Inês
 
-all: cascade_node ba sim ba_sim small p_law test_nets
+all: cascade_node ba sim ba_sim small p_law test_nets islands
 
 cascade_node: Simulations/cascade_node.C
 	g++ -std=c++11 Simulations/cascade_node.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/cascade_node
+
+islands: Simulations/islands.C
+	g++ -std=c++11 Simulations/islands.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/islands
 
 ba: Simulations/ba.C
 	g++ -std=c++11 Simulations/ba.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ba

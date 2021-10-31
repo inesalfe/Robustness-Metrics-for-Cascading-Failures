@@ -6,15 +6,24 @@ import matplotlib.pyplot as plt
 model = 0
 while True:
 	try:
-		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL): "))       
+		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL; 3 - IL): "))       
 	except ValueError:
-		print("Please enter 0, 1 or 2:")
+		print("Please enter 0, 1, 2 or 3:")
 		continue
 	else:
-		if model == 0 or model == 1 or model == 2:
+		if model == 0 or model == 1 or model == 2 or model == 3:
 			break
 		else:
 			continue
+
+if model == 0:
+	folder = "Data/BA/"
+elif model == 1:
+	folder = "Data/DMS/"
+elif model == 2:
+	folder = "Data/PL/"
+else:
+	folder = "Data/IL/"
 
 criteria = 0
 while True:
@@ -28,13 +37,6 @@ while True:
 			break
 		else:
 			continue
-
-if model == 0:
-	folder = "Data/BA/"
-elif model == 1:
-	folder = "Data/DMS/"
-else:
-	folder = "Data/PL/"
 
 file_name = "data_%i.txt" % criteria
 
@@ -93,8 +95,12 @@ plt.fill_between(x, min_del[2], max_del[2], color="blue", alpha=0.1, label='Maxi
 
 if model == 0:
 	plt.title('Barabási Albert Model')
-else:
+elif model == 1:
 	plt.title('DMS Minimal Model')
+elif model == 2:
+	plt.title('Power Law Model')
+else:
+	plt.title('Interconnected Islands Model')
 
 plt.yscale('log')
 plt.grid()
@@ -104,6 +110,6 @@ plt.ylabel(r'\# Deleted Nodes', fontsize=11)
 
 plt.show()
 
-file_name = "Plots/figures/v_del_%i.png" % criteria
+file_name = "Plots/figures/v_del_%i_%i.png" % (model, criteria)
 
 f1.savefig(file_name, bbox_inches='tight')
