@@ -14,6 +14,9 @@ p_law4: Simulations/p_law4.C
 random: Simulations/random.C
 	g++ -std=c++11 Simulations/random.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/random
 
+ws: Simulations/ws.C
+	g++ -std=c++11 Simulations/ws.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ws
+
 ba: Simulations/ba.C
 	g++ -std=c++11 Simulations/ba.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ba
 

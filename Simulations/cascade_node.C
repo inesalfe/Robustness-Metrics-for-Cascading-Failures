@@ -25,10 +25,11 @@ int main() {
 	cout << "2 - Power Law Model w/ <k> = 2" << endl;
 	cout << "3 - Power Law Model w/ <k> = 4" << endl;
 	cout << "4 - Random Graph Model w/ <k> = 4" << endl;
+	cout << "5 - Watts-Strogatz Model w/ <k> = 4" << endl;
 
 	int model;
 	cin >> model;
-	while(cin.fail() || model < 0 || model > 3) {
+	while(cin.fail() || model < 0 || model > 5) {
 		cout << "Invalid Input" << endl;
 		cin.clear();
 		cin.ignore(256,'\n');
@@ -69,9 +70,13 @@ int main() {
 		strcpy(file_name, "Data/PL4/data_0.txt");
 		file_name[14] = criterion + '0';
 	}
-	else {
+	else if (model == 4) {
 		strcpy(file_name, "Data/RAND/data_0.txt");
 		file_name[15] = criterion + '0';
+	}
+	else {
+		strcpy(file_name, "Data/WS/data_0.txt");
+		file_name[13] = criterion + '0';
 	}
 
 	FILE *output_file = fopen(file_name, "w");
@@ -188,9 +193,22 @@ int main() {
 			igraph_read_graph_gml(&graph, input_file);
 			fclose(input_file);
 		}
-		else {
+		else if (model == 4) {
 			char filename[50] = {0};
 			sprintf(filename, "Simulations/Graphs/rand_%d.gml", n);
+
+			FILE *input_file = fopen(filename, "r");
+			if (input_file == 0) {
+				cout << "Unable to open input file " << filename << ". Exiting\n";
+				return 11;
+			}
+
+			igraph_read_graph_gml(&graph, input_file);
+			fclose(input_file);
+		}
+		else {
+			char filename[50] = {0};
+			sprintf(filename, "Simulations/Graphs/ws_%d.gml", n);
 
 			FILE *input_file = fopen(filename, "r");
 			if (input_file == 0) {
