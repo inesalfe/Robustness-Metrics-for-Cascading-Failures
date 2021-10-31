@@ -5,6 +5,5 @@ Animação:
 	Corrigir centralidade das figuras;
 	Fazer a simulação para uma rede maior;
 	Possivelmente tirar as labels.
-	
-Power law e M = 1
+
 Islands em vez de LFR
