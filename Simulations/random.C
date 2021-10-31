@@ -28,7 +28,7 @@ int main() {
 		}
 
 		// Create graph using the barabasi albert model
-		igraph_erdos_renyi_game(&graph, IGRAPH_ERDOS_RENYI_GNP, N, 4/(N-1), false, false);		// std::cout << "Nodes: " << igraph_vcount(&graph) << " Edges: " << igraph_ecount(&graph) << std::endl;
+		igraph_erdos_renyi_game(&graph, IGRAPH_ERDOS_RENYI_GNP, N, 4/(N-1), false, false);
 		igraph_write_graph_gml(&graph, file, NULL, 0);
 		
 		fclose(file);
