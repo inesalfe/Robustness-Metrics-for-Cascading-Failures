@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 model = 0
 while True:
 	try:
-		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL; 3 - IL): "))       
+		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL2; 3 - PL4): "))       
 	except ValueError:
 		print("Please enter 0, 1, 2 or 3:")
 		continue
@@ -21,24 +21,11 @@ if model == 0:
 elif model == 1:
 	folder = "Data/DMS/"
 elif model == 2:
-	folder = "Data/PL/"
+	folder = "Data/PL2/"
 else:
-	folder = "Data/IL/"
+	folder = "Data/PL4/"
 
-criteria = 0
-while True:
-	try:
-		criteria = int(input("Choose criteria (0, 1, 2 or 3): "))       
-	except ValueError:
-		print("Please enter an integer between 0 and 3:")
-		continue
-	else:
-		if criteria >= 0 and criteria <= 3:
-			break
-		else:
-			continue
-
-file_name = "data_%i.txt" % criteria
+file_name = "data_2.txt"
 
 with open(folder + file_name) as f:
 	lines = f.read().splitlines()
@@ -80,27 +67,29 @@ for a in range(len(alphas)):
 		var_del[a].append(np.var([int(v[it]) for v in deleted_v[a]]))
 		std_del[a] = np.sqrt(var_del[a])
 
+curr_alpha = 2
+
 f1 = plt.figure()
 
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-x = list(range(1, len(avg_del[2])+1))
+x = list(range(1, len(avg_del[curr_alpha])+1))
 
-plt.plot(x, avg_del[2], color="blue", label="Average", marker='o')
+plt.plot(x, avg_del[curr_alpha], color="blue", label="Average", marker='o')
 
-plt.fill_between(x, avg_del[2]-std_del[2], avg_del[2]+std_del[2], color="red", alpha=0.1, label='Standard Deviation')
+plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]+std_del[curr_alpha], color="red", alpha=0.1, label='Standard Deviation')
 
-plt.fill_between(x, min_del[2], max_del[2], color="blue", alpha=0.1, label='Maximum and Minimum')
+plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
 
 if model == 0:
-	plt.title('Barabási Albert Model')
+	plt.title(r'Barabási Albert Model $\rightarrow \alpha=0.2$')
 elif model == 1:
-	plt.title('DMS Minimal Model')
+	plt.title(r'DMS Minimal Model $\rightarrow \alpha=0.2$')
 elif model == 2:
-	plt.title('Power Law Model')
+	plt.title(r'Power Law Model w/ <k> = 2 $\rightarrow \alpha=0.2$')
 else:
-	plt.title('Interconnected Islands Model')
+	plt.title(r'Power Law Model w/ <k> = 4 $\rightarrow \alpha=0.2$')
 
 plt.yscale('log')
 plt.grid()
@@ -110,6 +99,78 @@ plt.ylabel(r'\# Deleted Nodes', fontsize=11)
 
 plt.show()
 
-file_name = "Plots/figures/v_del_%i_%i.png" % (model, criteria)
+file_name = "Plots/figures/v_del_%i_02.png" % model
 
 f1.savefig(file_name, bbox_inches='tight')
+
+curr_alpha = 5
+
+f2 = plt.figure()
+
+plt.rc('text', usetex=True)
+plt.rc('font', family='serif')
+
+x = list(range(1, len(avg_del[curr_alpha])+1))
+
+plt.plot(x, avg_del[curr_alpha], color="blue", label="Average", marker='o')
+
+plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]+std_del[curr_alpha], color="red", alpha=0.1, label='Standard Deviation')
+
+plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
+
+if model == 0:
+	plt.title(r'Barabási Albert Model $\rightarrow \alpha=0.5$')
+elif model == 1:
+	plt.title(r'DMS Minimal Model $\rightarrow \alpha=0.5$')
+elif model == 2:
+	plt.title(r'Power Law Model w/ <k> = 2 $\rightarrow \alpha=0.5$')
+else:
+	plt.title(r'Power Law Model w/ <k> = 4 $\rightarrow \alpha=0.5$')
+
+plt.yscale('log')
+plt.grid()
+plt.legend()
+plt.xlabel(r'Time Stamp', fontsize=11)
+plt.ylabel(r'\# Deleted Nodes', fontsize=11)
+
+plt.show()
+
+file_name = "Plots/figures/v_del_%i_05.png" % model
+
+f2.savefig(file_name, bbox_inches='tight')
+
+curr_alpha = 7
+
+f3 = plt.figure()
+
+plt.rc('text', usetex=True)
+plt.rc('font', family='serif')
+
+x = list(range(1, len(avg_del[curr_alpha])+1))
+
+plt.plot(x, avg_del[curr_alpha], color="blue", label="Average", marker='o')
+
+plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]+std_del[curr_alpha], color="red", alpha=0.1, label='Standard Deviation')
+
+plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
+
+if model == 0:
+	plt.title(r'Barabási Albert Model $\rightarrow \alpha=0.7$')
+elif model == 1:
+	plt.title(r'DMS Minimal Model $\rightarrow \alpha=0.7$')
+elif model == 2:
+	plt.title(r'Power Law Model w/ <k> = 2 $\rightarrow \alpha=0.7$')
+else:
+	plt.title(r'Power Law Model w/ <k> = 4 $\rightarrow \alpha=0.7$')
+
+plt.yscale('log')
+plt.grid()
+plt.legend()
+plt.xlabel(r'Time Stamp', fontsize=11)
+plt.ylabel(r'\# Deleted Nodes', fontsize=11)
+
+plt.show()
+
+file_name = "Plots/figures/v_del_%i_07.png" % model
+
+f3.savefig(file_name, bbox_inches='tight')

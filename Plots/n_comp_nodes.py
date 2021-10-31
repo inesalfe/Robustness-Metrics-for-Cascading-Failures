@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 model = 0
 while True:
 	try:
-		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL; 3 - IL): "))       
+		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL2; 3 - PL4): "))       
 	except ValueError:
 		print("Please enter 0, 1, 2 or 3:")
 		continue
@@ -20,10 +20,10 @@ if model == 0:
 elif model == 1:
 	folder = "Data/DMS/"
 elif model == 2:
-	folder = "Data/PL/"
+	folder = "Data/PL2/"
 else:
-	folder = "Data/IL/"
-
+	folder = "Data/PL4/"
+	
 file = "data_0.txt"
 
 with open(folder + file) as f:
@@ -180,9 +180,9 @@ if model == 0:
 elif model == 1:
 	plt.title('DMS Minimal Model')
 elif model == 2:
-	plt.title('Power Law Model')
+	plt.title('Power Law Model w/ <k> = 2')
 else:
-	plt.title('Interconnected Islands Model')
+	plt.title('Power Law Model w/ <k> = 4')
 	
 plt.grid()
 plt.legend()

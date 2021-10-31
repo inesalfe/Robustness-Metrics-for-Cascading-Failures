@@ -1,9 +1,8 @@
-To do:
+Power law com grau médio 4
+Random com grau médio 4
 
-Animação:
+Corrigir as animações
 
-	Corrigir centralidade das figuras;
-	Fazer a simulação para uma rede maior;
-	Possivelmente tirar as labels.
+Rede real
 
-Islands em vez de LFR
+Node deletion - mudar para correr para três alfas - 0.2, 0.5 e 0.7, sempre para o critério 2

@@ -18,7 +18,7 @@ int main() {
 	igraph_vector_init(&deleted_nodes, 0);
 
 	// Path to the output file
-	char file_name[28] = "Simulations/Graphs/pl_0.gml";
+	char file_name[40] = "Simulations/Graphs/pl2_0.gml";
 
 	int file_counter = 0;
 
@@ -32,7 +32,7 @@ int main() {
 	FILE * file;
 
 	// Change path name according to the network
-	file_name[22] = file_counter + '0';
+	file_name[23] = file_counter + '0';
 
 	file = fopen(file_name, "w");
 	if (file == 0) {

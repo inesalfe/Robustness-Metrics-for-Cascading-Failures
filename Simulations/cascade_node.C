@@ -22,8 +22,8 @@ int main() {
 	cout << "Please choose the model:" << endl;
 	cout << "0 - Barabasi Albert Model" << endl;
 	cout << "1 - DMS Minimal Model" << endl;
-	cout << "2 - Power Law Model" << endl;
-	cout << "3 - Interconnected Islands Model" << endl;
+	cout << "2 - Power Law Model w/ <k> = 2" << endl;
+	cout << "3 - Power Law Model w/ <k> = 4" << endl;
 
 	int model;
 	cin >> model;
@@ -61,12 +61,12 @@ int main() {
 		file_name[14] = criterion + '0';
 	}
 	else if (model == 2) {
-		strcpy(file_name, "Data/PL/data_0.txt");
-		file_name[13] = criterion + '0';
+		strcpy(file_name, "Data/PL2/data_0.txt");
+		file_name[14] = criterion + '0';
 	}
 	else {
-		strcpy(file_name, "Data/IL/data_0.txt");
-		file_name[13] = criterion + '0';
+		strcpy(file_name, "Data/PL4/data_0.txt");
+		file_name[14] = criterion + '0';
 	}
 
 	FILE *output_file = fopen(file_name, "w");
@@ -159,7 +159,7 @@ int main() {
 		}
 		else if (model == 2) {
 			char filename[50] = {0};
-			sprintf(filename, "Simulations/Graphs/pl_%d.gml", n);
+			sprintf(filename, "Simulations/Graphs/pl2_%d.gml", n);
 
 			FILE *input_file = fopen(filename, "r");
 			if (input_file == 0) {
@@ -172,7 +172,7 @@ int main() {
 		}
 		else {
 			char filename[50] = {0};
-			sprintf(filename, "Simulations/Graphs/il_%d.gml", n);
+			sprintf(filename, "Simulations/Graphs/pl4_%d.gml", n);
 
 			FILE *input_file = fopen(filename, "r");
 			if (input_file == 0) {
