@@ -100,7 +100,7 @@ int main() {
 			FILE * file;
 
 			// Change path name according to the network
-			file_name[22] = file_counter + '0';
+			file_name[23] = file_counter + '0';
 
 			file = fopen(file_name, "w");
 			if (file == 0) {
@@ -170,7 +170,7 @@ int main() {
 			FILE * file;
 
 			// Change path name according to the network
-			file_name[22] = file_counter + '0';
+			file_name[23] = file_counter + '0';
 
 			file = fopen(file_name, "w");
 			if (file == 0) {
@@ -240,7 +240,7 @@ int main() {
 			FILE * file;
 
 			// Change path name according to the network
-			file_name[22] = file_counter + '0';
+			file_name[23] = file_counter + '0';
 
 			file = fopen(file_name, "w");
 			if (file == 0) {
@@ -313,7 +313,7 @@ int main() {
 			FILE * file;
 
 			// Change path name according to the network
-			file_name[22] = file_counter + '0';
+			file_name[23] = file_counter + '0';
 
 			file = fopen(file_name, "w");
 			if (file == 0) {
@@ -384,7 +384,7 @@ int main() {
 			FILE * file;
 
 			// Change path name according to the network
-			file_name[22] = file_counter + '0';
+			file_name[23] = file_counter + '0';
 
 			file = fopen(file_name, "w");
 			if (file == 0) {
@@ -455,7 +455,7 @@ int main() {
 			FILE * file;
 
 			// Change path name according to the network
-			file_name[22] = file_counter + '0';
+			file_name[23] = file_counter + '0';
 
 			file = fopen(file_name, "w");
 			if (file == 0) {
