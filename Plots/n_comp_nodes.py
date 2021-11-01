@@ -180,17 +180,17 @@ plt.errorbar(alphas, n_comp_avg_cl, np.sqrt(n_comp_var_cl), fmt='mo', markersize
 # plt.ylim((-0.1, 1.1))
 
 if model == 0:
-	plt.title('Barabási Albert Model')
+	plt.title(r'Barabási Albert Model')
 elif model == 1:
-	plt.title('DMS Minimal Model')
+	plt.title(r'DMS Minimal Model')
 elif model == 2:
-	plt.title('Power Law Model w/ <k> = 2')
+	plt.title(r'Power Law Model w/ $<k> = 2$')
 elif model == 3:
-	plt.title('Power Law Model w/ <k> = 4')
+	plt.title(r'Power Law Model w/ $<k> = 4$')
 elif model == 4:
-	plt.title('Random Graph Model w/ <k> = 4')
+	plt.title(r'Random Graph Model w/ $<k> = 4$')
 else:
-	plt.title('Watts-Strogatz Model')
+	plt.title(r'Watts-Strogatz Model')
 	
 plt.grid()
 plt.legend()
