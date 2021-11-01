@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 model = 0
 while True:
 	try:
-		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL2; 3 - PL4): "))       
+		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL2; 3 - PL4; 4 - RAND; 5 - WS): "))       
 	except ValueError:
-		print("Please enter 0, 1, 2 or 3:")
+		print("Please enter 0, 1, 2, 3, 4 ou 5:")
 		continue
 	else:
-		if model == 0 or model == 1 or model == 2 or model == 3:
+		if model == 0 or model == 1 or model == 2 or model == 3 or model == 4 or model == 5:
 			break
 		else:
 			continue
@@ -22,8 +22,12 @@ elif model == 1:
 	folder = "Data/DMS/"
 elif model == 2:
 	folder = "Data/PL2/"
-else:
+elif model == 3:
 	folder = "Data/PL4/"
+elif model == 4:
+	folder = "Data/RAND/"
+else:
+	folder = "Data/WS/"
 
 file_name = "data_2.txt"
 
@@ -88,8 +92,12 @@ elif model == 1:
 	plt.title(r'DMS Minimal Model $\rightarrow \alpha=0.2$')
 elif model == 2:
 	plt.title(r'Power Law Model w/ <k> = 2 $\rightarrow \alpha=0.2$')
-else:
+elif model == 3:
 	plt.title(r'Power Law Model w/ <k> = 4 $\rightarrow \alpha=0.2$')
+elif model == 4:
+	plt.title(r'Random Graph Model w/ <k> = 4 $\rightarrow \alpha=0.2$')
+else:
+	plt.title(r'Watts-Strogatz Model $\rightarrow \alpha=0.2$')
 
 plt.yscale('log')
 plt.grid()
@@ -124,8 +132,12 @@ elif model == 1:
 	plt.title(r'DMS Minimal Model $\rightarrow \alpha=0.5$')
 elif model == 2:
 	plt.title(r'Power Law Model w/ <k> = 2 $\rightarrow \alpha=0.5$')
-else:
+elif model == 3:
 	plt.title(r'Power Law Model w/ <k> = 4 $\rightarrow \alpha=0.5$')
+elif model == 4:
+	plt.title(r'Random Graph Model w/ <k> = 4 $\rightarrow \alpha=0.5$')
+else:
+	plt.title(r'Watts-Strogatz Model $\rightarrow \alpha=0.5$')
 
 plt.yscale('log')
 plt.grid()
@@ -160,8 +172,12 @@ elif model == 1:
 	plt.title(r'DMS Minimal Model $\rightarrow \alpha=0.7$')
 elif model == 2:
 	plt.title(r'Power Law Model w/ <k> = 2 $\rightarrow \alpha=0.7$')
-else:
+elif model == 3:
 	plt.title(r'Power Law Model w/ <k> = 4 $\rightarrow \alpha=0.7$')
+elif model == 4:
+	plt.title(r'Random Graph Model w/ <k> = 4 $\rightarrow \alpha=0.7$')
+else:
+	plt.title(r'Watts-Strogatz Model $\rightarrow \alpha=0.7$')
 
 plt.yscale('log')
 plt.grid()
