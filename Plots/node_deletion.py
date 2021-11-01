@@ -87,17 +87,17 @@ plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]
 plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
 
 if model == 0:
-	plt.title(r'Barabási Albert Model $\rightarrow \alpha=0.2$')
+	plt.title(r'Barabási Albert Model $\rightarrow \alpha=0.7$')
 elif model == 1:
-	plt.title(r'DMS Minimal Model $\rightarrow \alpha=0.2$')
+	plt.title(r'DMS Minimal Model $\rightarrow \alpha=0.7$')
 elif model == 2:
-	plt.title(r'Power Law Model w/ <k> = 2 $\rightarrow \alpha=0.2$')
+	plt.title(r'Power Law Model w/ $<k> = 2 \rightarrow \alpha=0.7$')
 elif model == 3:
-	plt.title(r'Power Law Model w/ <k> = 4 $\rightarrow \alpha=0.2$')
+	plt.title(r'Power Law Model w/ $<k> = 4 \rightarrow \alpha=0.7$')
 elif model == 4:
-	plt.title(r'Random Graph Model w/ <k> = 4 $\rightarrow \alpha=0.2$')
+	plt.title(r'Random Graph Model w/ $<k> = 4 \rightarrow \alpha=0.7$')
 else:
-	plt.title(r'Watts-Strogatz Model $\rightarrow \alpha=0.2$')
+	plt.title(r'Watts-Strogatz Model $\rightarrow \alpha=0.7$')
 
 plt.yscale('log')
 plt.grid()
@@ -127,17 +127,17 @@ plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]
 plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
 
 if model == 0:
-	plt.title(r'Barabási Albert Model $\rightarrow \alpha=0.5$')
+	plt.title(r'Barabási Albert Model $\rightarrow \alpha=0.7$')
 elif model == 1:
-	plt.title(r'DMS Minimal Model $\rightarrow \alpha=0.5$')
+	plt.title(r'DMS Minimal Model $\rightarrow \alpha=0.7$')
 elif model == 2:
-	plt.title(r'Power Law Model w/ <k> = 2 $\rightarrow \alpha=0.5$')
+	plt.title(r'Power Law Model w/ $<k> = 2 \rightarrow \alpha=0.7$')
 elif model == 3:
-	plt.title(r'Power Law Model w/ <k> = 4 $\rightarrow \alpha=0.5$')
+	plt.title(r'Power Law Model w/ $<k> = 4 \rightarrow \alpha=0.7$')
 elif model == 4:
-	plt.title(r'Random Graph Model w/ <k> = 4 $\rightarrow \alpha=0.5$')
+	plt.title(r'Random Graph Model w/ $<k> = 4 \rightarrow \alpha=0.7$')
 else:
-	plt.title(r'Watts-Strogatz Model $\rightarrow \alpha=0.5$')
+	plt.title(r'Watts-Strogatz Model $\rightarrow \alpha=0.7$')
 
 plt.yscale('log')
 plt.grid()
@@ -171,11 +171,11 @@ if model == 0:
 elif model == 1:
 	plt.title(r'DMS Minimal Model $\rightarrow \alpha=0.7$')
 elif model == 2:
-	plt.title(r'Power Law Model w/ <k> = 2 $\rightarrow \alpha=0.7$')
+	plt.title(r'Power Law Model w/ $<k> = 2 \rightarrow \alpha=0.7$')
 elif model == 3:
-	plt.title(r'Power Law Model w/ <k> = 4 $\rightarrow \alpha=0.7$')
+	plt.title(r'Power Law Model w/ $<k> = 4 \rightarrow \alpha=0.7$')
 elif model == 4:
-	plt.title(r'Random Graph Model w/ <k> = 4 $\rightarrow \alpha=0.7$')
+	plt.title(r'Random Graph Model w/ $<k> = 4 \rightarrow \alpha=0.7$')
 else:
 	plt.title(r'Watts-Strogatz Model $\rightarrow \alpha=0.7$')
 
