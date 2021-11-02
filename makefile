@@ -1,39 +1,42 @@
 # Inês
 
-all: cascade_node ba sim ba_sim small p_law2 p_law4 test_nets random
+all: cascade_node ba sim ba_sim small p_law2 p_law4 test_nets random cascade_node_realnet
 
 cascade_node: Simulations/cascade_node.C
-	g++ -std=c++11 Simulations/cascade_node.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/cascade_node
+	g++ -std=c++11 -O3 Simulations/cascade_node.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/cascade_node
+
+cascade_node_realnet: Simulations/cascade_node_realnet.C
+	g++ -std=c++11 -O3 Simulations/cascade_node_realnet.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/cascade_node_realnet
 
 p_law2: Simulations/p_law2.C
-	g++ -std=c++11 Simulations/p_law2.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/p_law2
+	g++ -std=c++11 -O3 Simulations/p_law2.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/p_law2
 
 p_law4: Simulations/p_law4.C
-	g++ -std=c++11 Simulations/p_law4.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/p_law4
+	g++ -std=c++11 -O3 Simulations/p_law4.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/p_law4
 
 random: Simulations/random.C
-	g++ -std=c++11 Simulations/random.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/random
+	g++ -std=c++11 -O3 Simulations/random.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/random
 
 ws: Simulations/ws.C
-	g++ -std=c++11 Simulations/ws.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ws
+	g++ -std=c++11 -O3 Simulations/ws.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ws
 
 ba: Simulations/ba.C
-	g++ -std=c++11 Simulations/ba.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ba
+	g++ -std=c++11 -O3 Simulations/ba.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ba
 
 p_law: Simulations/p_law.C
-	g++ -std=c++11 Simulations/p_law.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/p_law
+	g++ -std=c++11 -O3 Simulations/p_law.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/p_law
 
 test_nets: Simulations/test_nets.C
-	g++ -std=c++11 Simulations/test_nets.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/test_nets
+	g++ -std=c++11 -O3 Simulations/test_nets.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/test_nets
 
 sim: Animation/sim.C
-	g++ -std=c++11 Animation/sim.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/sim
+	g++ -std=c++11 -O3 Animation/sim.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/sim
 
 ba_sim: Animation/Network_Generation/ba.C
-	g++ -std=c++11 Animation/Network_Generation/ba.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ba_sim
+	g++ -std=c++11 -O3 Animation/Network_Generation/ba.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/ba_sim
 
 small: Animation/Network_Generation/small.C
-	g++ -std=c++11 Animation/Network_Generation/small.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/small
+	g++ -std=c++11 -O3 Animation/Network_Generation/small.C -I/usr/local/include/igraph -L/usr/local/lib -ligraph -o Executables/small
 
 # Ricardo
 
