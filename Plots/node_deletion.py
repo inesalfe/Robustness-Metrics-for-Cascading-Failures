@@ -2,6 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 model = 0
 while True:
@@ -94,9 +95,9 @@ x = list(range(1, len(avg_del[curr_alpha])+1))
 
 plt.plot(x, avg_del[curr_alpha], color="blue", label="Average", marker='o')
 
-plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]+std_del[curr_alpha], color="red", alpha=0.1, label='Standard Deviation')
+plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]+std_del[curr_alpha], color="blue", alpha=0.1, label='Standard Deviation')
 
-plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
+# plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
 
 if model == 0:
 	plt.title(r'Barabási Albert Model w/ $<k> = 4 \rightarrow \alpha=0.2$')
@@ -114,6 +115,9 @@ elif model == 6:
 	plt.title(r'Power Grid Network $\rightarrow \alpha=0.2$')
 else:
 	plt.title(r'Internet Network $\rightarrow \alpha=0.2$')
+
+xint = range(min(x), math.ceil(max(x))+1)
+plt.xticks(xint)
 
 plt.yscale('log')
 plt.grid()
@@ -138,9 +142,9 @@ x = list(range(1, len(avg_del[curr_alpha])+1))
 
 plt.plot(x, avg_del[curr_alpha], color="blue", label="Average", marker='o')
 
-plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]+std_del[curr_alpha], color="red", alpha=0.1, label='Standard Deviation')
+plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]+std_del[curr_alpha], color="blue", alpha=0.1, label='Standard Deviation')
 
-plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
+# plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
 
 if model == 0:
 	plt.title(r'Barabási Albert Model w/ $<k> = 4 \rightarrow \alpha=0.5$')
@@ -158,6 +162,9 @@ elif model == 6:
 	plt.title(r'Power Grid Network $\rightarrow \alpha=0.5$')
 else:
 	plt.title(r'Internet Network $\rightarrow \alpha=0.5$')
+
+xint = range(min(x), math.ceil(max(x))+1)
+plt.xticks(xint)
 
 plt.yscale('log')
 plt.grid()
@@ -182,9 +189,9 @@ x = list(range(1, len(avg_del[curr_alpha])+1))
 
 plt.plot(x, avg_del[curr_alpha], color="blue", label="Average", marker='o')
 
-plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]+std_del[curr_alpha], color="red", alpha=0.1, label='Standard Deviation')
+plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]+std_del[curr_alpha], color="blue", alpha=0.1, label='Standard Deviation')
 
-plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
+# plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
 
 if model == 0:
 	plt.title(r'Barabási Albert Model w/ $<k> = 4 \rightarrow \alpha=0.7$')
@@ -202,6 +209,9 @@ elif model == 6:
 	plt.title(r'Power Grid Network $\rightarrow \alpha=0.7$')
 else:
 	plt.title(r'Internet Network $\rightarrow \alpha=0.7$')
+
+xint = range(min(x), math.ceil(max(x))+1)
+plt.xticks(xint)
 
 plt.yscale('log')
 plt.grid()
