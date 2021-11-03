@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define N 50 // Number of nodes
+#define N 200 // Number of nodes
 #define M 2 // New edges per iteration
 
 int main() {
