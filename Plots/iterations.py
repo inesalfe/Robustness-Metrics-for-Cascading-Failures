@@ -39,7 +39,7 @@ elif model == 6:
 	folder = "Data/PG/"
 else:
 	folder = "Data/INT/"
-
+	
 file = "data_0.txt"
 
 with open(folder + file) as f:
@@ -56,21 +56,21 @@ criteria = int(lines[3].split()[1])
 alphas = lines[4].split()[1:12]
 
 a_it = np.zeros(len(alphas), dtype=int)
-giant_c_avg_rand = np.zeros(len(alphas))
-giant_c_var_rand = np.zeros(len(alphas))
-giant_c_sizes_rand = np.zeros((len(alphas), IT*N_GRAPHS))
+iterations_avg_rand = np.zeros(len(alphas))
+iterations_var_rand = np.zeros(len(alphas))
+iterations_rand = np.zeros((len(alphas), IT*N_GRAPHS))
 
 l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_rand[a][a_it[a]] = float(lines[8+6*l_it].split()[1]) / N[net]
+			iterations_rand[a][a_it[a]] = float(lines[6+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 
 for a in range(len(alphas)):
-	giant_c_avg_rand[a] = np.mean(giant_c_sizes_rand[a])
-	giant_c_var_rand[a] = np.var(giant_c_sizes_rand[a])
+	iterations_avg_rand[a] = np.mean(iterations_rand[a])
+	iterations_var_rand[a] = np.var(iterations_rand[a])
 
 file = "data_1.txt"
 
@@ -88,21 +88,21 @@ criteria = int(lines[3].split()[1])
 alphas = lines[4].split()[1:12]
 
 a_it = np.zeros(len(alphas), dtype=int)
-giant_c_avg_bc = np.zeros(len(alphas))
-giant_c_var_bc = np.zeros(len(alphas))
-giant_c_sizes_bc = np.zeros((len(alphas), IT*N_GRAPHS))
+iterations_avg_bc = np.zeros(len(alphas))
+iterations_var_bc = np.zeros(len(alphas))
+iterations_bc = np.zeros((len(alphas), IT*N_GRAPHS))
 
 l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_bc[a][a_it[a]] = float(lines[8+6*l_it].split()[1]) / N[net]
+			iterations_bc[a][a_it[a]] = float(lines[6+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 
 for a in range(len(alphas)):
-	giant_c_avg_bc[a] = np.mean(giant_c_sizes_bc[a])
-	giant_c_var_bc[a] = np.var(giant_c_sizes_bc[a])
+	iterations_avg_bc[a] = np.mean(iterations_bc[a])
+	iterations_var_bc[a] = np.var(iterations_bc[a])
 
 file = "data_2.txt"
 
@@ -120,21 +120,21 @@ criteria = int(lines[3].split()[1])
 alphas = lines[4].split()[1:12]
 
 a_it = np.zeros(len(alphas), dtype=int)
-giant_c_avg_dg = np.zeros(len(alphas))
-giant_c_var_dg = np.zeros(len(alphas))
-giant_c_sizes_dg = np.zeros((len(alphas), IT*N_GRAPHS))
+iterations_avg_dg = np.zeros(len(alphas))
+iterations_var_dg = np.zeros(len(alphas))
+iterations_dg = np.zeros((len(alphas), IT*N_GRAPHS))
 
 l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_dg[a][a_it[a]] = float(lines[8+6*l_it].split()[1]) / N[net]
+			iterations_dg[a][a_it[a]] = float(lines[6+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 
 for a in range(len(alphas)):
-	giant_c_avg_dg[a] = np.mean(giant_c_sizes_dg[a])
-	giant_c_var_dg[a] = np.var(giant_c_sizes_dg[a])
+	iterations_avg_dg[a] = np.mean(iterations_dg[a])
+	iterations_var_dg[a] = np.var(iterations_dg[a])
 
 file = "data_3.txt"
 
@@ -152,44 +152,44 @@ criteria = int(lines[3].split()[1])
 alphas = lines[4].split()[1:12]
 
 a_it = np.zeros(len(alphas), dtype=int)
-giant_c_avg_cl = np.zeros(len(alphas))
-giant_c_var_cl = np.zeros(len(alphas))
-giant_c_sizes_cl = np.zeros((len(alphas), IT*N_GRAPHS))
+iterations_avg_cl = np.zeros(len(alphas))
+iterations_var_cl = np.zeros(len(alphas))
+iterations_cl = np.zeros((len(alphas), IT*N_GRAPHS))
 
 l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			giant_c_sizes_cl[a][a_it[a]] = float(lines[8+6*l_it].split()[1]) / N[net]
+			iterations_cl[a][a_it[a]] = float(lines[6+6*l_it].split()[1])
 			l_it += 1
 			a_it[a] += 1
 
 for a in range(len(alphas)):
-	giant_c_avg_cl[a] = np.mean(giant_c_sizes_cl[a])
-	giant_c_var_cl[a] = np.var(giant_c_sizes_cl[a])
+	iterations_avg_cl[a] = np.mean(iterations_cl[a])
+	iterations_var_cl[a] = np.var(iterations_cl[a])
 
 f1 = plt.figure()
 
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-plt.scatter(alphas, giant_c_avg_rand, color="blue")
-plt.scatter(alphas, giant_c_avg_bc, color="red")
-plt.scatter(alphas, giant_c_avg_dg, color="green")
-plt.scatter(alphas, giant_c_avg_cl, color="magenta")
+plt.scatter(alphas, iterations_avg_rand, color="blue")
+plt.scatter(alphas, iterations_avg_bc, color="red")
+plt.scatter(alphas, iterations_avg_dg, color="green")
+plt.scatter(alphas, iterations_avg_cl, color="magenta")
 
-plt.plot(alphas, giant_c_avg_rand, color="blue")
-plt.plot(alphas, giant_c_avg_bc, color="red")
-plt.plot(alphas, giant_c_avg_dg, color="green")
-plt.plot(alphas, giant_c_avg_cl, color="magenta")
+plt.plot(alphas, iterations_avg_rand, color="blue")
+plt.plot(alphas, iterations_avg_bc, color="red")
+plt.plot(alphas, iterations_avg_dg, color="green")
+plt.plot(alphas, iterations_avg_cl, color="magenta")
 
-plt.errorbar(alphas, giant_c_avg_rand, np.sqrt(giant_c_var_rand), fmt='bo', markersize=5, capsize=5, ecolor="black", label="Random")
-plt.errorbar(alphas, giant_c_avg_bc, np.sqrt(giant_c_var_bc), fmt='ro', markersize=5, capsize=5, ecolor="black", label="Betweeness Centrality")
-plt.errorbar(alphas, giant_c_avg_dg, np.sqrt(giant_c_var_dg), fmt='go', markersize=5, capsize=5, ecolor="black", label="Degree")
-plt.errorbar(alphas, giant_c_avg_cl, np.sqrt(giant_c_var_cl), fmt='mo', markersize=5, capsize=5, ecolor="black", label="Clustering Coefficient")
+plt.errorbar(alphas, iterations_avg_rand, np.sqrt(iterations_var_rand), fmt='bo', markersize=5, capsize=5, ecolor="black", label="Random")
+plt.errorbar(alphas, iterations_avg_bc, np.sqrt(iterations_var_bc), fmt='ro', markersize=5, capsize=5, ecolor="black", label="Betweeness Centrality")
+plt.errorbar(alphas, iterations_avg_dg, np.sqrt(iterations_var_dg), fmt='go', markersize=5, capsize=5, ecolor="black", label="Degree")
+plt.errorbar(alphas, iterations_avg_cl, np.sqrt(iterations_var_cl), fmt='mo', markersize=5, capsize=5, ecolor="black", label="Clustering Coefficient")
 
-plt.xlim((-1.1, 11.1))
-plt.ylim((-0.1, 1.1))
+# plt.xlim((-1.1, 11.1))
+# plt.ylim((-0.1, 1.1))
 
 if model == 0:
 	plt.title(r'Barabasi Albert Model w/ $<k> = 4$')
@@ -211,10 +211,10 @@ else:
 plt.grid()
 plt.legend()
 plt.xlabel(r'\textbf{$\alpha$}', fontsize=11)
-plt.ylabel(r'\textbf{N\'/N}', fontsize=11)
+plt.ylabel(r'\textbf{Final number of components in the network}', fontsize=11)
 
 plt.show()
 
-fig_name = "Plots/figures/g_size_nodes_%i.png" % model
+fig_name = "Plots/figures/iter_%i.png" % model
 
 f1.savefig(fig_name, bbox_inches='tight')

@@ -5,12 +5,20 @@ import matplotlib.pyplot as plt
 model = 0
 while True:
 	try:
-		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - PL2; 3 - PL4; 4 - RAND; 5 - WS): "))       
+		model = int(input("""Choose a model:
+		0 - Barabasi Albert Model w/ <k> = 4;
+		1 - DMS Minimal Model w/ <k> = 4;
+		2 - Power Law Model w/ <k> = 2;
+		3 - Power Law Model w/ <k> = 4;
+		4 - Random Graph Model w/ <k> = 4;
+		5 - Watts-Strogatz Model w/ <k> = 4;
+		6 - Power Grid Network;
+		7 - Internet Network):\n>>> """))       
 	except ValueError:
-		print("Please enter 0, 1, 2, 3, 4 ou 5:")
+		print("Please an integer between 0 and 7:")
 		continue
 	else:
-		if model == 0 or model == 1 or model == 2 or model == 3 or model == 4 or model == 5:
+		if model >=0 or model <=7:
 			break
 		else:
 			continue
@@ -25,8 +33,12 @@ elif model == 3:
 	folder = "Data/PL4/"
 elif model == 4:
 	folder = "Data/RAND/"
-else:
+elif model == 5:
 	folder = "Data/WS/"
+elif model == 6:
+	folder = "Data/PG/"
+else:
+	folder = "Data/INT/"
 	
 file = "data_0.txt"
 
@@ -180,17 +192,21 @@ plt.errorbar(alphas, n_comp_avg_cl, np.sqrt(n_comp_var_cl), fmt='mo', markersize
 # plt.ylim((-0.1, 1.1))
 
 if model == 0:
-	plt.title(r'Barabási Albert Model')
+	plt.title(r'Barabasi Albert Model w/ $<k> = 4$')
 elif model == 1:
-	plt.title(r'DMS Minimal Model')
+	plt.title(r'DMS Minimal Model w/ $<k> = 4$')
 elif model == 2:
 	plt.title(r'Power Law Model w/ $<k> = 2$')
 elif model == 3:
 	plt.title(r'Power Law Model w/ $<k> = 4$')
 elif model == 4:
 	plt.title(r'Random Graph Model w/ $<k> = 4$')
+elif model == 5:
+	plt.title(r'Watts-Strogatz Model w/ $<k> = 4$')
+elif model == 6:
+	plt.title(r'Power Grid Network')
 else:
-	plt.title(r'Watts-Strogatz Model')
+	plt.title(r'Internet Network')
 	
 plt.grid()
 plt.legend()

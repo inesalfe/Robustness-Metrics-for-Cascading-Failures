@@ -50,11 +50,11 @@ int main() {
 	// Choose the path for the output files depending on the chosen model and criterion
 	char file_name[50] = {0};
 	if (model == 0) {
-		strcpy(file_name, "Data/power_0.txt");
-		file_name[11] = criterion + '0';
+		strcpy(file_name, "Data/PG/data_0.txt");
+		file_name[13] = criterion + '0';
 	}
 	else {
-		strcpy(file_name, "Data/internet_0.txt");
+		strcpy(file_name, "Data/INT/data_0.txt");
 		file_name[14] = criterion + '0';
 	}
 
@@ -96,7 +96,7 @@ int main() {
 
 	// Choose the path for the input files
 	if (model == 0) {
-		char filename[50] = "Data/power.gml";
+		char filename[50] = "Simulations/Graphs/power.gml";
 
 		FILE *input_file = fopen(filename, "r");
 		if (input_file == 0) {
@@ -108,7 +108,7 @@ int main() {
 		fclose(input_file);
 	}
 	else {
-		char filename[50] = "Data/as-22july06.gml";
+		char filename[50] = "Simulations/Graphs/as-22july06.gml";
 
 		FILE *input_file = fopen(filename, "r");
 		if (input_file == 0) {
@@ -139,11 +139,9 @@ int main() {
 
 	fprintf(output_file, "\n");
 
-
 	/* GRAPH INITIAL INFORMATION */
 	cout << "Number of Nodes: " << N << endl;
 	cout << "Average Degree: " << (2.0 * igraph_ecount(&graph) / N) << endl;
-
 
 	/* CAPACITY METRIC - Betweeness centrality - O(|V||E|) */
 	igraph_betweenness(&graph, &capacity, igraph_vss_all(), IGRAPH_UNDIRECTED, NULL);
