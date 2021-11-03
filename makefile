@@ -40,7 +40,7 @@ small: Animation/Network_Generation/small.C
 
 # Ricardo
 
-ricky: cascade_node_r
+ricky: cascade_node_r cascade_node_realnet_r
 
 CC = g++
 CFLAGS = -std=c++11 -O3
@@ -51,6 +51,9 @@ GRAPHIC_PATHS = -I/usr/include/python3.8 -I/home/ricky/.local/lib/python3.8/site
 
 cascade_node_r: Simulations/cascade_node.C
 	$(CC) $(CFLAGS) Simulations/cascade_node.C $(LIBS_PATHS) $(LIBS) -o Executables/cascade_node
+	
+cascade_node_realnet_r: Simulations/cascade_node_realnet.C
+	$(CC) $(CFLAGS) Simulations/cascade_node_realnet.C $(LIBS_PATHS) $(LIBS) -o Executables/cascade_node_realnet
 
 sim_r: Animation/sim.C
 	$(CC) $(CFLAGS) Animation/sim.C $(LIBS_PATHS) $(LIBS) -o Executables/sim
