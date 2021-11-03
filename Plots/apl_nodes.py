@@ -5,15 +5,15 @@ import numpy as np
 model = 0
 while True:
 	try:
-		model = int(input(r"""Choose a model:\n
-		0 - Barabasi Albert Model w/ $<k> = 4$;\n
-		1 - DMS Minimal Model w/ $<k> = 4$;\n
-		2 - Power Law Model w/ $<k> = 2$;\n
-		3 - Power Law Model w/ $<k> = 4$;\n
-		4 - Random Graph Model w/ $<k> = 4$;\n
-		5 - Watts-Strogatz Model w/ $<k> = 4$;\n
-		6 - Power Grid Network;\n
-		7 - Internet Network):"""))       
+		model = int(input("""Choose a model:
+		0 - Barabasi Albert Model w/ <k> = 4;
+		1 - DMS Minimal Model w/ <k> = 4;
+		2 - Power Law Model w/ <k> = 2;
+		3 - Power Law Model w/ <k> = 4;
+		4 - Random Graph Model w/ <k> = 4;
+		5 - Watts-Strogatz Model w/ <k> = 4;
+		6 - Power Grid Network;
+		7 - Internet Network):\n>>> """))       
 	except ValueError:
 		print("Please an integer between 0 and 7:")
 		continue
@@ -35,7 +35,7 @@ elif model == 4:
 	folder = "Data/RAND/"
 elif model == 5:
 	folder = "Data/WS/"
-elif model == 4:
+elif model == 6:
 	folder = "Data/PG/"
 else:
 	folder = "Data/INT/"
