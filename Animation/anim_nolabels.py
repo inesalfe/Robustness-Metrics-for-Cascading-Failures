@@ -5,12 +5,12 @@ import numpy as np
 model = 0
 while True:
 	try:
-		model = int(input("Choose model (0 - BA; 1 - DMS; 2 - Small Example): "))       
+		model = int(input("Choose model (0 - BA; 1 - DMS): "))       
 	except ValueError:
-		print("Please enter 0, 1 or 2:")
+		print("Please enter 0, or 1:")
 		continue
 	else:
-		if model >= 0 or model <= 2:
+		if model >= 0 and model <= 1:
 			break
 		else:
 			continue
@@ -34,12 +34,9 @@ def grouped(iterable, n):
 if model == 0:
 	G = nx.read_gml("Animation/Graphs/ba2.gml", None)
 	file_name = "Animation/Data/ba_%i.txt" % criteria
-elif model == 1:
+else:
 	G = nx.read_gml("Animation/Graphs/dms2.gml", None)
 	file_name = "Animation/Data/dms_%i.txt" % criteria
-else:
-	G = nx.read_gml("Animation/Graphs/small2.gml", None)
-	file_name = "Animation/Data/small_%i.txt" % criteria
 
 for node in G.nodes():
 	G.nodes[node]['pos'] = G.nodes[node]['graphics']['x'], G.nodes[node]['graphics']['y']
@@ -76,37 +73,33 @@ marked_vertices = []
 
 if model == 0:
 	name = "Animation/Figures/ba_%i" % criteria
-elif model == 1:
-	name = "Animation/Figures/dms_%i" % criteria
 else:
-	name = "Animation/Figures/small_%i" % criteria
-
-fig_it = 1
-
-fig = plt.figure(figsize=(15, 7))
-
-ax=plt.gca()
+	name = "Animation/Figures/dms_%i" % criteria
 
 bc = nx.betweenness_centrality(G)
-for i in range(len(bc)):
-	if (bc[i] == 0):
-		bc[i] = 0.02
+for bc_key in bc:
+	if (bc[bc_key] == 0):
+		bc[bc_key] = 0.03
 
 sizes = dict(bc)
-
-nx.draw_networkx(G, pos=pos, nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=False, font_weight='bold', node_size=[v * 1000 for v in sizes.values()])
-
-ax.autoscale()
-plt.axis('equal')
-plt.axis('off')
-
-plt.margins(0.0)
 
 cut = 1.1
 xmax= cut*max(xx for xx,yy in pos.values())
 ymax= cut*max(yy for xx,yy in pos.values())
 xmin= cut*min(xx for xx,yy in pos.values())
 ymin= cut*min(yy for xx,yy in pos.values())
+
+fig_it = 1
+
+fig = plt.figure(figsize=(15, 7))
+ax=plt.gca()
+
+nx.draw_networkx(G, pos=pos, nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=False, font_weight='bold', node_size=[v * 1500 for v in sizes.values()])
+
+ax.autoscale()
+plt.axis('equal')
+plt.axis('off')
+plt.margins(0.0)
 plt.xlim(xmin,xmax)
 plt.ylim(ymin,ymax)
 
@@ -114,8 +107,6 @@ plt.show()
 fig_name = name + "_%i.png" % fig_it
 fig.savefig(fig_name + '', format='png')
 fig_it = fig_it + 1
-
-exit(0)
 
 for i in range(it+1):
 
@@ -128,10 +119,21 @@ for i in range(it+1):
 			untouched_edges.remove((e1, e2))
 			marked_edges.append((e1, e2))
 
-	fig = plt.figure()
-	nx.draw_networkx(G, pos=pos, nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=False, font_weight='bold')
-	nx.draw_networkx(G, pos=pos, nodelist = marked_vertices, node_color = 'red', edgelist = marked_edges, edge_color = 'red', alpha = 1.0, with_labels=False, font_weight='bold')
-	nx.draw_networkx(G, pos=pos, nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=False, font_weight='bold')
+	sizes1 = dict((k, bc[k]) for k in untouched_vertices)
+	sizes2 = dict((k, bc[k]) for k in marked_vertices)
+	sizes3 = dict((k, bc[k]) for k in deleted_vertices)
+
+	fig = plt.figure(figsize=(15, 7))
+	ax=plt.gca()
+	nx.draw_networkx(G, pos=pos, nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=False, font_weight='bold', node_size=[v * 1500 for v in sizes1.values()])
+	nx.draw_networkx(G, pos=pos, nodelist = marked_vertices, node_color = 'red', edgelist = marked_edges, edge_color = 'red', alpha = 1.0, with_labels=False, font_weight='bold', node_size=[v * 1500 for v in sizes2.values()])
+	nx.draw_networkx(G, pos=pos, nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=False, font_weight='bold', node_size=[v * 1500 for v in sizes3.values()])
+	ax.autoscale()
+	plt.axis('equal')
+	plt.axis('off')
+	plt.margins(0.0)
+	plt.xlim(xmin,xmax)
+	plt.ylim(ymin,ymax)
 	plt.show()
 	fig_name = name + "_%i.png" % fig_it
 	fig.savefig(fig_name, format='png')
@@ -147,9 +149,19 @@ for i in range(it+1):
 
 	marked_edges.clear()
 
-	fig = plt.figure()
-	nx.draw_networkx(G, pos=pos, nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=False, font_weight='bold')
-	nx.draw_networkx(G, pos=pos, nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=False, font_weight='bold')
+	sizes1 = dict((k, bc[k]) for k in untouched_vertices)
+	sizes3 = dict((k, bc[k]) for k in deleted_vertices)
+
+	fig = plt.figure(figsize=(15, 7))
+	ax=plt.gca()
+	nx.draw_networkx(G, pos=pos, nodelist = untouched_vertices, node_color = 'blue', edgelist = untouched_edges, edge_color = 'black', alpha = 1.0, with_labels=False, font_weight='bold', node_size=[v * 1500 for v in sizes1.values()])
+	nx.draw_networkx(G, pos=pos, nodelist = deleted_vertices, node_color = 'grey', edgelist = deleted_edges, edge_color = 'grey', alpha = 0.2, with_labels=False, font_weight='bold', node_size=[v * 1500 for v in sizes3.values()])
+	ax.autoscale()
+	plt.axis('equal')
+	plt.axis('off')
+	plt.margins(0.0)
+	plt.xlim(xmin,xmax)
+	plt.ylim(ymin,ymax)
 	plt.show()
 	fig_name = name + "_%i.png" % fig_it
 	fig.savefig(fig_name, format='png')

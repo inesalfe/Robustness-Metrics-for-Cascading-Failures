@@ -18,7 +18,7 @@ while True:
 		print("Please an integer between 0 and 7:")
 		continue
 	else:
-		if model >=0 or model <=7:
+		if model >=0 and model <=7:
 			break
 		else:
 			continue
