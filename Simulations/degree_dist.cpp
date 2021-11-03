@@ -9,17 +9,17 @@ int main(int argc, char** argv) {
 
     igraph_t graph;
     igraph_real_t apl, c, L0, C0;
-    int n_pts = 100;
-    vector<double> powerlaw(20, 0);
-    vector<int> deg(20);
+    int n_pts = 500;
+    vector<double> powerlaw(50, 0);
+    vector<int> deg(50);
     vector<double> degree_freq(n_pts,0);
     vector<int> degree(n_pts);
     for(int i = 0; i < n_pts; degree[i] = i, ++i);
 
-    char filename[50] = {0};
-    sprintf(filename, "Simulations/graphs/%s_%d.gml", argv[1], argv[2][0] - '0');
+    // char filename[50] = {0};
+    // sprintf(filename, "Simulations/graphs/%s_%d.gml", argv[1], argv[2][0] - '0');
 
-    FILE *input_file = fopen(filename, "r");
+    FILE *input_file = fopen("Data/as-22july06.gml", "r");
     if (input_file == 0) {
         cout << "Unable to open input file Simulations/Graphs/lfr.gml. Exiting\n";
         return 11;
@@ -34,9 +34,9 @@ int main(int argc, char** argv) {
             ++degree_freq[VECTOR(result)[k]];
     for(int k = 0; k < n_pts; ++k)
         degree_freq[k] /= igraph_vcount(&graph);
-    for(int k = 0; k < 20; ++k) {
+    for(int k = 0; k < 50; ++k) {
         deg[k] = k + 2;
-        powerlaw[k] = 2*pow(k + 2, -3);
+        powerlaw[k] = 4*pow(k + 2, -3);
     }
 
     plt::figure();

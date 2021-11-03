@@ -82,36 +82,15 @@ int main() {
 	igraph_es_t del_edges_sel; // Edges to be deleted in each iteration in selector mode
 	vector<long> initial_nodes; // Vector with the nodes to be deleted in each iteration
 
-	int N = 5000;
-
-	// Printing general information in the output file
-	fprintf(output_file, "N %d\n", N);
-	fprintf(output_file, "N_NET %d\n", 1);
-	fprintf(output_file, "IT %d\n", IT);
-	fprintf(output_file, "CRITERIA %d\n", criterion);
-	fprintf(output_file, "ALPHAS");
-
-	// Filling the alphas vector
-	vector<double> alphas(11);
-	vector<vector<double>> ratios(11, vector<double>(10,0));
-	for(int i = 0; i < 11; ++i) {
-		alphas[i] = .1 * i;
-		fprintf(output_file, " %.1f", alphas[i]);
-	}
-
-	fprintf(output_file, "\n");
-
-	N = 5100;
-
 	// Initializations
 	igraph_rng_seed(igraph_rng_default(), 0);
 	igraph_vector_init(&comp, 0);
-	igraph_vector_init(&capacity, N);
-	igraph_vector_init(&curr_bc, N);
+	igraph_vector_init(&capacity, 0);
+	igraph_vector_init(&curr_bc, 0);
 	igraph_vector_init(&deletion_list, 0);
 	igraph_vector_init(&del_edges, 0);
-	igraph_vector_init(&degree, N);
-	igraph_vector_init(&clustering, N);
+	igraph_vector_init(&degree, 0);
+	igraph_vector_init(&clustering, 0);
 	igraph_vector_init(&deleted_nodes, 0);
 	igraph_matrix_init(&m, 0, 0);
 
@@ -141,13 +120,32 @@ int main() {
 		fclose(input_file);
 	}
 
-	N = igraph_vcount(&graph);
+	int N = igraph_vcount(&graph);
+
+	// Printing general information in the output file
+	fprintf(output_file, "N %d\n", N);
+	fprintf(output_file, "N_NET %d\n", 1);
+	fprintf(output_file, "IT %d\n", IT);
+	fprintf(output_file, "CRITERIA %d\n", criterion);
+	fprintf(output_file, "ALPHAS");
+
+	// Filling the alphas vector
+	vector<double> alphas(11);
+	vector<vector<double>> ratios(11, vector<double>(10,0));
+	for(int i = 0; i < 11; ++i) {
+		alphas[i] = .1 * i;
+		fprintf(output_file, " %.1f", alphas[i]);
+	}
+
+	fprintf(output_file, "\n");
+
 
 	/* GRAPH INITIAL INFORMATION */
 	cout << "Number of Nodes: " << N << endl;
 	cout << "Average Degree: " << (2.0 * igraph_ecount(&graph) / N) << endl;
 
-	/* CAPACITY METRIC - Betweeness centrality */
+
+	/* CAPACITY METRIC - Betweeness centrality - O(|V||E|) */
 	igraph_betweenness(&graph, &capacity, igraph_vss_all(), IGRAPH_UNDIRECTED, NULL);
 
 	/* CHOOSE INITIAL VERTEX TO DELETE... */
@@ -161,7 +159,7 @@ int main() {
 			}
 			break;
 		case 1:
-			// ... HIGHEST LOAD
+			// ... HIGHEST LOAD - O(|V| log |V|)
 			igraph_vector_copy(&capacity_sorted, &capacity);
 			igraph_vector_reverse_sort(&capacity_sorted);
 			for (int i = 0; i < IT; i++) {
@@ -171,7 +169,7 @@ int main() {
 			igraph_vector_destroy(&capacity_sorted);
 			break;
 		case 2:
-			// ... HIGHEST AVERAGE DEGREE
+			// ... HIGHEST AVERAGE DEGREE - O(|V| log |V|)
 			igraph_degree(&graph, &degree, igraph_vss_all(), IGRAPH_ALL, false);
 			igraph_vector_copy(&degree_sorted, &degree);
 			igraph_vector_reverse_sort(&degree_sorted);
@@ -182,8 +180,8 @@ int main() {
 			igraph_vector_destroy(&degree_sorted);
 			break;
 		case 3:
-			// ... HIGHEST CLUSTERING COEFICIENT
-			igraph_transitivity_local_undirected(&graph, &clustering, igraph_vss_all(), IGRAPH_TRANSITIVITY_ZERO);
+			// ... HIGHEST CLUSTERING COEFICIENT - O(|V| log |V|)
+			igraph_transitivity_local_undirected(&graph, &clustering, igraph_vss_all(), IGRAPH_TRANSITIVITY_ZERO); // O(|V|*<k>^2)
 			igraph_vector_copy(&clustering_sorted, &clustering);
 			igraph_vector_reverse_sort(&clustering_sorted);
 			for (int i = 0; i < IT; i++) {
@@ -261,11 +259,11 @@ int main() {
 			igraph_clusters(&graph_cp, NULL, &comp, &n_comp, IGRAPH_WEAK);
 			long final_L_comp = igraph_vector_max(&comp);
 			cout << "Final Number of Components: " << n_comp << "\nLargest Component: " << final_L_comp << endl;
-			cout << "Final Average Degree: " << (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)) << endl;
+			cout << "Final Average Degree: " << (2.0 * igraph_ecount(&graph_cp) / N) << endl;
 			
 			fprintf(output_file, "\nN_COMP %d\n", n_comp);
 			fprintf(output_file, "L_COMP %ld\n", final_L_comp);
-			fprintf(output_file, "D_FINAL %f\n", (2.0 * igraph_ecount(&graph_cp) / igraph_vcount(&graph_cp)));
+			fprintf(output_file, "D_FINAL %f\n", (2.0 * igraph_ecount(&graph_cp) / N));
 
 			// Get the number of unconnected pairs of nodes in the network
 			int unconn_pairs = 0;
