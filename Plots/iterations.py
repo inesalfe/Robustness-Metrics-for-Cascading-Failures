@@ -211,7 +211,7 @@ else:
 plt.grid()
 plt.legend()
 plt.xlabel(r'\textbf{$\alpha$}', fontsize=11)
-plt.ylabel(r'\textbf{Final number of components in the network}', fontsize=11)
+plt.ylabel(r'\textbf{$\#$ Iterations}', fontsize=11)
 
 plt.show()
 
