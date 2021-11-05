@@ -47,7 +47,7 @@ file_name = "data_2.txt"
 with open(folder + file_name) as f:
 	lines = f.read().splitlines()
 
-if model == 2:
+if model == 2 or model == 3 or model == 4:
 	N = [int(i) for i in lines[0].split()[1:]]
 else:
 	N = [int(lines[0].split()[1]) for i in range(10)]
@@ -100,17 +100,17 @@ plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]
 # plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
 
 if model == 0:
-	plt.title(r'Barabási Albert Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.2$', fontsize=18)
+	plt.title(r'Barabási Albert Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.2$', fontsize=18)
 elif model == 1:
-	plt.title(r'DMS Minimal Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.2$', fontsize=18)
+	plt.title(r'DMS Minimal Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.2$', fontsize=18)
 elif model == 2:
-	plt.title(r'Power Law Model w/ $\langle k \rangle = 2 \rightarrow \alpha=0.2$', fontsize=18)
+	plt.title(r'Power Law Model w/ $\langle k \rangle \approx 2 \rightarrow \alpha=0.2$', fontsize=18)
 elif model == 3:
-	plt.title(r'Power Law Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.2$', fontsize=18)
+	plt.title(r'Power Law Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.2$', fontsize=18)
 elif model == 4:
-	plt.title(r'Random Graph Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.2$', fontsize=18)
+	plt.title(r'Random Graph Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.2$', fontsize=18)
 elif model == 5:
-	plt.title(r'Watts-Strogatz Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.2$', fontsize=18)
+	plt.title(r'Watts-Strogatz Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.2$', fontsize=18)
 elif model == 6:
 	plt.title(r'Power Grid Network $\rightarrow \alpha=0.2$', fontsize=18)
 else:
@@ -150,17 +150,17 @@ plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]
 # plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
 
 if model == 0:
-	plt.title(r'Barabási Albert Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.5$', fontsize=18)
+	plt.title(r'Barabási Albert Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.5$', fontsize=18)
 elif model == 1:
-	plt.title(r'DMS Minimal Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.5$', fontsize=18)
+	plt.title(r'DMS Minimal Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.5$', fontsize=18)
 elif model == 2:
-	plt.title(r'Power Law Model w/ $\langle k \rangle = 2 \rightarrow \alpha=0.5$', fontsize=18)
+	plt.title(r'Power Law Model w/ $\langle k \rangle \approx 2 \rightarrow \alpha=0.5$', fontsize=18)
 elif model == 3:
-	plt.title(r'Power Law Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.5$', fontsize=18)
+	plt.title(r'Power Law Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.5$', fontsize=18)
 elif model == 4:
-	plt.title(r'Random Graph Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.5$', fontsize=18)
+	plt.title(r'Random Graph Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.5$', fontsize=18)
 elif model == 5:
-	plt.title(r'Watts-Strogatz Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.5$', fontsize=18)
+	plt.title(r'Watts-Strogatz Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.5$', fontsize=18)
 elif model == 6:
 	plt.title(r'Power Grid Network $\rightarrow \alpha=0.5$', fontsize=18)
 else:
@@ -200,17 +200,17 @@ plt.fill_between(x, avg_del[curr_alpha]-std_del[curr_alpha], avg_del[curr_alpha]
 # plt.fill_between(x, min_del[curr_alpha], max_del[curr_alpha], color="blue", alpha=0.1, label='Maximum and Minimum')
 
 if model == 0:
-	plt.title(r'Barabási Albert Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.7$', fontsize=18)
+	plt.title(r'Barabási Albert Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.7$', fontsize=18)
 elif model == 1:
-	plt.title(r'DMS Minimal Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.7$', fontsize=18)
+	plt.title(r'DMS Minimal Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.7$', fontsize=18)
 elif model == 2:
-	plt.title(r'Power Law Model w/ $\langle k \rangle = 2 \rightarrow \alpha=0.7$', fontsize=18)
+	plt.title(r'Power Law Model w/ $\langle k \rangle \approx 2 \rightarrow \alpha=0.7$', fontsize=18)
 elif model == 3:
-	plt.title(r'Power Law Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.7$', fontsize=18)
+	plt.title(r'Power Law Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.7$', fontsize=18)
 elif model == 4:
-	plt.title(r'Random Graph Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.7$', fontsize=18)
+	plt.title(r'Random Graph Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.7$', fontsize=18)
 elif model == 5:
-	plt.title(r'Watts-Strogatz Model w/ $\langle k \rangle = 4 \rightarrow \alpha=0.7$', fontsize=18)
+	plt.title(r'Watts-Strogatz Model w/ $\langle k \rangle \approx 4 \rightarrow \alpha=0.7$', fontsize=18)
 elif model == 6:
 	plt.title(r'Power Grid Network $\rightarrow \alpha=0.7$', fontsize=18)
 else:

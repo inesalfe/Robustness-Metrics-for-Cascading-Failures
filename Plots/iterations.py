@@ -45,7 +45,7 @@ file = "data_0.txt"
 with open(folder + file) as f:
 	lines = f.read().splitlines()
 
-if model == 2:
+if model == 2 or model == 3 or model == 4:
 	N = [int(i) for i in lines[0].split()[1:]]
 else:
 	N = [int(lines[0].split()[1]) for i in range(10)]
@@ -64,7 +64,7 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			iterations_rand[a][a_it[a]] = float(lines[6+6*l_it].split()[1])
+			iterations_rand[a][a_it[a]] = float(lines[6+6*l_it].split()[1])-1
 			l_it += 1
 			a_it[a] += 1
 
@@ -77,7 +77,7 @@ file = "data_1.txt"
 with open(folder + file) as f:
 	lines = f.read().splitlines()
 
-if model == 2:
+if model == 2 or model == 3 or model == 4:
 	N = [int(i) for i in lines[0].split()[1:]]
 else:
 	N = [int(lines[0].split()[1]) for i in range(10)]
@@ -96,7 +96,7 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			iterations_bc[a][a_it[a]] = float(lines[6+6*l_it].split()[1])
+			iterations_bc[a][a_it[a]] = float(lines[6+6*l_it].split()[1])-1
 			l_it += 1
 			a_it[a] += 1
 
@@ -109,7 +109,7 @@ file = "data_2.txt"
 with open(folder + file) as f:
 	lines = f.read().splitlines()
 
-if model == 2:
+if model == 2 or model == 3 or model == 4:
 	N = [int(i) for i in lines[0].split()[1:]]
 else:
 	N = [int(lines[0].split()[1]) for i in range(10)]
@@ -128,7 +128,7 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			iterations_dg[a][a_it[a]] = float(lines[6+6*l_it].split()[1])
+			iterations_dg[a][a_it[a]] = float(lines[6+6*l_it].split()[1])-1
 			l_it += 1
 			a_it[a] += 1
 
@@ -141,7 +141,7 @@ file = "data_3.txt"
 with open(folder + file) as f:
 	lines = f.read().splitlines()
 
-if model == 2:
+if model == 2 or model == 3 or model == 4:
 	N = [int(i) for i in lines[0].split()[1:]]
 else:
 	N = [int(lines[0].split()[1]) for i in range(10)]
@@ -160,7 +160,7 @@ l_it = 0
 for net in range(N_GRAPHS):
 	for a in range(len(alphas)):
 		for it in range(IT):
-			iterations_cl[a][a_it[a]] = float(lines[6+6*l_it].split()[1])
+			iterations_cl[a][a_it[a]] = float(lines[6+6*l_it].split()[1])-1
 			l_it += 1
 			a_it[a] += 1
 
@@ -189,17 +189,17 @@ elif model == 7:
 	plt.ylim((-1, 17))
 
 if model == 0:
-	plt.title(r'Barabasi Albert Model w/ $\langle k \rangle = 4$', fontsize=18)
+	plt.title(r'Barabasi Albert Model w/ $\langle k \rangle \approx 4$', fontsize=18)
 elif model == 1:
-	plt.title(r'DMS Minimal Model w/ $\langle k \rangle = 4$', fontsize=18)
+	plt.title(r'DMS Minimal Model w/ $\langle k \rangle \approx 4$', fontsize=18)
 elif model == 2:
-	plt.title(r'Power Law Model w/ $\langle k \rangle = 2$', fontsize=18)
+	plt.title(r'Power Law Model w/ $\langle k \rangle \approx 2$', fontsize=18)
 elif model == 3:
-	plt.title(r'Power Law Model w/ $\langle k \rangle = 4$', fontsize=18)
+	plt.title(r'Power Law Model w/ $\langle k \rangle \approx 4$', fontsize=18)
 elif model == 4:
-	plt.title(r'Random Graph Model w/ $\langle k \rangle = 4$', fontsize=18)
+	plt.title(r'Random Graph Model w/ $\langle k \rangle \approx 4$', fontsize=18)
 elif model == 5:
-	plt.title(r'Watts-Strogatz Model w/ $\langle k \rangle = 4$', fontsize=18)
+	plt.title(r'Watts-Strogatz Model w/ $\langle k \rangle \approx 4$', fontsize=18)
 elif model == 6:
 	plt.title(r'Power Grid Network', fontsize=18)
 else:
