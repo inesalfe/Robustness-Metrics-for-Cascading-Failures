@@ -56,9 +56,9 @@ def degree_dist():
     f1 = plt.figure()
     plot(range(deg_max), degree_freq, 'o-')
     if model == 6 or model == 7:
-        plt.ylabel(r'Cummulative Degree Distibution $P_{avg}(k)$', fontsize=15)
+        plt.ylabel(r'Cumulative Degree Distibution $P(k)$', fontsize=15)
     else:
-        plt.ylabel(r'Average Cummulative Degree Distibution $P_{avg}(k)$', fontsize=15)
+        plt.ylabel(r'Average Cumulative Degree Distibution $P_{avg}(k)$', fontsize=15)
     plt.xlabel(r'Degree, $k$', fontsize=15)
     plt.title(rf'{graphs_name[model]} Network Degree Distribution', fontsize=18)
     if model not in (4, 5, 6):
