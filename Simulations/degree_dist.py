@@ -1,10 +1,9 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
-import sys
 
 
-def degree_dist(deg_max=100):
+def degree_dist():
     graphs = {0: 'ba', 1: 'dms', 2: 'pl2', 3: 'pl4', 4: 'rand', 5: 'ws', 6: 'power', 7: 'as-22july06'}
     graphs_name = {0: r'Barabási-Albert', 1: r'DMS', 
                    2: r'Powerlaw w/ $\langle k\rangle=2$', 3: r'Powerlaw w/ $\langle k\rangle=4$', 
@@ -26,6 +25,8 @@ def degree_dist(deg_max=100):
                 break    
         except ValueError:
             print("Please an integer between 0 and 7:")
+
+    deg_max = 21 if model == 6 else 10 if model == 5 else 16 if model == 4 else 100
     
     degree_freq = [0 for _ in range(deg_max)]
     cummulative_vcount = 0
@@ -47,8 +48,8 @@ def degree_dist(deg_max=100):
     for i in range(deg_max - 2, -1, -1):
         degree_freq[i] += degree_freq[i + 1]
 
-    plt.rc('text', usetex=True)
-    plt.rc('font', family='serif')
+    # plt.rc('text', usetex=True)
+    # plt.rc('font', family='serif')
 
     plot = plt.plot if model in (4, 5) else (plt.semilogy if model == 6 else plt.loglog)
     
@@ -69,7 +70,4 @@ def degree_dist(deg_max=100):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        degree_dist(int(sys.argv[1]))
-    else:
-        degree_dist()
+    degree_dist()
