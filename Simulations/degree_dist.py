@@ -47,19 +47,25 @@ def degree_dist(deg_max=100):
     for i in range(deg_max - 2, -1, -1):
         degree_freq[i] += degree_freq[i + 1]
 
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif')
+
     plot = plt.plot if model in (4, 5) else (plt.semilogy if model == 6 else plt.loglog)
     
-    plt.figure()
+    f1 = plt.figure()
     plot(range(deg_max), degree_freq, 'o-')
-    plt.ylabel(r'Average Cummulative Degree Distibution $P_{avg}(k)$')
-    plt.xlabel(r'Degree, $k$')
-    plt.title(rf'{graphs_name[model]} Network Degree Distribution')
+    plt.ylabel(r'Average Cummulative Degree Distibution $P_{avg}(k)$', fontsize=15)
+    plt.xlabel(r'Degree, $k$', fontsize=15)
+    plt.title(rf'{graphs_name[model]} Network Degree Distribution', fontsize=18)
     if model not in (4, 5, 6):
         plot([k+2 for k in range(deg_max)], [4*(k + 2)**(-2) for k in range(deg_max)], 'g--', label=r'$P(k) \sim k^{-\gamma + 1}, \ \gamma = 3$')
-        plt.legend()
+        plt.legend(fontsize=14)
     # plt.xlim(0, np.max([i for i, f in enumerate(degree_freq) if f != 0]) + 5)
     plt.grid()
     plt.show()
+
+    fig_name = "Plots/figures/degree_dist_%i.png" % model
+    f1.savefig(fig_name, bbox_inches='tight')
 
 
 if __name__ == '__main__':
