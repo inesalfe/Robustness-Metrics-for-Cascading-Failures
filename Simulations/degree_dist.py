@@ -48,14 +48,17 @@ def degree_dist():
     for i in range(deg_max - 2, -1, -1):
         degree_freq[i] += degree_freq[i + 1]
 
-    # plt.rc('text', usetex=True)
-    # plt.rc('font', family='serif')
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif')
 
     plot = plt.plot if model in (4, 5) else (plt.semilogy if model == 6 else plt.loglog)
     
     f1 = plt.figure()
     plot(range(deg_max), degree_freq, 'o-')
-    plt.ylabel(r'Average Cummulative Degree Distibution $P_{avg}(k)$', fontsize=15)
+    if model == 6 or model == 7:
+        plt.ylabel(r'Cummulative Degree Distibution $P_{avg}(k)$', fontsize=15)
+    else:
+        plt.ylabel(r'Average Cummulative Degree Distibution $P_{avg}(k)$', fontsize=15)
     plt.xlabel(r'Degree, $k$', fontsize=15)
     plt.title(rf'{graphs_name[model]} Network Degree Distribution', fontsize=18)
     if model not in (4, 5, 6):
