@@ -7,7 +7,7 @@ import sys
 def degree_dist(deg_max=100):
     graphs = {0: 'ba', 1: 'dms', 2: 'pl2', 3: 'pl4', 4: 'rand', 5: 'ws', 6: 'power', 7: 'as-22july06'}
     graphs_name = {0: r'Barabási-Albert', 1: r'DMS', 
-                   2: r'Powerlaw w/ $\langle k\rangle=2$', 3: r'Powerlaw w/ $\langle k\rangle=2$', 
+                   2: r'Powerlaw w/ $\langle k\rangle=2$', 3: r'Powerlaw w/ $\langle k\rangle=4$', 
                    4: r'Random Erdos-Rényi', 5: r'Watts-Strogatz', 
                    6: r'Power Grid', 7: r'Internet'}
     model = 0
