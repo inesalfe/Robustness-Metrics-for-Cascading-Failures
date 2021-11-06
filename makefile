@@ -40,7 +40,7 @@ small: Animation/Network_Generation/small.C
 
 # Ricardo
 
-ricky: cascade_node_r cascade_node_realnet_r
+ricky: degree_dist #cascade_node_r cascade_node_realnet_r
 
 CC = g++
 CFLAGS = -std=c++11 -O3
