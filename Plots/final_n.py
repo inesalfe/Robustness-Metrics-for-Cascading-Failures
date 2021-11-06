@@ -13,12 +13,12 @@ while True:
 		4 - Random Graph Model w/ <k> = 4;
 		5 - Watts-Strogatz Model w/ <k> = 4;
 		6 - Power Grid Network;
-		7 - Internet Network):\n>>> """))       
+		7 - Internet Network.\n>>> """))       
 	except ValueError:
 		print("Please an integer between 0 and 7:")
 		continue
 	else:
-		if model >=0 or model <=7:
+		if model >=0 and model <=7:
 			break
 		else:
 			continue
@@ -45,7 +45,7 @@ file = "data_0.txt"
 with open(folder + file) as f:
 	lines = f.read().splitlines()
 
-if model == 2:
+if model == 2 or model == 3 or model == 4:
 	N = [int(i) for i in lines[0].split()[1:]]
 else:
 	N = [int(lines[0].split()[1]) for i in range(10)]
@@ -77,7 +77,7 @@ file = "data_1.txt"
 with open(folder + file) as f:
 	lines = f.read().splitlines()
 
-if model == 2:
+if model == 2 or model == 3 or model == 4:
 	N = [int(i) for i in lines[0].split()[1:]]
 else:
 	N = [int(lines[0].split()[1]) for i in range(10)]
@@ -109,7 +109,7 @@ file = "data_2.txt"
 with open(folder + file) as f:
 	lines = f.read().splitlines()
 
-if model == 2:
+if model == 2 or model == 3 or model == 4:
 	N = [int(i) for i in lines[0].split()[1:]]
 else:
 	N = [int(lines[0].split()[1]) for i in range(10)]
@@ -141,7 +141,7 @@ file = "data_3.txt"
 with open(folder + file) as f:
 	lines = f.read().splitlines()
 
-if model == 2:
+if model == 2 or model == 3 or model == 4:
 	N = [int(i) for i in lines[0].split()[1:]]
 else:
 	N = [int(lines[0].split()[1]) for i in range(10)]
@@ -173,45 +173,38 @@ f1 = plt.figure()
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-plt.scatter(alphas, n_final_avg_rand, color="blue")
-plt.scatter(alphas, n_final_avg_bc, color="red")
-plt.scatter(alphas, n_final_avg_dg, color="green")
-plt.scatter(alphas, n_final_avg_cl, color="magenta")
-
-plt.plot(alphas, n_final_avg_rand, color="blue")
-plt.plot(alphas, n_final_avg_bc, color="red")
-plt.plot(alphas, n_final_avg_dg, color="green")
-plt.plot(alphas, n_final_avg_cl, color="magenta")
-
-plt.errorbar(alphas, n_final_avg_rand, np.sqrt(n_final_var_rand), fmt='bo', markersize=5, capsize=5, ecolor="black", label="Random")
-plt.errorbar(alphas, n_final_avg_bc, np.sqrt(n_final_var_bc), fmt='ro', markersize=5, capsize=5, ecolor="black", label="Betweeness Centrality")
-plt.errorbar(alphas, n_final_avg_dg, np.sqrt(n_final_var_dg), fmt='go', markersize=5, capsize=5, ecolor="black", label="Degree")
-plt.errorbar(alphas, n_final_avg_cl, np.sqrt(n_final_var_cl), fmt='mo', markersize=5, capsize=5, ecolor="black", label="Clustering Coefficient")
+plt.errorbar(alphas, n_final_avg_rand, np.sqrt(n_final_avg_rand), fmt='bo-', markersize=5, capsize=5, ecolor="black", label="Random")
+plt.errorbar(alphas, n_final_avg_bc, np.sqrt(n_final_avg_bc), fmt='rs-', markersize=5, capsize=5, ecolor="black", label="Betweeness Centrality")
+plt.errorbar(alphas, n_final_avg_dg, np.sqrt(n_final_avg_dg), fmt='g^-', markersize=5, capsize=5, ecolor="black", label="Degree")
+plt.errorbar(alphas, n_final_avg_cl, np.sqrt(n_final_avg_cl), fmt='m*-', markersize=5, capsize=5, ecolor="black", label="Clustering Coefficient")
 
 # plt.xlim((-1.1, 11.1))
 # plt.ylim((-0.1, 1.1))
 
 if model == 0:
-	plt.title(r'Barabasi Albert Model w/ $<k> = 4$')
+	plt.title(r'Barabasi Albert Model w/ $\langle k \rangle \approx 4$', fontsize=18)
 elif model == 1:
-	plt.title(r'DMS Minimal Model w/ $<k> = 4$')
+	plt.title(r'DMS Minimal Model w/ $\langle k \rangle \approx 4$', fontsize=18)
 elif model == 2:
-	plt.title(r'Power Law Model w/ $<k> = 2$')
+	plt.title(r'Power Law Model w/ $\langle k \rangle \approx 2$', fontsize=18)
 elif model == 3:
-	plt.title(r'Power Law Model w/ $<k> = 4$')
+	plt.title(r'Power Law Model w/ $\langle k \rangle \approx 4$', fontsize=18)
 elif model == 4:
-	plt.title(r'Random Graph Model w/ $<k> = 4$')
+	plt.title(r'Random Graph Model w/ $\langle k \rangle \approx 4$', fontsize=18)
 elif model == 5:
-	plt.title(r'Watts-Strogatz Model w/ $<k> = 4$')
+	plt.title(r'Watts-Strogatz Model w/ $\langle k \rangle \approx 4$', fontsize=18)
 elif model == 6:
-	plt.title(r'Power Grid Network')
+	plt.title(r'Power Grid Network', fontsize=18)
 else:
-	plt.title(r'Internet Network')
+	plt.title(r'Internet Network', fontsize=18)
 
 plt.grid()
-plt.legend()
-plt.xlabel(r'\textbf{$\alpha$}', fontsize=11)
-plt.ylabel(r'\textbf{Final N}', fontsize=11)
+if model != 6:
+	plt.legend(fontsize=14)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
+plt.xlabel(r'\textbf{$\alpha$}', fontsize=15)
+plt.ylabel(r'\textbf{Final N}', fontsize=15)
 
 plt.show()
 

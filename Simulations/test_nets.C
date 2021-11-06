@@ -87,6 +87,44 @@ int main() {
 
 	fclose(file2);
 
+	char f_name3[50] = {0};
+	strcpy(f_name3, "Data/first_line_rand.txt");
+
+	FILE *file3 = fopen(f_name3, "w");
+	if (file3 == 0) {
+		cout << "Unable to open output file " << f_name3 << ". Exiting\n";
+		return 10;
+	}
+
+	fprintf(file3, "N");
+
+	for(int n = 0; n < N_GRAPHS; ++n) {
+
+		char filename[50] = {0};
+		sprintf(filename, "Simulations/Graphs/rand_%d.gml", n);
+
+		FILE *input_file = fopen(filename, "r");
+		if (input_file == 0) {
+			cout << "Unable to open input file " << filename << ". Exiting\n";
+			return 11;
+		}
+
+		igraph_t graph;
+
+		igraph_read_graph_gml(&graph, input_file);
+		fclose(input_file);
+
+		N = igraph_vcount(&graph);
+
+		fprintf(file3, " %d", N);
+		
+		cout << N << endl;
+	}
+
+	fprintf(file3, "\n");
+
+	fclose(file3);
+
 	return 0;
 }
 
