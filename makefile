@@ -1,5 +1,3 @@
-# Inês
-
 all: cascade_node ba sim ba_sim small p_law2 p_law4 test_nets random cascade_node_realnet
 
 CC = g++
