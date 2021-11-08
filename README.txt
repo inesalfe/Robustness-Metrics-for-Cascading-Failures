@@ -31,5 +31,5 @@ This folder contains:
 Usage: 
 	To compile the code C++ (even though all the executables are provided), the igraph library for C++ has to be installed. The makefile has the default path and flags from this library; Then, the user just has to type 'make' in the terminal, in the main directory (the directory where the makefile is);
 	To run the Python code, the NetworkX library has to be installed;
-	It is assumed that all the code will be run from the main directory: the run the C++ executables files, the command './Executables/<exec_name>' has to be issued in the terminal;
+	It is assumed that all the code will be run from the main directory: to run the C++ executables files, the command './Executables/<exec_name>' has to be issued in the terminal;
 	The Python files should also be analogously run from this directory: 'python3 <folder_that_has_the_file>/<exec_file>.py; This is because all the files written by the ran programs have their paths relative to the main folder.
