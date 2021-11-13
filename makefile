@@ -1,3 +1,4 @@
+sims: sim
 all: cascade_node ba sim ba_sim small p_law2 p_law4 test_nets random cascade_node_realnet
 
 CC = g++
@@ -5,10 +6,10 @@ CFLAGS = -std=c++11 -O3
 LIBS_PATHS = -I/usr/local/include/igraph -L/usr/local/lib
 
 # For MacOS
-LIBS = -ligraph
+# LIBS = -ligraph
 
 # For WSL
-# LIBS = -ligraph -lm -lstdc++ -lxml2 -lz -lgmp -lblas -lcxsparse -lglpk -llapack -larpack -lgomp -lpthread
+LIBS = -ligraph -lm -lstdc++ -lxml2 -lz -lgmp -lblas -lcxsparse -lglpk -llapack -larpack -lgomp -lpthread
 
 cascade_node: Simulations/cascade_node.C
 	$(CC) $(CFLAGS) Simulations/cascade_node.C $(LIBS_PATHS) $(LIBS) -o Executables/cascade_node

@@ -20,14 +20,23 @@ int main() {
 	cout << "0 - Barabasi Albert Model" << endl;
 	cout << "1 - DMS Minimal Model" << endl;
 	cout << "2 - Small example Network" << endl;
+	cout << "3 - Other" << endl;
 
 	int model;
 	cin >> model;
-	while(cin.fail() || model < 0 || model > 2) {
+	while(cin.fail() || model < 0 || model > 3) {
 		cout << "Invalid Input" << endl;
 		cin.clear();
 		cin.ignore(256,'\n');
 		cin >> model;
+	}
+
+	string file_path;
+	string complete_path;
+	if(model == 3) {
+		cout << "File name: ";
+		cin >> file_path;
+		complete_path = "Animation/Graphs/" + file_path + ".gml";
 	}
 
 	// The user inserts the criterion for node deletion
@@ -56,9 +65,13 @@ int main() {
 		strcpy(file_name, "Animation/Data/dms_0.txt");
 		file_name[19] = criterion + '0';
 	}
-	else {
+	else if (model == 2) {
 		strcpy(file_name, "Animation/Data/small_0.txt");
 		file_name[21] = criterion + '0';
+	}
+	else {
+		strcpy(file_name, ("Animation/Data/" + file_path + "_0.txt").c_str());
+		file_name[strlen(("Animation/Data/" + file_path).c_str())+1] = criterion + '0';
 	}
 
 	FILE *output_file = fopen(file_name, "w");
@@ -70,49 +83,30 @@ int main() {
 	igraph_t graph; // The graph itself
 
 	// Choose the path for the input files
-	if (model == 0) {
-		char filename[50] = {0};
+	char filename[50] = {0};
+
+	if (model == 0) 
 		strcpy(filename, "Animation/Graphs/ba.gml");
-
-		FILE *input_file = fopen(filename, "r");
-		if (input_file == 0) {
-			cout << "Unable to open input file " << filename << ". Exiting\n";
-			return 11;
-		}
-
-		igraph_read_graph_gml(&graph, input_file);
-		fclose(input_file);
-	}
-	else if (model == 1) {
-		char filename[50] = {0};
+	else if (model == 1) 
 		strcpy(filename, "Animation/Graphs/dms.gml");
-
-		FILE *input_file = fopen(filename, "r");
-		if (input_file == 0) {
-			cout << "Unable to open input file " << filename << ". Exiting\n";
-			return 11;
-		}
-
-		igraph_read_graph_gml(&graph, input_file);
-		fclose(input_file);
-	}
-	else {
-		char filename[50] = {0};
+	else if (model == 2)
 		strcpy(filename, "Animation/Graphs/small.gml");
+	else
+		strcpy(filename, complete_path.c_str());
 
-		FILE *input_file = fopen(filename, "r");
-		if (input_file == 0) {
-			cout << "Unable to open input file " << filename << ". Exiting\n";
-			return 11;
-		}
-
-		igraph_read_graph_gml(&graph, input_file);
-		fclose(input_file);
+	FILE *input_file = fopen(filename, "r");
+	if (input_file == 0) {
+		cout << "Unable to open input file " << filename << ". Exiting\n";
+		return 11;
 	}
+
+	igraph_read_graph_gml(&graph, input_file);
+	fclose(input_file);
+
 
 	int N = igraph_vcount(&graph);
 
-	double alpha = 0;
+	double alpha = 0.2;
 
 	igraph_vector_t deletion_list; 	// List with the vertices to delete - updated in each iteration
 	igraph_vector_t capacity; // The capacity of each vertex equals the initial betweeness centrality
@@ -123,6 +117,9 @@ int main() {
 	igraph_vector_t del_edges; // Clustering coeficient of each vertex
 	igraph_es_t del_edges_sel; // Edges to be deleted in each iteration in selector mode
 	igraph_vector_t edges_v; // Edges to be deleted in each iteration - each pair of vertices corresponds to one edge
+
+	// igraph_vector_t deleted_nodes;
+	// igraph_vector_init(&deleted_nodes, 0);
 
 	// Initializations
 	igraph_rng_seed(igraph_rng_default(), 0);
@@ -177,7 +174,7 @@ int main() {
 		// Delete edges incident in the vertices in the deletion list
 		while(!igraph_vector_empty(&deletion_list)) {
 			fprintf(output_file, "%d\n", int(VECTOR(deletion_list)[igraph_vector_size(&deletion_list)-1]));
-			
+			// igraph_vector_push_back(&deleted_nodes, igraph_vector_tail(&deletion_list));
 			igraph_incident(&graph, &del_edges, igraph_vector_pop_back(&deletion_list), IGRAPH_ALL);
 			igraph_es_vector(&del_edges_sel, &del_edges);
 
@@ -203,6 +200,14 @@ int main() {
 		it++;
 
 	}
+
+	// igraph_vs_t v_del;
+	// igraph_vs_vector(&v_del, &deleted_nodes);
+	// igraph_delete_vertices(&graph, v_del);
+	// FILE *file = fopen("Animation/Data/test.gml", "w");
+	// igraph_write_graph_gml(&graph, file, NULL, 0);
+	// fclose(file);
+
 
 	fclose(output_file);
 
