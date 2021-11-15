@@ -24,7 +24,11 @@
 # convert -delay 100 -loop 0 $(ls -1 Animation/Figures/pl4_1_*.png | sort -V) Animation/Gifs/pl4_1.gif
 # convert -delay 100 -loop 0 $(ls -1 Animation/Figures/pl4_2_*.png | sort -V) Animation/Gifs/pl4_2.gif
 # convert -delay 100 -loop 0 $(ls -1 Animation/Figures/pl4_3_*.png | sort -V) Animation/Gifs/pl4_3.gif
-convert -delay 100 -loop 0 $(ls -1 Animation/Figures/dms_b_0_*.png | sort -V) Animation/Gifs/dms_b_0.gif
-convert -delay 100 -loop 0 $(ls -1 Animation/Figures/dms_b_1_*.png | sort -V) Animation/Gifs/dms_b_1.gif
-convert -delay 100 -loop 0 $(ls -1 Animation/Figures/dms_b_2_*.png | sort -V) Animation/Gifs/dms_b_2.gif
-convert -delay 100 -loop 0 $(ls -1 Animation/Figures/dms_b_3_*.png | sort -V) Animation/Gifs/dms_b_3.gif
+# convert -delay 100 -loop 0 $(ls -1 Animation/Figures/dms_b_0_*.png | sort -V) Animation/Gifs/dms_b_0.gif
+# convert -delay 100 -loop 0 $(ls -1 Animation/Figures/dms_b_1_*.png | sort -V) Animation/Gifs/dms_b_1.gif
+# convert -delay 100 -loop 0 $(ls -1 Animation/Figures/dms_b_2_*.png | sort -V) Animation/Gifs/dms_b_2.gif
+# convert -delay 100 -loop 0 $(ls -1 Animation/Figures/dms_b_3_*.png | sort -V) Animation/Gifs/dms_b_3.gif
+convert -delay 100 -loop 0 $(ls -1 Animation/Figures/power2_1_*.png | sort -V) Animation/Gifs/power2_1.gif
+# convert -delay 100 -loop 0 $(ls -1 Animation/Figures/dms_b_1_*.png | sort -V) Animation/Gifs/dms_b_1.gif
+# convert -delay 100 -loop 0 $(ls -1 Animation/Figures/dms_b_2_*.png | sort -V) Animation/Gifs/dms_b_2.gif
+# convert -delay 100 -loop 0 $(ls -1 Animation/Figures/dms_b_3_*.png | sort -V) Animation/Gifs/dms_b_3.gif

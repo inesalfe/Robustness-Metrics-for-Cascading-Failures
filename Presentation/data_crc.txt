@@ -1,0 +1,33 @@
+Power Law, <k> = 4
+
+Initial #nodes: 4982
+Initial <k> = 4.001
+
+Final #nodes: 3193
+Final #nodes k > 0: 2995 (94%)
+Final #nodes biggest component: 2751 (86%)
+Final #components: 281 (83 non-singular)
+Final <k> = 2.695 (3.011 biggest component)
+
+
+DMS, <k> = 4
+
+Initial #nodes: 5000
+Initial <k> = 3.999
+
+Final #nodes: 4483
+Final #nodes k > 0: 4125 (92%)
+Final #nodes biggest component: 1095 (24%)
+Final #components: 533 (175 non-singular)
+Final <k> = 3.411 (3.856 biggest component)
+
+Power Grid
+
+Initial #nodes: 4941
+Initial <k> = 2.669
+
+Final #nodes: 4049
+Final #nodes k > 0: 3745 (95%)
+Final #nodes biggest component: 1011 (25%)
+Final #components: 373 (169 non-singular)
+Final <k> = 2.223 (2.621 biggest component)

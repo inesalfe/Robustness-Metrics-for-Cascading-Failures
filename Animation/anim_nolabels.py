@@ -46,6 +46,7 @@ else:
 	G = nx.read_gml("Animation/Graphs/" + model_name + ".gml", None)
 	file_name = "Animation/Data/" + model_name + "_%i.txt" % criteria
 
+# print(G.edges())
 
 for node in G.nodes():
 	G.nodes[node]['pos'] = G.nodes[node]['graphics']['x'], G.nodes[node]['graphics']['y']
@@ -70,6 +71,9 @@ with open(file_name, 'r') as f:
 			for word in words:
 				it_list_e[it].append(int(word))
 
+# print(G.nodes[4164]['pos'])
+# for n in G.nodes:
+# 	print(n)
 N = G.number_of_nodes()
 E = G.number_of_edges()
 
@@ -101,7 +105,7 @@ ax=plt.gca()
 n_color = [G.nodes[n]['graphics']['fill'] for n in G.nodes()]
 # n_color = ["blue" for n in G.nodes()]
 e_color = ["#A0A0A0" for _ in G.edges()]
-l_widths = [1 for _ in G.nodes()]
+l_widths = [0 for _ in G.nodes()]
 n_alpha = [1.0 for _ in G.nodes()]
 e_alpha = [1.0 for _ in G.edges()]
 aux_range = [G.nodes[n]['graphics']['w'] for n in G.nodes()]
@@ -129,13 +133,17 @@ for i in range(it+1):
 
 	# marked nodes
 	for v in it_list_v[i]:
-		n_color[v] = "black"
+		n_color[list(G.nodes).index(v)] = "black"
 
 	# marked edges
 	for e1, e2 in grouped(it_list_e[i], 2):
 		if ((e1, e2) != (-1, -1)):
-			e_color[untouched_edges.index((e1, e2))] = "black"
-			marked_edges.append((e1, e2))
+			try:
+				e_color[untouched_edges.index((e1, e2))] = "black"
+				marked_edges.append((e1, e2))
+			except ValueError:
+				e_color[untouched_edges.index((e2, e1))] = "black"
+				marked_edges.append((e2, e1))
 
 	fig = plt.figure(figsize=(15, 7))
 	ax=plt.gca()
@@ -161,9 +169,9 @@ for i in range(it+1):
 	# deleted nodes
 	for v in it_list_v[i]:
 		deleted_vertices.append(v)
-		l_widths[v] = 0
-		n_color[v] = "grey"
-		n_alpha[v] = 0.2
+		l_widths[list(G.nodes).index(v)] = 0
+		n_color[list(G.nodes).index(v)] = "grey"
+		n_alpha[list(G.nodes).index(v)] = 0.2
 
 	# deleted edges
 	for e in marked_edges:
