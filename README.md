@@ -1,8 +1,8 @@
 # Robustness Metrics for Cascading Failures
 
 Authors: <br />
-	Inês Ferreira, 90395 <br />
-	Ricardo Santos, 90178 <br />
+&nbsp;	Inês Ferreira, 90395 <br />
+&nbsp;	Ricardo Santos, 90178 <br />
 
 This folder contains: <br />
 	=> 'Animation' Folder <br />
