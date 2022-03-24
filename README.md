@@ -25,7 +25,6 @@ This folder contains: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		o cascade_node.C and cascade_node_realnet.C - files that implement the developed cascading failures algorithm. These files allow the choice of the network to consider and the choice of the elimination criteria. The latter is similar to the former, but from the two real networks considered the Internet and Power Grid. The corresponding executables are in '../Executables/'. v
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		o 'Graphs' Folder: has all the .gml files containing the networks that were used throughout the project. Each type of network has 10 different instances (appended with '_n', n \in [0,9]), corresponding to 10 different seeds, except for the real-world networks, as-22july06.gml (Internet) and power.gml (Power Grid). <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		o degree_dist.py - plots the average degree distribution for a user-selected network for those in 'Graphs'. The resulting plots are in '../Plots/figures/'. <br />
-		
 &nbsp;&nbsp;&nbsp;&nbsp; => makefile: Compiles all the C++ files. The resulting executables are sent to the 'Executables/' folder. <br />
 
 Usage: <br />
