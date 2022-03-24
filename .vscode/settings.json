@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "cascade_node.C": "cpp",
-        "cascade_node_realnet.C": "cpp",
-        "sim.C": "cpp",
-        "p_law2.C": "cpp"
-    }
-}
