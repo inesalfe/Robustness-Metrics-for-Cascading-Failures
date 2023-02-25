@@ -1,8 +1,20 @@
 # Robustness Metrics for Cascading Failures
 
-Authors: <br />
+This is the final project for the course "Science of Complex Networks". This course is a Computer Science masters course in Instituto Superior Técnico - Universidade de Lisboa. The main outputs of this is project is a paper named Robustness Metrics for Cascading Failures. This repository contains, besides the paper, the code and data sets.
+
+## Authors: <br />
+
 &nbsp;&nbsp;&nbsp;&nbsp;	Inês Ferreira, 90395 <br />
 &nbsp;&nbsp;&nbsp;&nbsp;	Ricardo Santos, 90178 <br />
+
+## Abstract
+
+In networks that act as transportation systems, a local failure propagates to the surrounding nodes, possibly leading to cascading events. Motter and Lai [1] have shown that heterogeneous networks are susceptible to random breakdowns and targeted attacks. Here we extend their analysis, considering several strategies to assess robustness that might result in divergent conclusions - a network can be more or less vulnerable to attacks, depending on the indicators used. Our work may guide the design of defense strategies to halt the propagation of cascading failures.
+
+### References
+Motter, Adilson E. and Lai, Ying-Cheng (2002). ”Cascade-based attacks on complex networks”
+
+## Files organization and usage
 
 This folder contains: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;	=> 'Animation' Folder <br />
